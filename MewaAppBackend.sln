@@ -3,7 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MewaAppBackend.WebApi", "MewaAppBackend.WebApi\MewaAppBackend.WebApi.csproj", "{59834CC1-E62C-438A-BD8D-CB4832F6C376}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MewaAppBackend.WebApi", "MewaAppBackend.WebApi\MewaAppBackend.WebApi.csproj", "{59834CC1-E62C-438A-BD8D-CB4832F6C376}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MewaAppBackend.Model", "MewaAppBackend.Model\MewaAppBackend.Model.csproj", "{51DF7583-63E5-4D20-AEDF-7BC429A7CA8D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MewaAppBackend.Services", "MewaAppBackend.Services\MewaAppBackend.Services.csproj", "{1F3B2773-A6FC-43AA-9467-A7D75E5B9348}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DD9C5026-AF3E-461C-9E92-FBE721F3E6D7}"
+	ProjectSection(SolutionItems) = preProject
+		Readme.md = Readme.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MewaAppBackend.Bussines", "MewaAppBackend.Bussines\MewaAppBackend.Bussines.csproj", "{57D690E8-8E85-4E6A-828F-D517D70B13AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +26,18 @@ Global
 		{59834CC1-E62C-438A-BD8D-CB4832F6C376}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59834CC1-E62C-438A-BD8D-CB4832F6C376}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59834CC1-E62C-438A-BD8D-CB4832F6C376}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51DF7583-63E5-4D20-AEDF-7BC429A7CA8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51DF7583-63E5-4D20-AEDF-7BC429A7CA8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51DF7583-63E5-4D20-AEDF-7BC429A7CA8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51DF7583-63E5-4D20-AEDF-7BC429A7CA8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F3B2773-A6FC-43AA-9467-A7D75E5B9348}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F3B2773-A6FC-43AA-9467-A7D75E5B9348}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F3B2773-A6FC-43AA-9467-A7D75E5B9348}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F3B2773-A6FC-43AA-9467-A7D75E5B9348}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57D690E8-8E85-4E6A-828F-D517D70B13AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57D690E8-8E85-4E6A-828F-D517D70B13AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57D690E8-8E85-4E6A-828F-D517D70B13AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57D690E8-8E85-4E6A-828F-D517D70B13AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
