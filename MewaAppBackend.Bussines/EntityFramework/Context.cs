@@ -1,10 +1,11 @@
-﻿using MewaAppBackend.Model.Model;
-using Microsoft.AspNet.Identity.EntityFramework;
+﻿
+using MewaAppBackend.Model.Model;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace MewaAppBackend.WebApi
 {
-    public class Context : DbContext
+    public class Context : IdentityDbContext<User>
     {
         public Context(DbContextOptions<Context> options) : base(options)
         {
@@ -24,6 +25,11 @@ namespace MewaAppBackend.WebApi
                 .HasOne(u => u.File)
                 .WithOne(f => f.User)
                 .HasForeignKey<Model.Model.File>(f => f.UserId);
+
+            modelBuilder.Entity<Model.Model.File>()
+                .HasOne(u => u.Link)
+                .WithOne(f => f.File)
+                .HasForeignKey<Link>(f => f.FileId);
         }
     }
 }

@@ -33,7 +33,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MewaAppBackend.Bussines\MewaAppBackend.Business.csproj" />
     <ProjectReference Include="..\MewaAppBackend.Model\MewaAppBackend.Model.csproj" />
+    <ProjectReference Include="..\MewaAppBackend.Services\MewaAppBackend.Services.csproj" />
   </ItemGroup>
 
 </Project>
