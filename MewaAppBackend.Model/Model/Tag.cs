@@ -8,6 +8,6 @@
         public string? Description { get; set; }
 
         public User User { get; set; }
-        public IList<GroupTag> GroupTags { get; set; }
+        public ICollection<Group> Groups { get; set; }
     }
 }
