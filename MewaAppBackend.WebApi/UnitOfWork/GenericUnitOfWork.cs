@@ -3,10 +3,10 @@ using MewaAppBackend.WebApi.Repository;
 
 namespace MewaAppBackend.WebApi.UnitOfWork
 {
-    public class UnitOfWork : IUnitOfWork
+    public class GenericUnitOfWork : IUnitOfWork
     {
         private Context db = null;
-        public UnitOfWork(Context _db)
+        public GenericUnitOfWork(Context _db)
         {
             db = _db;
         }
