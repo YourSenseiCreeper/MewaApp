@@ -1,4 +1,5 @@
 ﻿using MewaAppBackend.Model.Interfaces;
+using MewaAppBackend.WebApi.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
@@ -38,6 +39,11 @@ namespace MewaAppBackend.WebApi.Repository
         public T GetDetail(Func<T, bool> predicate)
         {
             return _objectSet.First(predicate);
+        }
+
+        public IQueryable<T> GetAllIncluding(params Expression<Func<T, object>>[] includes)
+        {
+            return this.GetAll().IncludeMultiple(includes);
         }
     }
 }
