@@ -1,5 +1,10 @@
 # MewaApp (Name to change)
 
+## Organizacja pracy
+
+Trello - https://trello.com/invite/b/SnydrmIc/8ee74516843f8135247dc3cb817b954d/main-mevaapp
+
+
 ## Linki do zapozania sie
 
 * https://angular.io/tutorial
