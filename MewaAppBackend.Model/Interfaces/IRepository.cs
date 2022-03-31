@@ -9,7 +9,6 @@ namespace MewaAppBackend.Model.Interfaces
 {
     public interface IRepository<T> where T : class
     {
-        IQueryable<T> GetAllIncluding(params Expression<Func<T, object>>[] includes);
         IQueryable<T> GetAll();
         T GetDetail(Func<T, bool> predicate);
         void Add(T entity);

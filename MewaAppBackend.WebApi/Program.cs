@@ -1,9 +1,5 @@
 using MediatR;
-using MewaAppBackend.Model.Interfaces;
 using MewaAppBackend.WebApi;
-using MewaAppBackend.WebApi.Functions.Link.Queries;
-using MewaAppBackend.WebApi.Repository;
-using MewaAppBackend.WebApi.UnitOfWork;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
