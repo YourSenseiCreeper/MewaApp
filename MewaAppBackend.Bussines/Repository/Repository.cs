@@ -46,5 +46,10 @@ namespace MewaAppBackend.WebApi.Repository
         {
             return this.GetAll().IncludeMultiple(includes);
         }
+
+        public T GetDetail(int id)
+        {
+            return _objectSet.First(x => x.Id == id);
+        }
     }
 }
