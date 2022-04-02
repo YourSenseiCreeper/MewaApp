@@ -28,8 +28,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="MewaAppFront\" />
     <Folder Include="Commands\" />
+    <Folder Include="Commands\Link\" />
+    <Folder Include="MewaAppFront\" />
+    <Folder Include="Queries\Link\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,5 +1,7 @@
 using MediatR;
+using MewaAppBackend.Model.Interfaces;
 using MewaAppBackend.WebApi;
+using MewaAppBackend.WebApi.UnitOfWork;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -20,6 +22,7 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "MewaApp", Version = "v1" });
 });
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
+builder.Services.AddTransient<IUnitOfWork, GenericUnitOfWork>();
 
 var app = builder.Build();
 

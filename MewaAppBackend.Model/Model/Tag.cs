@@ -6,6 +6,6 @@
         public string? Description { get; set; }
         public User User { get; set; }
         public string UserId { get; set; }
-        public ICollection<Group> Groups { get; set; }
+        public virtual ICollection<Group> Groups { get; set; }
     }
 }

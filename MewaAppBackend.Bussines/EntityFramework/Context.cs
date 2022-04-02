@@ -1,5 +1,4 @@
-﻿
-using MewaAppBackend.Model.Model;
+﻿using MewaAppBackend.Model.Model;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

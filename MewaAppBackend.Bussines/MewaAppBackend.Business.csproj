@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MewaAppBackend.Model\MewaAppBackend.Model.csproj" />
+    <ProjectReference Include="..\MewaAppBackend.Services\MewaAppBackend.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>
