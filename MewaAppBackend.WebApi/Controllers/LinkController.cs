@@ -1,6 +1,6 @@
 ﻿using MediatR;
+using MewaAppBackend.Model.Interfaces;
 using MewaAppBackend.Model.Model;
-using MewaAppBackend.WebApi.Queries.List;
 using MewaAppBackend.WebApi.UnitOfWork;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,25 +8,21 @@ namespace MewaAppBackend.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LinkController<T> : ControllerBase where T : Entity
+    public class LinkController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private GenericUnitOfWork uow = null;
+        private readonly IUnitOfWork unitOfWork;
 
-        public LinkController(IMediator mediator, GenericUnitOfWork _uow)
+        public LinkController(IMediator mediator, IUnitOfWork unitOfWork)
         {
-            this.uow = _uow;
             _mediator = mediator;
+            this.unitOfWork = unitOfWork;
         }
 
-        [HttpGet(Name = "Index")]
-        public async Task<ActionResult<List<Link>>> Index()
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Link>>> GetAllLinks()
         {
-            var request = new IndexQuery();
-
-            var result = await _mediator.Send(request);
-
-            return result;
+            return Ok(unitOfWork.Repository<Link>().GetAll());
         }
     }
 }

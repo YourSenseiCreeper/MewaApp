@@ -1,11 +1,12 @@
 ﻿using MewaAppBackend.Model.Interfaces;
+using MewaAppBackend.Model.Model;
 using MewaAppBackend.WebApi.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace MewaAppBackend.WebApi.Repository
 {
-    public class Repository<T> : IRepository<T> where T : class
+    public class Repository<T> : IRepository<T> where T : Entity
     {
         private readonly Context db;
         private readonly DbSet<T> _objectSet;

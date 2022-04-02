@@ -8,13 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Commands\**" />
-    <Content Remove="Commands\**" />
-    <EmbeddedResource Remove="Commands\**" />
-    <None Remove="Commands\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="MediatR" Version="10.0.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.3" />
@@ -35,8 +28,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Functions\Link\Commands\" />
+    <Folder Include="Commands\" />
+    <Folder Include="Commands\Link\" />
     <Folder Include="MewaAppFront\" />
+    <Folder Include="Queries\Link\" />
   </ItemGroup>
 
   <ItemGroup>
