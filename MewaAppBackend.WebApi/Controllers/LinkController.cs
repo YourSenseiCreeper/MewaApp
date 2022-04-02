@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using MewaAppBackend.Model.Interfaces;
 using MewaAppBackend.Model.Model;
-using MewaAppBackend.WebApi.UnitOfWork;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MewaAppBackend.WebApi.Controllers

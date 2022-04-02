@@ -9,6 +9,6 @@
         public string UserId { get; set; }
         public File File { get; set; }
         public int? FileId { get; set; }
-        public ICollection<Group> Groups { get; set; }
+        public virtual ICollection<Group> Groups { get; set; }
     }
 }
