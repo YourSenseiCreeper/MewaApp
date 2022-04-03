@@ -1,34 +1,36 @@
 ﻿using MewaAppBackend.Model.Interfaces;
+using MewaAppBackend.Model.Model;
 using MewaAppBackend.WebApi.Repository;
 
 namespace MewaAppBackend.WebApi.UnitOfWork
 {
     public class GenericUnitOfWork : IUnitOfWork
     {
-        private Context db = null;
+        private readonly Context db;
+        private bool disposed = false;
+        public Dictionary<System.Type, object> repositories = new();
+
         public GenericUnitOfWork(Context _db)
         {
             db = _db;
         }
-        public Dictionary<Type, object> repositories = new Dictionary<Type, object>();
-        public IRepository<T> Repository<T>() where T : class
+        public IRepository<T> Repository<T>() where T : Entity
         {
-            if (repositories.Keys.Contains(typeof(T)) == true)
-                return repositories[typeof(T)] as IRepository<T>;
+            if (repositories.TryGetValue(typeof(T), out var repository))
+                return (IRepository<T>) repository;
             IRepository<T> repo = new Repository<T>(db);
             repositories.Add(typeof(T), repo);
             return repo;
         }
 
-        private bool disposed = false;
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!disposed)
             {
                 if (disposing)
                     db.Dispose();
             }
-            this.disposed = true;
+            disposed = true;
         }
 
         public void Dispose()
