@@ -7,7 +7,8 @@ import { NotificationService } from "src/app/shared/notification.service";
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  constructor(private notificationService: NotificationService) {}
+  constructor(private notificationService: NotificationService) {
+  }
 
   onClickAcction() {
     this.notificationService.showTestMessage();

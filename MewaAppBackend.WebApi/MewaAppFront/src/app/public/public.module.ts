@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { RouterModule } from '@angular/router';
-import { AppRoutingModule } from '../app-routing.module';
 import { PublicRoutingModule } from './public-routing.module';
+import {MatChipsModule} from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -12,7 +12,8 @@ import { PublicRoutingModule } from './public-routing.module';
   imports: [
     CommonModule,
     RouterModule,
-    PublicRoutingModule
+    PublicRoutingModule,
+    MatChipsModule
   ]
 })
 export class PublicModule { }
