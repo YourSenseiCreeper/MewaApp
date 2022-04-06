@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace MewaAppBackend.WebApi.Repository
 {
-    public class Repository<T> : IRepository<T> where T : Entity
+    public class Repository<T> : IRepository<T> where T : class
     {
         private readonly Context db;
         private readonly DbSet<T> _objectSet;
@@ -45,11 +45,6 @@ namespace MewaAppBackend.WebApi.Repository
         public IQueryable<T> GetAllIncluding(params Expression<Func<T, object>>[] includes)
         {
             return this.GetAll().IncludeMultiple(includes);
-        }
-
-        public T GetDetail(int id)
-        {
-            return _objectSet.First(x => x.Id == id);
         }
     }
 }
