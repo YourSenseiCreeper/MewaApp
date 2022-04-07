@@ -37,7 +37,15 @@ export class DashboardComponent implements OnInit {
   }
 
   onClickAcction() {
-    this.notificationService.showMessage("Użytkownik test", "Close");
+    this.notificationService.showWarning('Przykładowy warning');
+  }
+
+  onClickAcction1() {
+    this.notificationService.showInfo('Przykładowy info');
+  }
+
+  onClickAcction2() {
+    this.notificationService.showSuccess('Przykładowy success');
   }
 
   redirect(url: string) {
