@@ -17,10 +17,27 @@ export class NotificationService {
     })
   }
 
-  showMessage(text: string, action: string): void {
+  showMessage(text: string, action: string, panelClass: string): void {
     this._snackBar.open(text, action, {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
+      panelClass: panelClass
     })
+  }
+
+  showError(error: string): void {
+    this.showMessage(error, 'Close', 'snackbar-error');
+  }
+
+  showWarning(message: string): void {
+    this.showMessage(message, 'Close', 'snackbar-warning');
+  }
+
+  showSuccess(message: string): void {
+    this.showMessage(message, 'Close', 'snackbar-success');
+  }
+
+  showInfo(message: string): void {
+    this.showMessage(message, 'Close', 'snackbar-info');
   }
 }

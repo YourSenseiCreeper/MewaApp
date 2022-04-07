@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class MewaHttpService {
     })
   };
   
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private notificationService: NotificationService) { }
 
   get(path: string, params = {}): Observable<any> {
     return this.http.get<any>(
@@ -51,6 +52,7 @@ export class MewaHttpService {
     else {
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
+    this.notificationService.showError(errorMessage);
 
     return throwError(() => error)
   }
