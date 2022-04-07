@@ -1,0 +1,21 @@
+<mat-toolbar>
+    <span>
+        <a class="link">MewaApp</a>
+    </span>
+    <span class="spacer"></span>
+    <button mat-icon-button color="primary" aria-label="Dashboard" matTooltip="Dashboard">
+        <mat-icon>home</mat-icon>
+    </button>
+    <button mat-icon-button color="primary" aria-label="Foldery" matTooltip="Foldery">
+        <mat-icon>folder</mat-icon>
+    </button>
+    <button mat-mini-fab color="primary" class="ml" [matMenuTriggerFor]="menu" aria-label="Użytkownik">
+        <mat-icon>account_circle</mat-icon>
+    </button>
+    <mat-menu class="border" #menu="matMenu">
+        <div class="user-menu">Nazwa użytkownika</div>
+        <hr>
+        <button mat-menu-item><mat-icon color="primary">settings</mat-icon>Ustawienia</button>
+        <button mat-menu-item><mat-icon color="primary">logout</mat-icon>Wyloguj się</button>
+    </mat-menu>
+</mat-toolbar>
