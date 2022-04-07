@@ -15,6 +15,8 @@ import { UserComponent } from './user/user.component';
             //   ]
           },
           { path: ':userName', component: DashboardComponent },
+          { path: ':userName/:folder', component: DashboardComponent },
+
           // {path: '**', redirectTo: ''}
       ])
   ],
