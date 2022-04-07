@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MewaAppService } from 'src/app/shared/mewa-app.service';
+import { Link } from 'src/app/shared/models';
 import { NotificationService } from "src/app/shared/notification.service";
-
-export interface Link {
-  name: string,
-  url: string,
-  description: string;
-}
 
 @Component({
   selector: 'app-user-dashboard',
@@ -16,15 +12,12 @@ export interface Link {
 export class DashboardComponent implements OnInit {
   userName: string = "Test";
   folder: string = '';
-  links: Link[] = [
-    {name: 'Link do YouTube', url: 'https://youtube.com', description: ''},
-    {name: 'Link do przepisów na obiad', url: 'https://kwestiasmaku.pl', description: ''},
-    {name: 'Link do materiałów na PK', url: 'https://youtube.com', description: ''}
-  ];
+  links: Link[] = [];
 
   constructor(private notificationService: NotificationService,
     private route: ActivatedRoute,
-    private router: Router) {
+    private router: Router,
+    public mewaService: MewaAppService) {
   }
   ngOnInit(): void {
     this.route.paramMap.subscribe(paramMap => {
@@ -34,6 +27,7 @@ export class DashboardComponent implements OnInit {
         // tutaj pobieramy listę linków i folderów dla podanego folderu
       }
     });
+    this.mewaService.getAllLinks().subscribe(data => this.links = data);
   }
 
   onClickAcction() {

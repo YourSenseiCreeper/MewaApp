@@ -1,5 +1,18 @@
-.login {
-    background-color: violet;
-    font-size: 20pt;
+.login-card {
     margin: 0px auto;
+    width: fit-content;
+    height: fit-content;
+    background-color: lightgray;
+}
+
+.login-area {
+    background-color: aqua;
+    padding: 30px;
+    width: 100%;
+    height: 100%;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
 }
