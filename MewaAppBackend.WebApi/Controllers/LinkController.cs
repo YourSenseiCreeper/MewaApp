@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using MewaAppBackend.Model.Interfaces;
 using MewaAppBackend.Model.Model;
+using MewaAppBackend.WebApi.Queries;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MewaAppBackend.WebApi.Controllers
@@ -21,7 +22,10 @@ namespace MewaAppBackend.WebApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Link>>> GetAllLinks()
         {
-            return Ok(unitOfWork.Repository<Link>().GetAll());
+            var request = new GetAllLinksQuery();
+            var result = await _mediator.Send(request);
+
+            return Ok(result);
         }
     }
 }

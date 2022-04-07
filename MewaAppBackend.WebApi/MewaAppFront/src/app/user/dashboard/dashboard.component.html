@@ -1,0 +1,7 @@
+<div class="user">
+    <h2>Komponent użytkownika {{userName}}</h2>
+    <h3 *ngIf="folder">Ścieżka: {{folder}}</h3>
+    <div class="link" *ngFor="let link of links" (click)="redirect(link.url)">
+        {{link.name}}
+    </div>
+</div>

@@ -16,4 +16,11 @@ export class NotificationService {
       verticalPosition: this.verticalPosition,
     })
   }
+
+  showMessage(text: string, action: string): void {
+    this._snackBar.open(text, action, {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    })
+  }
 }

@@ -1,0 +1,19 @@
+.user {
+    background-color: limegreen;
+    font-size: 14t;
+    margin: 0px auto;
+    width: 80%;
+    padding: 10px 10px;
+}
+
+.link {
+    background-color: white;
+    border-radius: 10px;
+    padding: 5px 10px;
+    margin: 10px 5px;
+}
+
+.link:hover {
+    background-color: lightgrey;
+    transition: .3s;
+}
