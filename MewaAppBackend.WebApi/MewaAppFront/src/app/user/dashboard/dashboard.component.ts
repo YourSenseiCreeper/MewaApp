@@ -7,7 +7,8 @@ import { NotificationService } from "src/app/shared/notification.service";
 @Component({
   selector: 'app-user-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
+  providers: [MewaAppService]
 })
 export class DashboardComponent implements OnInit {
   userName: string = "Test";
