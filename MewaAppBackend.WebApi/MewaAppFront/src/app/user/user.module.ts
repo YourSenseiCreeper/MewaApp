@@ -4,6 +4,7 @@ import { UserComponent } from './user/user.component';
 import { RouterModule } from '@angular/router';
 import { UserRoutingModule } from './user-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { PublicModule } from '../public/public.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
   imports: [
     CommonModule,
     RouterModule,
-    UserRoutingModule
+    UserRoutingModule,
+    PublicModule
   ]
 })
 export class UserModule { }

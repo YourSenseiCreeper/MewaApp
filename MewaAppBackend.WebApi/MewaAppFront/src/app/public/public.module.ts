@@ -6,21 +6,28 @@ import { PublicRoutingModule } from './public-routing.module';
 import {MatChipsModule} from '@angular/material/chips';
 import { SingleFolderCardComponent } from './home/single-folder-card/single-folder-card.component';
 import { MatCardModule } from "@angular/material/card";
+import { SingleLinkCardComponent } from './home/single-link-card/single-link-card.component';
+import {MatIconModule} from "@angular/material/icon";
+import {CustomslicePipe} from "../shared/usefulTools/customslice.pipe";
 
 @NgModule({
     declarations: [
         HomeComponent,
-        SingleFolderCardComponent
+        SingleFolderCardComponent,
+        SingleLinkCardComponent,
+        CustomslicePipe
     ],
-    exports: [
-        SingleFolderCardComponent
-    ],
+  exports: [
+    SingleFolderCardComponent,
+    SingleLinkCardComponent
+  ],
   imports: [
     CommonModule,
     RouterModule,
     PublicRoutingModule,
     MatChipsModule,
-    MatCardModule
+    MatCardModule,
+    MatIconModule,
   ]
 })
 export class PublicModule { }
