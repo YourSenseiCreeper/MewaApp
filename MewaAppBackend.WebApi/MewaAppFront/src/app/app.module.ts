@@ -11,7 +11,7 @@ import { PublicModule } from './public/public.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -21,7 +21,7 @@ import { PublicModule } from './public/public.module';
     MatSnackBarModule,
     MatButtonModule,
     PublicModule,
-    RouterModule
+    RouterModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
