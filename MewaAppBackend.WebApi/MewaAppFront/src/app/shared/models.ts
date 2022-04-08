@@ -6,4 +6,5 @@ export interface Link {
     userId: number | null;
     //thumbnail: string | null; // byte[] powinno być
     thumbnailId: number | null;
+    url: string;
 }

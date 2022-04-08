@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MatSnackBar} from "@angular/material/snack-bar";
+import { Link } from 'src/app/shared/models';
 
 @Component({
   selector: 'app-single-link-card',
@@ -9,19 +10,17 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   ]
 })
 export class SingleLinkCardComponent implements OnInit {
-  @Input() linkCard: {
-    id: number,
-    title: string,
-    imageURL: string,
-    description: string,
-    link: string
-  } = {
+  @Input() link: Link = {
     id: 1,
-    title: 'Link 1',
-    imageURL: "/assets/images/asp-net-core-identity-with-patterns-1.png",
+    name: 'Link 1',
     description: "To jest pierwsza karta oraz jej jakis tam tekst, który musi zostać sformatowany. Powinny być zazwyczaj dwa wiersze tekstu.",
-    link: "bardzoDobryLink.org/link2"
+    url: "https://bardzoDobryLink.org/link2",
+    expiryDate: null,
+    thumbnailId: null,
+    userId: null
   };
+
+  imageUrl = "/assets/images/asp-net-core-identity-with-patterns-1.png";
 
 
   constructor(private snackBar: MatSnackBar) { }
@@ -33,7 +32,7 @@ export class SingleLinkCardComponent implements OnInit {
   Copy() {
 
     try {
-      navigator.clipboard.writeText('https://' + this.linkCard.link);
+      navigator.clipboard.writeText(this.link.url);
       this.snackBar.open("Link was copied", 'Ok', {
         duration: 2000
       });

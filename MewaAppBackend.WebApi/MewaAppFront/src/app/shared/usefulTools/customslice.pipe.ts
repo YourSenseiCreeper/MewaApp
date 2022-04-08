@@ -4,7 +4,9 @@ import {Pipe, PipeTransform} from "@angular/core";
   name: 'customSlice'
 })
 export class CustomslicePipe implements PipeTransform {
-  transform(val: string, lenght: number): string {
+  transform(val: string | null, lenght: number): string {
+    if (!val)
+      return '';
     return (val.length>length)? val.slice(0, lenght)+'...':val;
   }
 }
