@@ -9,8 +9,9 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class LoginComponent {
 
+  hide = true;
   loginForm!: FormGroup;
-  
+
   constructor(private route: ActivatedRoute, private fb: FormBuilder) {
     this.loginForm = fb.group(
       {
@@ -23,4 +24,4 @@ export class LoginComponent {
   login() {
     // request
   }
-} 
+}
