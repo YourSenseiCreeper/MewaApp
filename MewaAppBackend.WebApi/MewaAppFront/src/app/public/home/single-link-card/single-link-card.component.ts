@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-single-link-card',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class SingleLinkCardComponent implements OnInit {
-  linkCard: {
+  @Input() linkCard: {
     id: number,
     title: string,
     imageURL: string,
@@ -23,7 +24,7 @@ export class SingleLinkCardComponent implements OnInit {
   };
 
 
-  constructor() { }
+  constructor(private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
 
@@ -33,7 +34,10 @@ export class SingleLinkCardComponent implements OnInit {
 
     try {
       navigator.clipboard.writeText('https://' + this.linkCard.link);
-      alert("Copied the text: " + this.linkCard.link);
+      this.snackBar.open("Link was copied", 'Ok', {
+        duration: 2000
+      });
+
   }catch (e) {
       console.log(e);
     }
