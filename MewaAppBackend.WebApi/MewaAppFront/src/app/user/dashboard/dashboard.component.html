@@ -4,7 +4,7 @@
     <button (click)="onClickAcction()">Przykładowy error</button>
     <button (click)="onClickAcction1()">Przykładowy info</button>
     <button (click)="onClickAcction2()">Przykładowy success</button>
-    <div class="link" *ngFor="let link of links" (click)="redirect(link.url)">
-        {{link.name}}
+    <div class="link" *ngFor="let link of links">
+        {{link.name}} - {{link.description}}
     </div>
 </div>

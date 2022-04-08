@@ -12,6 +12,9 @@ export class MewaHttpService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200;http://localhost:5097',
+      'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
     })
   };
   

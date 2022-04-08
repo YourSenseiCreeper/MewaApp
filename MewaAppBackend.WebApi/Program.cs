@@ -14,6 +14,24 @@ builder.Services.AddSpaStaticFiles(configuration =>
     configuration.RootPath = "MewaAppFront/dist";
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy",
+        builder => builder.WithOrigins(new string[]
+        {
+             "https://localhost:7097",
+             "http://localhost:7097",
+             "http://localhost:5097",
+             "https://localhost:5097",
+             "http://localhost:4200",
+             "https://localhost:4200",
+        })
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowCredentials()
+        .SetIsOriginAllowed((host) => true));
+});
+
 builder.Services.AddControllers();
 builder.Services.AddDbContext<Context>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MewaApp")));
 builder.Services.AddEndpointsApiExplorer();
@@ -35,6 +53,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("CorsPolicy");
 
 app.UseRouting();
 app.UseAuthentication();
