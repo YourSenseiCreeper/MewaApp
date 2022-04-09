@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-auth-register',
@@ -7,5 +8,20 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
-  constructor(private route: ActivatedRoute) {}
-} 
+  loginForm!: FormGroup;
+
+  constructor(
+    private route: ActivatedRoute,
+    private fb: FormBuilder
+  ) {
+    this.loginForm = fb.group(
+      {
+        name: new FormControl('', null),
+        email: new FormControl('', null),
+        password: new FormControl('', null),
+        repeatPassword: new FormControl('', null)
+      }
+    )
+
+  }
+}
