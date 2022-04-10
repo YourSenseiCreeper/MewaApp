@@ -21,14 +21,20 @@ namespace MewaAppBackend.WebApi
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<User>()
-                .HasOne(u => u.File)
+                .HasOne(u => u.Avatar)
                 .WithOne(f => f.User)
                 .HasForeignKey<Model.Model.File>(f => f.UserId);
 
             modelBuilder.Entity<Model.Model.File>()
                 .HasOne(u => u.Link)
-                .WithOne(f => f.File)
-                .HasForeignKey<Link>(f => f.FileId);
+                .WithOne(f => f.Thumbnail)
+                .HasForeignKey<Link>(f => f.ThumbnailId);
+
+            modelBuilder.Entity<Link>()
+                .Property("CreationDate")
+                .IsRequired()
+                .HasDefaultValueSql("SYSDATETIME()")
+                .ValueGeneratedOnAdd();
         }
     }
 }

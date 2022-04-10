@@ -8,10 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="MewaAppFront\**" />
+    <Content Remove="MewaAppFront\**" />
+    <EmbeddedResource Remove="MewaAppFront\**" />
+    <None Remove="MewaAppFront\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MediatR" Version="10.0.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Core" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="3.1.23" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="6.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.3" />
@@ -31,7 +39,10 @@
   <ItemGroup>
     <Folder Include="Commands\" />
     <Folder Include="Commands\Link\" />
-    <Folder Include="MewaAppFront\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
 
   <ItemGroup>

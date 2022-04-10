@@ -14,7 +14,7 @@ namespace MewaAppBackend.WebApi.Handlers.Link
 
         public async Task<IEnumerable<Model.Model.Link>> Handle(GetAllLinksQuery request, CancellationToken cancellationToken)
         {
-            return unitOfWork.Repository<Model.Model.Link>().GetAll();
+            return unitOfWork.Repository<Model.Model.Link>().GetAllIncluding(l => l.Tags);
         }
 
     }
