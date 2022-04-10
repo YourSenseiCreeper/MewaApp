@@ -1,7 +1,9 @@
 using MediatR;
 using MewaAppBackend.Model.Interfaces;
+using MewaAppBackend.Model.Model;
 using MewaAppBackend.WebApi;
 using MewaAppBackend.WebApi.UnitOfWork;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -34,6 +36,21 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<Context>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MewaApp")));
+builder.Services.AddDefaultIdentity<User>(
+    x => {
+        x.Password.RequireDigit = false;
+        x.Password.RequiredLength = 2;
+        x.Password.RequireUppercase = false;
+        x.Password.RequireLowercase = false;
+        x.Password.RequireNonAlphanumeric = false;
+        x.Password.RequiredUniqueChars = 0;
+        x.Lockout.AllowedForNewUsers = true;
+        x.Lockout.MaxFailedAccessAttempts = 5;
+        x.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromSeconds(30);
+        x.SignIn.RequireConfirmedAccount = false;
+    })
+    .AddEntityFrameworkStores<Context>();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -50,8 +67,8 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
+    await app.RunSeeder(args);
 }
-
 app.UseHttpsRedirection();
 
 app.UseCors("CorsPolicy");
