@@ -2,13 +2,11 @@ import { Component } from '@angular/core';
 import { NotificationService } from "src/app/shared/notification.service";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: 'app-mobile-home',
+  templateUrl: './mobile-home.component.html',
+  styleUrls: ['./mobile-home.component.scss']
 })
-export class AppComponent {
-  title = 'Angular-Mewa';
-
+export class MobileHomeComponent {
   constructor(private notificationService: NotificationService) {}
 
   onClickAcction() {

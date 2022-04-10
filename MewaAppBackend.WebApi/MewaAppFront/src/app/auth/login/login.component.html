@@ -1,0 +1,30 @@
+<div class="login-area">
+    <mat-card class="login-card">
+        <mat-card-title class="fontColor" id="Top">Logowanie</mat-card-title>
+        <mat-card-content>
+            <form [formGroup]="loginForm" class="login-form">
+                <mat-form-field appearance="fill" class="inputField">
+                    <span matPrefix>
+                      <mat-icon class="iconColor">mail</mat-icon>
+                    </span>
+                    <mat-label>Email</mat-label>
+                    <input matInput type="text" formControlName="login">
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                  <span matPrefix>
+                    <mat-icon class="iconColor">password</mat-icon>
+                  </span>
+                    <mat-label>Haslo</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+<!--                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">-->
+<!--                      <mat-icon class="iconColor">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>-->
+<!--                    </button>-->
+                </mat-form-field>
+            </form>
+            <mat-card-subtitle [routerLink]="['#']" class="fontColor forgot">Zapomniałes hasła?</mat-card-subtitle>
+          <button mat-stroked-button class="button"><i class="material-icons" style="padding-right: 10px; font-size: 17px">login</i><span id="login">Zaloguj się</span></button>
+            <div id="register">
+              Nie masz konta? <a routerLink="./register">Zarejestruj się!</a>
+            </div>
+        </mat-card-content>
+    </mat-card>

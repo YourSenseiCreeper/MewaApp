@@ -5,26 +5,12 @@ using MewaAppBackend.WebApi;
 using MewaAppBackend.WebApi.Configuration;
 using MewaAppBackend.WebApi.UnitOfWork;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
-using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSpaStaticFiles(configuration =>
-{
-    configuration.RootPath = "MewaAppFront/dist";
-});
-
-builder.Services.AddControllers();
-builder.Services.AddDbContext<Context>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MewaApp")));
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "MewaApp", Version = "v1" });
-});
-builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
-builder.Services.AddTransient<IUnitOfWork, GenericUnitOfWork>();
+BasicConfig.Handle(builder);
+ServicesConfig.Handle(builder);
+SwaggerConfig.Handle(builder);
 
 var mapperConfig = new MapperConfiguration(mc =>
 {
@@ -46,6 +32,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors("CorsPolicy");
+
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
@@ -60,7 +48,7 @@ app.UseSpa(spa =>
     spa.Options.SourcePath = "MewaAppFront";
 
     spa.UseAngularCliServer(npmScript: "start");
-    
+
 });
 
 app.Run();

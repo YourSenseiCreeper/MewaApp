@@ -1,0 +1,41 @@
+<div class="login-area">
+  <mat-card class="login-card">
+    <mat-card-title class="fontColor" id="Top">Rejestracja</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="loginForm" class="login-form">
+        <mat-form-field appearance="fill" class="inputField">
+                    <span matPrefix>
+                      <mat-icon class="iconColor">portrait</mat-icon>
+                    </span>
+          <mat-label>Imię i Nazwisko</mat-label>
+          <input matInput type="text" formControlName="name">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+                  <span matPrefix>
+                    <mat-icon class="iconColor">mail</mat-icon>
+                  </span>
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+                  <span matPrefix>
+                    <mat-icon class="iconColor">password</mat-icon>
+                  </span>
+          <mat-label>Hasło</mat-label>
+          <input matInput type="password" formControlName="password">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+                  <span matPrefix>
+                    <mat-icon class="iconColor">password</mat-icon>
+                  </span>
+          <mat-label>Powtórz hasło</mat-label>
+          <input matInput type="password" formControlName="repeatPassword">
+        </mat-form-field>
+      </form>
+      <button mat-stroked-button class="button"><i class="material-icons" style="padding-right: 10px; font-size: 17px">login</i><span id="login">UTWÓRZ KONTO</span></button>
+      <div id="register">
+        Posiadasz konto? <a routerLink="/auth">Zaloguj się</a>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

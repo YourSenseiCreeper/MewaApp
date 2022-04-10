@@ -1,5 +1,23 @@
 # MewaApp (Name to change)
 
+## Rzeczy do zainstalowania
+
+nodejs - https://nodejs.org/en/
+
+npm install -g @angular/cli
+
+baza danych - https://www.microsoft.com/pl-pl/sql-server/sql-server-downloads
+(Express)
+
+ms ssms - https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15
+(Taki link)
+
+
+## Organizacja pracy
+
+Trello - https://trello.com/invite/b/SnydrmIc/8ee74516843f8135247dc3cb817b954d/main-mevaapp
+
+
 ## Linki do zapozania sie
 
 * https://angular.io/tutorial
