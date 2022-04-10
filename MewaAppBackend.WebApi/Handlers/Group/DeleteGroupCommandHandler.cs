@@ -7,17 +7,19 @@ namespace MewaAppBackend.WebApi.Handlers.Group
     public class DeleteGroupCommandHandler : IRequestHandler<DeleteGroupCommand, Unit>
     {
         private readonly IUnitOfWork unitOfWork;
+        private readonly IRepository<Model.Model.Group> groupRepository;
         public DeleteGroupCommandHandler(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
+            groupRepository = unitOfWork.Repository<Model.Model.Group>();
         }
 
-        Task<Unit> IRequestHandler<DeleteGroupCommand, Unit>.Handle(DeleteGroupCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteGroupCommand request, CancellationToken cancellationToken)
         {
-            var group = unitOfWork.Repository<Model.Model.Group>().GetDetail(g => g.Id == request.Id);
-            unitOfWork.Repository<Model.Model.Group>().Delete(group);
+            var group = groupRepository.GetDetail(g => g.Id == request.Id);
+            groupRepository.Delete(group);
             unitOfWork.SaveChanges();
-            return Task.FromResult(Unit.Value);
+            return Unit.Value;
         }
     }
 }

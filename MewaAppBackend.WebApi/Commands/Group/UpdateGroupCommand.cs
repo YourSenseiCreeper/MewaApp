@@ -9,8 +9,8 @@ namespace MewaAppBackend.WebApi.Commands.Group
         public string RedirectURL { get; set; }
         public string Name { get; set; }
         public bool IsFolder { get; set; }
-        public virtual ICollection<Link> Links { get; set; }
-        public virtual ICollection<Tag> Tags { get; set; }
-        public virtual ICollection<User> Users { get; set; }
+        public IEnumerable<Entity> Links { get; set; }
+        public IEnumerable<Entity> Tags { get; set; }
+        public IEnumerable<Entity> Users { get; set; }
     }
 }

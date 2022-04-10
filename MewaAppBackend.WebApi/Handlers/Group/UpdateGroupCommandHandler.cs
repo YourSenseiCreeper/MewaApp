@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using MewaAppBackend.Model.Interfaces;
 using MewaAppBackend.Model.Model;
 using MewaAppBackend.WebApi.Commands.Group;
@@ -8,28 +9,37 @@ namespace MewaAppBackend.WebApi.Handlers.Group
     public class UpdateGroupCommandHandler : IRequestHandler<UpdateGroupCommand, Unit>
     {
         private readonly IUnitOfWork unitOfWork;
-        public UpdateGroupCommandHandler(IUnitOfWork unitOfWork)
+        private readonly IRepository<Model.Model.Group> groupRepository;
+        private readonly IRepository<Model.Model.Link> linkRepository;
+        private readonly IRepository<Model.Model.User> userRepository;
+        private readonly IRepository<Model.Model.Tag> tagRepository;
+        protected readonly IMapper _mapper;
+        public UpdateGroupCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
             this.unitOfWork = unitOfWork;
+            groupRepository = unitOfWork.Repository<Model.Model.Group>();
+            linkRepository = unitOfWork.Repository<Model.Model.Link>();
+            userRepository = unitOfWork.Repository<User>();
+            tagRepository = unitOfWork.Repository<Tag>();
+            _mapper = mapper;
         }
 
-        public Task<Unit> Handle(UpdateGroupCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateGroupCommand request, CancellationToken cancellationToken)
         {
-            Model.Model.Group group = new()
-            {
-                Id = request.Id,
-                Name = request.Name,
-                RedirectURL = request.RedirectURL,
-                IsFolder = request.IsFolder,
-                Links = request.Links,
-                Tags = request.Tags,
-                Users = request.Users
-            };
+            var group = groupRepository.GetDetail(g => g.Id == request.Id);
 
-            unitOfWork.Repository<Model.Model.Group>().Edit(group);
+            group.Id = request.Id;
+            group.Name = request.Name;
+            group.RedirectURL = request.RedirectURL;
+            group.IsFolder = request.IsFolder;
+            group.Links = _mapper.Map<ICollection<Model.Model.Link>>(request.Links);
+            group.Tags = _mapper.Map<ICollection<Tag>>(request.Tags);
+            group.Users = _mapper.Map<ICollection<User>>(request.Users);
+
+            groupRepository.Edit(group);
             unitOfWork.SaveChanges();
 
-            return Task.FromResult(Unit.Value);
+            return Unit.Value;
         }
     }
 }

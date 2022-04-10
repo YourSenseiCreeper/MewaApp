@@ -13,10 +13,10 @@ namespace MewaAppBackend.WebApi.Handlers.Group
             this.unitOfWork = unitOfWork;
         }
 
-        Task<Model.Model.Group> IRequestHandler<GetDetailGroupQuery, Model.Model.Group>.Handle(GetDetailGroupQuery request, CancellationToken cancellationToken)
+        public async Task<Model.Model.Group> Handle(GetDetailGroupQuery request, CancellationToken cancellationToken)
         {
             var group = unitOfWork.Repository<Model.Model.Group>().GetDetail(g => g.Id == request.Id);
-            return Task.FromResult(group);
+            return group;
         }
     }
 }

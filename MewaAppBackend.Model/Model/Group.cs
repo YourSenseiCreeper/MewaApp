@@ -1,6 +1,6 @@
 ﻿namespace MewaAppBackend.Model.Model
 {
-    public class Group: Entity
+    public class Group : Entity
     {
         public string RedirectURL { get; set; }
         public string Name { get; set; }

@@ -1,6 +1,8 @@
+using AutoMapper;
 using MediatR;
 using MewaAppBackend.Model.Interfaces;
 using MewaAppBackend.WebApi;
+using MewaAppBackend.WebApi.Configuration;
 using MewaAppBackend.WebApi.UnitOfWork;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +25,14 @@ builder.Services.AddSwaggerGen(c =>
 });
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 builder.Services.AddTransient<IUnitOfWork, GenericUnitOfWork>();
+
+var mapperConfig = new MapperConfiguration(mc =>
+{
+    mc.AddProfile(new AutoMapperConfig());
+});
+
+IMapper mapper = mapperConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
 
 var app = builder.Build();
 
