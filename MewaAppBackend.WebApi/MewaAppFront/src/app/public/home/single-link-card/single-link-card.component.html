@@ -9,7 +9,7 @@
   </mat-card-content>
 
   <mat-card-footer>
-    <mat-card-subtitle id="link">{{ 'https://' + link.url | customSlice:120 }}</mat-card-subtitle>
+    <mat-card-subtitle id="link">{{ link.url | customSlice:120 }}</mat-card-subtitle>
     <a id="linkIcon" (click)="Copy();"><mat-icon>content_copy</mat-icon></a>
 <!--    <a id="link"><mat-icon>link</mat-icon></a>-->
   </mat-card-footer>

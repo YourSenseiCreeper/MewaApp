@@ -57,7 +57,7 @@ export class DashboardComponent implements OnInit {
       }
     });
     // CORS not working :(
-    // this.mewaService.getAllLinks().subscribe(data => this.links = data);
+    this.mewaService.getAllLinks().subscribe(data => this.links = data);
   }
 
   onClickAcction() {

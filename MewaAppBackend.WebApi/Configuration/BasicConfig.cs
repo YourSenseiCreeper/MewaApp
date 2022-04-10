@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using MewaAppBackend.Model.Model;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -38,7 +39,18 @@ namespace MewaAppBackend.WebApi.Configuration
             // Database
             builder.Services.AddDbContext<Context>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MewaApp")));
 
-            builder.Services.AddIdentity<Model.Model.User, IdentityRole>()
+            builder.Services.AddIdentity<User, IdentityRole>(x => {
+                x.Password.RequireDigit = false;
+                x.Password.RequiredLength = 2;
+                x.Password.RequireUppercase = false;
+                x.Password.RequireLowercase = false;
+                x.Password.RequireNonAlphanumeric = false;
+                x.Password.RequiredUniqueChars = 0;
+                x.Lockout.AllowedForNewUsers = true;
+                x.Lockout.MaxFailedAccessAttempts = 5;
+                x.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromSeconds(30);
+                x.SignIn.RequireConfirmedAccount = false;
+            })
             .AddEntityFrameworkStores<Context>()
             .AddDefaultTokenProviders();
 

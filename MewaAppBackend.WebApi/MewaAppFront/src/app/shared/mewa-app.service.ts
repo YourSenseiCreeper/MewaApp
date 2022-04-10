@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/internal/operators/map';
 import { MewaHttpService } from './mewa-http.service';
@@ -12,7 +13,7 @@ export class MewaAppService {
   constructor(private service: MewaHttpService) { }
 
   getAllLinks(): Observable<Link[]> {
-    return this.service.get('http://localhost:5097/api/link').pipe(map(data => this.mapLinks(data)))
+    return this.service.request("get", "https://localhost:7097/api/link").pipe(map(data => this.mapLinks(data)))
   }
 
   mapLinks(links: any[]): Link[] {
@@ -22,6 +23,7 @@ export class MewaAppService {
   mapLink(rawLink: any) {
     let link = {
       id: rawLink.id,
+      url: rawLink.url,
       name: rawLink.name,
       description: rawLink.desciption ? rawLink.desciption : null,
       expiryDate: rawLink.expiryDate ? rawLink.expiryDate : null,
