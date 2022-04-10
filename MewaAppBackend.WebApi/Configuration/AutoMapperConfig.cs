@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MewaAppBackend.Model.Dtos.User;
 using MewaAppBackend.Model.Model;
 
 namespace MewaAppBackend.WebApi.Configuration
@@ -8,7 +9,7 @@ namespace MewaAppBackend.WebApi.Configuration
         public AutoMapperConfig()
         {
             CreateMap<Entity, Link>();
-            CreateMap<Entity, User>();
+            CreateMap<AddUserToSomething, User>();
             CreateMap<Entity, Tag>();
         }
     }
