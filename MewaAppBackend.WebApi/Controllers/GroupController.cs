@@ -20,7 +20,7 @@ namespace MewaAppBackend.WebApi.Controllers
             this.unitOfWork = unitOfWork;
         }
 
-        [HttpGet]
+        [HttpGet("GetAllGroups")]
         public async Task<ActionResult<IEnumerable<Group>>> GetAllGroups()
         {
             var request = new GetAllGroupsQuery();
@@ -29,17 +29,37 @@ namespace MewaAppBackend.WebApi.Controllers
             return Ok(result);
         }
 
-/*        [HttpGet]
+        [HttpGet("GetDetailGroup")]
         public async Task<ActionResult> GetDetailGroup(int id)
         {
             return Ok(await _mediator.Send(new GetDetailGroupQuery { Id = id }));
         }
-*/
 
-        [HttpPost]
+        [HttpPost("CreateGroup")]
         public async Task<ActionResult> Create(CreateGroupCommand createGroupCommand)
         {
             return Ok(await _mediator.Send(createGroupCommand));
+        }
+
+        [HttpPost("TestDataGroup")]
+        public async Task<ActionResult> TestData()
+        {
+            unitOfWork.Repository<Link>().Add(new Link()
+            {
+                Name = "Name",
+                OwnerId = "28ad5b21-258b-4b21-b44a-78fac15a9c37",
+                Url = "asd"
+            });
+
+            unitOfWork.Repository<Tag>().Add(new Tag()
+            {
+                Name = "Name",
+                UserId = "28ad5b21-258b-4b21-b44a-78fac15a9c37"
+            });
+
+            unitOfWork.SaveChanges();
+
+            return Ok();
         }
 
         [HttpPut]
