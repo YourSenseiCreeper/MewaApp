@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { PublicModule } from '../public/public.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatIconModule,
     MatButtonModule,
     MatMenuModule,
-    MatTooltipModule
+    MatTooltipModule,
+    PublicModule
   ]
 })
 export class UserModule { }

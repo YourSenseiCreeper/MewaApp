@@ -1,0 +1,71 @@
+#mainCard {
+  max-width: 289px;
+  max-height: 222px;
+}
+
+#card {
+  background-color: #FFFFFF;
+  max-width: 289px;
+  height: 153px;
+  clear: both;
+  border: 1px solid #0099FF;
+  border-top: none;
+  border-radius: 0 0 0 0;
+}
+
+.margin {
+  margin: 50px;
+  display: inline-block;
+}
+
+#topGroup {
+  float: left;
+  display: inline-block;
+}
+
+#left {
+  width: 128px;
+  height: 35px;
+  border-left: 1px solid;
+  border-top: 1px solid;
+  border-color: #0099FF;
+  position: relative;
+}
+
+#center {
+  height: 58.82px;
+  width: 30px;
+  position: absolute;
+  border-right: 1px solid #0099FF;
+  right: -25px;
+  top: 1px;
+  transform: rotateZ(-45deg);
+}
+
+#right {
+  width: 126px;
+  height: 35px;
+  margin-left: 34px;
+  border-bottom: 1px solid #0099FF;
+}
+
+div.inline {
+  float: left;
+}
+
+#container {
+  color: #0099FF;
+  position: relative;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 35.16px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+#content {
+  position: absolute;
+  margin-top: 30%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}

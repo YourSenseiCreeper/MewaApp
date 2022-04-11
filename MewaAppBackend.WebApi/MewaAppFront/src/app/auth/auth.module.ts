@@ -9,6 +9,7 @@ import {MatCardModule} from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -16,14 +17,15 @@ import { MatInputModule } from '@angular/material/input';
     LoginComponent,
     RegisterComponent
   ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    AuthRoutingModule,
-    MatButtonModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule
-  ]
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        AuthRoutingModule,
+        MatButtonModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatIconModule
+    ]
 })
 export class AuthModule { }

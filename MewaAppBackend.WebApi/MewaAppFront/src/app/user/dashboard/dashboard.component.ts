@@ -13,7 +13,35 @@ import { NotificationService } from "src/app/shared/notification.service";
 export class DashboardComponent implements OnInit {
   userName: string = "Test";
   folder: string = '';
-  links: Link[] = [];
+  links: Link[] = [
+    {
+      id: 1,
+      name: 'Link 1',
+      description: "To jest pierwsza karta oraz jej jakis tam tekst, który musi zostać sformatowany. Powinny być zazwyczaj dwa wiersze tekstu.",
+      url: "https://bardzoDobryLink.org/link2",
+      expiryDate: null,
+      thumbnailId: null,
+      userId: null
+    },
+    {
+      id: 2,
+      name: 'Link 2',
+      description: "To jest pierwsza karta oraz jej jakis tam tekst, który musi zostać sformatowany. Powinny być zazwyczaj dwa wiersze tekstu.",
+      url: "https://bardzoDobryLink.org/link2",
+      expiryDate: null,
+      thumbnailId: null,
+      userId: null
+    },
+    {
+      id: 3,
+      name: 'Link 3',
+      description: "To jest pierwsza karta oraz jej jakis tam tekst, który musi zostać sformatowany. Powinny być zazwyczaj dwa wiersze tekstu.",
+      url: "https://bardzoDobryLink.org/link2",
+      expiryDate: null,
+      thumbnailId: null,
+      userId: null
+    }
+  ];
 
   constructor(private notificationService: NotificationService,
     private route: ActivatedRoute,
@@ -28,6 +56,7 @@ export class DashboardComponent implements OnInit {
         // tutaj pobieramy listę linków i folderów dla podanego folderu
       }
     });
+    // CORS not working :(
     this.mewaService.getAllLinks().subscribe(data => this.links = data);
   }
 

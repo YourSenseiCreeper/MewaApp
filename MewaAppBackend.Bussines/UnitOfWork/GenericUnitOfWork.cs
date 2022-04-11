@@ -14,7 +14,7 @@ namespace MewaAppBackend.WebApi.UnitOfWork
         {
             db = _db;
         }
-        public IRepository<T> Repository<T>() where T : Entity
+        public IRepository<T> Repository<T>() where T : class
         {
             if (repositories.TryGetValue(typeof(T), out var repository))
                 return (IRepository<T>) repository;
