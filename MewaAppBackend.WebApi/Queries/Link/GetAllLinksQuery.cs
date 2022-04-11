@@ -3,7 +3,7 @@ using MewaAppBackend.Model.Model;
 
 namespace MewaAppBackend.WebApi.Queries
 {
-    public record GetAllLinksQuery : IRequest<IEnumerable<Link>>
+    public record GetAllLinksQuery : IRequest<IEnumerable<Model.Model.Link>>
     {
     }
 }

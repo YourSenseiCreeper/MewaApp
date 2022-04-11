@@ -2,6 +2,7 @@
 using MewaAppBackend.Model.Interfaces;
 using MewaAppBackend.Model.Model;
 using MewaAppBackend.WebApi.Queries;
+using MewaAppBackend.WebApi.Queries.Link;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MewaAppBackend.WebApi.Controllers
@@ -26,6 +27,12 @@ namespace MewaAppBackend.WebApi.Controllers
             var result = await _mediator.Send(request);
 
             return Ok(result);
+        }
+
+        [HttpPost ("Add")]
+        public async Task<Unit> AddLink([FromBody] AddLinkCommand command)
+        {
+            return await _mediator.Send(command);
         }
     }
 }
