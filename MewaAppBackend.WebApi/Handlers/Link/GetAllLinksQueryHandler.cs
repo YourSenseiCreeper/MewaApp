@@ -16,6 +16,5 @@ namespace MewaAppBackend.WebApi.Handlers.Link
         {
             return unitOfWork.Repository<Model.Model.Link>().GetAllIncluding(l => l.Tags);
         }
-
     }
 }

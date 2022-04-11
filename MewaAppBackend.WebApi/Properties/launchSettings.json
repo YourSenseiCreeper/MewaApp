@@ -11,7 +11,6 @@
   "profiles": {
     "MewaAppBackend.WebApi": {
       "commandName": "Project",
-      "commandLineArgs": "--seed=true",
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {

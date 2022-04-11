@@ -29,6 +29,9 @@ namespace MewaAppBackend.Services.User
         {
             SignInResult loginResoult;
             var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+                return null;
+
             loginResoult = await _signInManager.PasswordSignInAsync(user, password, false, false);
 
             if (loginResoult.Succeeded)
@@ -66,9 +69,9 @@ namespace MewaAppBackend.Services.User
             };
         }
 
-        public IdentityResult? HandleRegister(Model.Model.User user, string password)
+        public async Task<IdentityResult> HandleRegister(Model.Model.User user, string password)
         {
-            return password != null ? _userManager.CreateAsync(user, password).Result : null;
+            return await _userManager.CreateAsync(user, password);
         }
     }
 }

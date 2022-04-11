@@ -1,5 +1,10 @@
 using MewaAppBackend.WebApi;
+using AutoMapper;
+using MediatR;
+using MewaAppBackend.Model.Interfaces;
+using MewaAppBackend.WebApi;
 using MewaAppBackend.WebApi.Configuration;
+using MewaAppBackend.WebApi.UnitOfWork;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +12,14 @@ var builder = WebApplication.CreateBuilder(args);
 BasicConfig.Handle(builder);
 ServicesConfig.Handle(builder);
 SwaggerConfig.Handle(builder);
+
+var mapperConfig = new MapperConfiguration(mc =>
+{
+    mc.AddProfile(new AutoMapperConfig());
+});
+
+IMapper mapper = mapperConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
 
 var app = builder.Build();
 

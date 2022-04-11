@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
     <Compile Remove="MewaAppFront\**" />
     <Content Remove="MewaAppFront\**" />
     <EmbeddedResource Remove="MewaAppFront\**" />
@@ -34,11 +35,6 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Commands\" />
-    <Folder Include="Commands\Link\" />
   </ItemGroup>
 
   <ItemGroup>
