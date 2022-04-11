@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using MewaAppBackend.Services.User;
 using MewaAppBackend.WebApi.Handlers.User;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MewaAppBackend.WebApi.Commands.User
 {
@@ -12,7 +13,7 @@ namespace MewaAppBackend.WebApi.Commands.User
             _userCreationService = userCreationService;
         }
 
-        public async Task<RegisterCommandResult> Handle(RegisterCommand request, CancellationToken cancellationToken)
+        public async Task<RegisterCommandResult> Handle([FromBody] RegisterCommand request, CancellationToken cancellationToken)
         {
             var response = new RegisterCommandResult { Success = false };
             if (string.IsNullOrWhiteSpace(request.Password))

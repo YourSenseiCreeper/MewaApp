@@ -22,7 +22,9 @@
                 </mat-form-field>
             </form>
             <mat-card-subtitle [routerLink]="['#']" class="fontColor forgot">Zapomniałes hasła?</mat-card-subtitle>
-          <button mat-stroked-button class="button"><i class="material-icons" style="padding-right: 10px; font-size: 17px">login</i><span id="login">Zaloguj się</span></button>
+          <button mat-stroked-button class="button" (click)="login()">
+            <i class="material-icons" style="padding-right: 10px; font-size: 17px">login</i><span id="login">Zaloguj się</span>
+          </button>
             <div id="register">
               Nie masz konta? <a routerLink="./register">Zarejestruj się!</a>
             </div>

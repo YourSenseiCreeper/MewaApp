@@ -32,7 +32,9 @@
           <input matInput type="password" formControlName="repeatPassword">
         </mat-form-field>
       </form>
-      <button mat-stroked-button class="button"><i class="material-icons" style="padding-right: 10px; font-size: 17px">login</i><span id="login">UTWÓRZ KONTO</span></button>
+      <button mat-stroked-button class="button" (click)="submit()">
+        <i class="material-icons" style="padding-right: 10px; font-size: 17px">login</i><span id="login">UTWÓRZ KONTO</span>
+      </button>
       <div id="register">
         Posiadasz konto? <a routerLink="/auth">Zaloguj się</a>
       </div>

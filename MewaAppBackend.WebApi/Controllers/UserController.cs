@@ -17,21 +17,15 @@ namespace MewaAppBackend.WebApi.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<RegisterCommandResult> Create(string userName, string email, string password)
+        public async Task<RegisterCommandResult> Create([FromBody] RegisterCommand command)
         {
-            var command = new RegisterCommand
-            {
-                UserName = userName,
-                Email = email,
-                Password = password
-            };
             return await _mediator.Send(command, CancellationToken.None);
         }
 
         [HttpPost("Login")]
-        public async Task<LoginCommandResult> Login(string email, string password)
+        public async Task<LoginCommandResult> Login([FromBody] LoginCommand command)
         {
-            return await _mediator.Send(new LoginCommand { Email = email, Password = password }, CancellationToken.None);
+            return await _mediator.Send(command, CancellationToken.None);
         }
     }
 }
