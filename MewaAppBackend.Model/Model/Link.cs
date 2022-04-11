@@ -2,6 +2,10 @@
 {
     public class Link: Entity
     {
+        public Link()
+        {
+            this.Groups = new HashSet<Group>();
+        }
         public string Url { get; set; }
         public string Name { get; set; }
         public string? Description { get; set; }

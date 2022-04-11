@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
     <Compile Remove="MewaAppFront\**" />
     <Content Remove="MewaAppFront\**" />
     <EmbeddedResource Remove="MewaAppFront\**" />
@@ -37,7 +38,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\" />
     <Folder Include="Commands\Link\" />
   </ItemGroup>
 
