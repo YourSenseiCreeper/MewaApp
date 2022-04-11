@@ -19,7 +19,7 @@ namespace MewaAppBackend.WebApi.Handlers.Group
             this.unitOfWork = unitOfWork;
             groupRepository = unitOfWork.Repository<Model.Model.Group>();
             linkRepository = unitOfWork.Repository<Model.Model.Link>();
-            userRepository = unitOfWork.Repository<User>();
+            userRepository = unitOfWork.Repository<Model.Model.User>();
             tagRepository = unitOfWork.Repository<Tag>();
             _mapper = mapper;
         }
@@ -34,7 +34,7 @@ namespace MewaAppBackend.WebApi.Handlers.Group
             group.IsFolder = request.IsFolder;
             group.Links = _mapper.Map<ICollection<Model.Model.Link>>(request.Links);
             group.Tags = _mapper.Map<ICollection<Tag>>(request.Tags);
-            group.Users = _mapper.Map<ICollection<User>>(request.Users);
+            group.Users = _mapper.Map<ICollection<Model.Model.User>>(request.Users);
 
             groupRepository.Edit(group);
             unitOfWork.SaveChanges();
