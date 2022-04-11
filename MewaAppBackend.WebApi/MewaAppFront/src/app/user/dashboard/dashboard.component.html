@@ -8,8 +8,9 @@
 	    <button (click)="onClickAcction2()">Przykładowy success</button>
 	    <div class="link-list">
 	        <app-single-link-card 
-			*ngFor="let link of links" 
-			[link]="link"></app-single-link-card>
+				*ngFor="let link of links" 
+				[link]="link">
+			</app-single-link-card>
  	    </div>
 	</div>
 </div>
