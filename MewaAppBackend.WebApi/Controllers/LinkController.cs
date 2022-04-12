@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using MewaAppBackend.Model.Interfaces;
 using MewaAppBackend.Model.Model;
+using MewaAppBackend.WebApi.Commands.Link;
+using MewaAppBackend.WebApi.Handlers.Link;
 using MewaAppBackend.WebApi.Queries;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,6 +28,12 @@ namespace MewaAppBackend.WebApi.Controllers
             var result = await _mediator.Send(request);
 
             return Ok(result);
+        }
+
+        [HttpDelete]
+        public async Task<DeleteLinkCommandResult> Delete(int id)
+        {
+            return await _mediator.Send(new DeleteLinkCommand { Id = id });
         }
     }
 }
