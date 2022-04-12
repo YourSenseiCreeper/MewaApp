@@ -11,12 +11,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { PublicModule } from '../public/public.module';
+import { FoldersComponent } from './folders/folders.component';
 
 @NgModule({
   declarations: [
     UserComponent,
     DashboardComponent,
-    NavbarComponent
+    NavbarComponent,
+    FoldersComponent
   ],
   imports: [
     CommonModule,

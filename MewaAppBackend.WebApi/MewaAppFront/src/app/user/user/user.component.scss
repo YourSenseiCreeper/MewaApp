@@ -1,3 +1,10 @@
+.bg {
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg width='495' height='495' viewBox='0 0 495 495' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='495' r='495' fill='%230099FF' fill-opacity='0.1'/%3E%3C/svg%3E");
+}
+
 .user {
     background-color: limegreen;
     font-size: 20pt;
