@@ -1,7 +1,6 @@
 ﻿namespace MewaAppBackend.WebApi.Handlers.User
 {
-    public class RegisterCommandResult
+    public class RegisterCommandResult : SuccessResult
     {
-        public bool Success { get; set; }
     }
 }

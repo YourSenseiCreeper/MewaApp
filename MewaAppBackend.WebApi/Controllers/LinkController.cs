@@ -35,5 +35,11 @@ namespace MewaAppBackend.WebApi.Controllers
         {
             return await _mediator.Send(new DeleteLinkCommand { Id = id });
         }
+
+        [HttpPut]
+        public async Task<EditLinkCommandResult> Edit([FromBody] EditLinkCommand command)
+        {
+            return await _mediator.Send(command);
+        }
     }
 }
