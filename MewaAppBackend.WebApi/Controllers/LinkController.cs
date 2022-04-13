@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using MewaAppBackend.Model.Interfaces;
 using MewaAppBackend.Model.Model;
+using MewaAppBackend.WebApi.Commands;
 using MewaAppBackend.WebApi.Commands.Link;
 using MewaAppBackend.WebApi.Handlers.Link;
 using MewaAppBackend.WebApi.Queries;
@@ -30,6 +31,13 @@ namespace MewaAppBackend.WebApi.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet("GetLinkById")]
+        public async Task<Link> GetLinkById(int id)
+        {
+            return await _mediator.Send(new GetLinkByIdQuery { Id = id });
+        }
+
 
         [HttpPost ("Add")]
         public async Task<Unit> AddLink([FromBody] AddLinkCommand command)
