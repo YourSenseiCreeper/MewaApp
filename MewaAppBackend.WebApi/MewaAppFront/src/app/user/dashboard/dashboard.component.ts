@@ -74,7 +74,7 @@ export class DashboardComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public mewaService: MewaAppService,
-    breakpointObserver: BreakpointObserver) {
+    public breakpointObserver: BreakpointObserver) {
     breakpointObserver
     .observe([
       Breakpoints.XSmall,

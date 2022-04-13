@@ -6,12 +6,12 @@
 		<app-single-link-card [link]="link"></app-single-link-card>
 	</mat-grid-tile>
 </mat-grid-list>
-<div class="test">
+<div class="link-card-container">
 	<app-single-link-card 
-	*ngFor="let link of links" 
-	[link]="link"
-	style="padding: 1rem;">
-</app-single-link-card>
+		*ngFor="let link of links" 
+		[link]="link"
+		style="padding: 1rem;">
+	</app-single-link-card>
 </div>
 <div class="user">
 	<h2>Komponent użytkownika {{ userName }}</h2>
