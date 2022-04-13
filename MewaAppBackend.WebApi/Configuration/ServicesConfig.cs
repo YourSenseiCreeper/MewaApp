@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using MewaAppBackend.Model.Interfaces;
 using MewaAppBackend.Services.User;
 using MewaAppBackend.WebApi.UnitOfWork;
@@ -14,6 +15,14 @@ namespace MewaAppBackend.WebApi.Configuration
 
             builder.Services.AddTransient<IUnitOfWork, GenericUnitOfWork>();
             builder.Services.AddScoped<IUserCreationService, UserCreationService>();
+
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new AutoMapperConfig());
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            builder.Services.AddSingleton(mapper);
         }
     }
 }
