@@ -1,3 +1,4 @@
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MewaAppService } from 'src/app/shared/mewa-app.service';
@@ -13,6 +14,14 @@ import { NotificationService } from "src/app/shared/notification.service";
 export class DashboardComponent implements OnInit {
   userName: string = "Test";
   folder: string = '';
+  cols : number = 1;
+  gridByBreakpoint = {
+    xl: 5,
+    lg: 3,
+    md: 2,
+    sm: 1,
+    xs: 1
+  };
   links: Link[] = [
     {
       id: 1,
@@ -40,13 +49,59 @@ export class DashboardComponent implements OnInit {
       expiryDate: null,
       thumbnailId: null,
       userId: null
+    },
+    {
+      id: 4,
+      name: 'Link 4',
+      description: "To jest pierwsza karta oraz jej jakis tam tekst, który musi zostać sformatowany. Powinny być zazwyczaj dwa wiersze tekstu.",
+      url: "https://bardzoDobryLink.org/link2",
+      expiryDate: null,
+      thumbnailId: null,
+      userId: null
+    },
+    {
+      id: 5,
+      name: 'Link 5',
+      description: "To jest pierwsza karta oraz jej jakis tam tekst, który musi zostać sformatowany. Powinny być zazwyczaj dwa wiersze tekstu.",
+      url: "https://bardzoDobryLink.org/link2",
+      expiryDate: null,
+      thumbnailId: null,
+      userId: null
     }
   ];
 
   constructor(private notificationService: NotificationService,
     private route: ActivatedRoute,
     private router: Router,
-    public mewaService: MewaAppService) {
+    public mewaService: MewaAppService,
+    breakpointObserver: BreakpointObserver) {
+    breakpointObserver
+    .observe([
+      Breakpoints.XSmall,
+      Breakpoints.Small,
+      Breakpoints.Medium,
+      Breakpoints.Large,
+      Breakpoints.XLarge,
+    ])
+    .subscribe(result => {
+      if (result.matches) {
+        if (result.breakpoints[Breakpoints.XSmall]) {
+          this.cols = this.gridByBreakpoint.xs;
+        }
+        if (result.breakpoints[Breakpoints.Small]) {
+          this.cols = this.gridByBreakpoint.sm;
+        }
+        if (result.breakpoints[Breakpoints.Medium]) {
+          this.cols = this.gridByBreakpoint.md;
+        }
+        if (result.breakpoints[Breakpoints.Large]) {
+          this.cols = this.gridByBreakpoint.lg;
+        }
+        if (result.breakpoints[Breakpoints.XLarge]) {
+          this.cols = this.gridByBreakpoint.xl;
+        }
+      }
+    });
   }
   ngOnInit(): void {
     this.route.paramMap.subscribe(paramMap => {

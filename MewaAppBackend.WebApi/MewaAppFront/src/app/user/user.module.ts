@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { PublicModule } from '../public/public.module';
 import { FoldersComponent } from './folders/folders.component';
 
@@ -29,6 +30,7 @@ import { FoldersComponent } from './folders/folders.component';
     MatButtonModule,
     MatMenuModule,
     MatTooltipModule,
+    MatGridListModule,
     PublicModule
   ]
 })
