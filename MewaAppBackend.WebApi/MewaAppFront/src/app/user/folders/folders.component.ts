@@ -7,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FoldersComponent implements OnInit {
 
-  constructor() { }
+  folderId: string;
+
+  constructor() {
+    this.folderId = 'fbx245shd';
+  }
 
   ngOnInit(): void {
   }

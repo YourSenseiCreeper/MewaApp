@@ -13,13 +13,15 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { PublicModule } from '../public/public.module';
 import { FoldersComponent } from './folders/folders.component';
+import { FolderContentsComponent } from './folder-contents/folder-contents.component';
 
 @NgModule({
   declarations: [
     UserComponent,
     DashboardComponent,
     NavbarComponent,
-    FoldersComponent
+    FoldersComponent,
+    FolderContentsComponent
   ],
   imports: [
     CommonModule,

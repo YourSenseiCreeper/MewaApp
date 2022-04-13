@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { FolderContentsComponent } from './folder-contents/folder-contents.component';
 import { FoldersComponent } from './folders/folders.component';
 import { UserComponent } from './user/user.component';
 
@@ -13,7 +14,8 @@ import { UserComponent } from './user/user.component';
         component: UserComponent,
         children: [
           { path: 'dashboard', component: DashboardComponent, data: { title: "Dashboard" } },
-          { path: 'folders', component: FoldersComponent, data: { title: "Foldery" } }
+          { path: 'folders', component: FoldersComponent, data: { title: "Foldery" } },
+          { path: 'folder/:id', component: FolderContentsComponent, data: { title: "Folder Contents" } }
           // { path: 'register', component: RegisterComponent, canActivate: [AppRouteGuard], data: { title: "Rejestracja"}  },
           // { path: 'change-password', component: ChangePasswordComponent, canActivate: [AppRouteGuard], data: { title: "Zmiana hasła"}  }
         ]
