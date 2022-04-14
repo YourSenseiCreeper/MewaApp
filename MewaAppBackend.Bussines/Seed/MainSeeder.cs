@@ -25,7 +25,6 @@ namespace MewaAppBackend.Business.Seed
             await context.SaveChangesAsync();
         }
 
-
         private static async Task<User> SeedUsersAsync(UserManager<User> userManager)
         {
             var adminUser = await userManager.FindByNameAsync("admin");

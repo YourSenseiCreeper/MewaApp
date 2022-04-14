@@ -1,4 +1,5 @@
 ﻿using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 namespace MewaAppBackend.WebApi.Configuration
 {
@@ -6,9 +7,17 @@ namespace MewaAppBackend.WebApi.Configuration
     {
         public static void Handle(WebApplicationBuilder builder) 
         {
-            builder.Services.AddSwaggerGen(c =>
+            builder.Services.AddSwaggerGen(options =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MewaApp", Version = "v1" });
+                options.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "MewaApp API",
+                    Description = "Application created by .Net Group Koszalin University of Technology",
+                });
+
+                var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
             });
         }
     }

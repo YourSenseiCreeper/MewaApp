@@ -5,6 +5,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-MewaAppBackend.WebApi-D9EE3E5E-85CD-4386-8560-C64A4D00585A</UserSecretsId>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	<NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -38,6 +40,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Commands\Link\" />
+    <Folder Include="MewaAppFront\" />
     <None Include="..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
 
