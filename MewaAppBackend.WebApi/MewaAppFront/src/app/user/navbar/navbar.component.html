@@ -1,4 +1,6 @@
-<mat-toolbar>
+<mat-toolbar 
+    (scroll)="onScroll()" 
+    [ngClass]="navbarFixed? 'fixed':''">
     <span>
         <a class="link">MewaApp</a>
     </span>
