@@ -1,19 +1,15 @@
-.user {
-    background-color: limegreen;
-    font-size: 14t;
-    margin: 0px auto;
-    width: 80%;
-    padding: 10px 10px;
+@import 'variables.scss';
+
+h1{
+    color: $my-primary;
+    font-weight: bold;
+    text-align: center;
+    font-size: 40px;
+    margin-top: 2rem;
 }
 
-.link-list {
-    padding: 15px;
+.link-card-container {
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
-    max-width: 100%;
-}
-
-.link-list > mat-card {
-    margin: 5px;
+    justify-content: space-evenly;
 }

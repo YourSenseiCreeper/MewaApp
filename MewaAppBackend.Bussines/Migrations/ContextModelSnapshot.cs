@@ -137,30 +137,39 @@ namespace MewaAppBackend.Business.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<DateTime>("CreationDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("SYSDATETIME()");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ExpiryDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("FileId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
+                    b.Property<string>("OwnerId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int?>("ThumbnailId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("FileId")
-                        .IsUnique()
-                        .HasFilter("[FileId] IS NOT NULL");
+                    b.HasIndex("OwnerId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("ThumbnailId")
+                        .IsUnique()
+                        .HasFilter("[ThumbnailId] IS NOT NULL");
 
                     b.ToTable("Link");
                 });
@@ -176,6 +185,9 @@ namespace MewaAppBackend.Business.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("LinkId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -185,6 +197,8 @@ namespace MewaAppBackend.Business.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LinkId");
 
                     b.HasIndex("UserId");
 
@@ -437,7 +451,7 @@ namespace MewaAppBackend.Business.Migrations
             modelBuilder.Entity("MewaAppBackend.Model.Model.File", b =>
                 {
                     b.HasOne("MewaAppBackend.Model.Model.User", "User")
-                        .WithOne("File")
+                        .WithOne("Avatar")
                         .HasForeignKey("MewaAppBackend.Model.Model.File", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -447,23 +461,27 @@ namespace MewaAppBackend.Business.Migrations
 
             modelBuilder.Entity("MewaAppBackend.Model.Model.Link", b =>
                 {
-                    b.HasOne("MewaAppBackend.Model.Model.File", "File")
-                        .WithOne("Link")
-                        .HasForeignKey("MewaAppBackend.Model.Model.Link", "FileId");
-
-                    b.HasOne("MewaAppBackend.Model.Model.User", "User")
+                    b.HasOne("MewaAppBackend.Model.Model.User", "Owner")
                         .WithMany("Links")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("File");
+                    b.HasOne("MewaAppBackend.Model.Model.File", "Thumbnail")
+                        .WithOne("Link")
+                        .HasForeignKey("MewaAppBackend.Model.Model.Link", "ThumbnailId");
 
-                    b.Navigation("User");
+                    b.Navigation("Owner");
+
+                    b.Navigation("Thumbnail");
                 });
 
             modelBuilder.Entity("MewaAppBackend.Model.Model.Tag", b =>
                 {
+                    b.HasOne("MewaAppBackend.Model.Model.Link", null)
+                        .WithMany("Tags")
+                        .HasForeignKey("LinkId");
+
                     b.HasOne("MewaAppBackend.Model.Model.User", "User")
                         .WithMany("Tags")
                         .HasForeignKey("UserId")
@@ -530,9 +548,14 @@ namespace MewaAppBackend.Business.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("MewaAppBackend.Model.Model.Link", b =>
+                {
+                    b.Navigation("Tags");
+                });
+
             modelBuilder.Entity("MewaAppBackend.Model.Model.User", b =>
                 {
-                    b.Navigation("File")
+                    b.Navigation("Avatar")
                         .IsRequired();
 
                     b.Navigation("Links");

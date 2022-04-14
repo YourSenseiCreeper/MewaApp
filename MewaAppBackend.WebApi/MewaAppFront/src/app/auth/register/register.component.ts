@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import { MewaAppService } from 'src/app/shared/mewa-app.service';
+import { RegisterCommand } from 'src/app/shared/models';
+import { NotificationService } from 'src/app/shared/notification.service';
 
 @Component({
   selector: 'app-auth-register',
@@ -12,7 +15,9 @@ export class RegisterComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private service: MewaAppService,
+    private notification: NotificationService
   ) {
     this.loginForm = fb.group(
       {
@@ -22,6 +27,27 @@ export class RegisterComponent {
         repeatPassword: new FormControl('', null)
       }
     )
+  }
 
+  submit() {
+    let rawForm = this.loginForm.getRawValue();
+
+    if (rawForm.password !== rawForm.repeatPassword) {
+      // powiadomienie na formularzu że hasła się nie zgadzają
+    }
+
+    // sprawdzenie czy taki użytkownik istnieje?
+    let command = {
+      userName: rawForm.name,
+      email: rawForm.email,
+      password: rawForm.password
+    } as RegisterCommand
+    this.service.register(command).subscribe(r => {
+      if (r.success) {
+        this.notification.showSuccess("Pomyślnie zarejestrowano");
+      } else {
+        this.notification.showError("Coś poszło nie tak");
+      }
+    })
   }
 }

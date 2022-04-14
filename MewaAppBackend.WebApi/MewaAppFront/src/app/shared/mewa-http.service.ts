@@ -1,50 +1,43 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MewaHttpService {
-  private urlAddres: string = '';
-
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-      'Access-Control-Allow-Origin': 'http://localhost:4200;http://localhost:5097',
-      'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-      'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
-    })
-  };
+  private urlAddres: string = 'https://localhost:7097/api';
   
   constructor(private http: HttpClient, private notificationService: NotificationService) { }
 
-  get(path: string, params = {}): Observable<any> {
-    return this.http.get<any>(
-      `${this.urlAddres}${path}`, {
-      headers: this.httpOptions.headers,
-      params
-    })
-    .pipe(catchError((err) => this.handleError(err)))
+  request(method: string, path: string, body: Object = {}): Observable<any> {
+    return this.http.request(method, `${this.urlAddres}${path}`, {
+      body: JSON.stringify(body),
+      observe: "response",
+      responseType: "json",
+      headers: new HttpHeaders({
+        "Content-Type": "application/json-patch+json",
+        "Accept": "text/plain",
+        'Access-Control-Allow-Origin': "*",
+      })
+    }).pipe(catchError((err) => this.handleError(err)), map(r => r.body));
+  }
+
+  get(path: string): Observable<any> {
+    return this.request("get", path);
   }
 
   put(path: string, body: Object = {}) {
-    return this.http.put<any>(`${this.urlAddres}${path}`, body, this.httpOptions)
-    .pipe(catchError((err) => this.handleError(err)))
+    return this.request("put", path, body);
   }
 
   post(path: string, body: Object = {}) {
-    return this.http.post<any>(`${this.urlAddres}${path}`, body, this.httpOptions)
-    .pipe(catchError((err) => this.handleError(err)))
+    return this.request("post", path, body);
   }
 
   delete(path: string, body: Object = {}) {
-    return this.http.delete<any>(`${this.urlAddres}${path}`, {
-      headers: this.httpOptions.headers,
-      body
-    })
-    .pipe(catchError((err) => this.handleError(err)))
+    return this.request("delete", path, body);
   }
 
   handleError(error: any): Observable<never> {

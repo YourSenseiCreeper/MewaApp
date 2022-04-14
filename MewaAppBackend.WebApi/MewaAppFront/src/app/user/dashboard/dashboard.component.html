@@ -1,10 +1,8 @@
-<div class="user">
-    <h2>Komponent użytkownika {{userName}}</h2>
-    <h3 *ngIf="folder">Ścieżka: {{folder}}</h3>
-    <button (click)="onClickAcction()">Przykładowy error</button>
-    <button (click)="onClickAcction1()">Przykładowy info</button>
-    <button (click)="onClickAcction2()">Przykładowy success</button>
-    <div class="link-list">
-        <app-single-link-card *ngFor="let link of links" [link]="link"></app-single-link-card>
-    </div>
+<h1>Popularne linki</h1>
+<div class="link-card-container">
+	<app-single-link-card 
+		*ngFor="let link of links" 
+		[link]="link"
+		style="padding: 1rem;">
+	</app-single-link-card>
 </div>
