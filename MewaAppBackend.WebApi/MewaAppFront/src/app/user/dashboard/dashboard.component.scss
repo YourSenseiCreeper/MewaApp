@@ -13,23 +13,3 @@ h1{
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
-
-.user {
-    background-color: limegreen;
-    font-size: 14t;
-    margin: 0px auto;
-    width: 80%;
-    padding: 10px 10px;
-}
-
-.link-list {
-    padding: 15px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    max-width: 100%;
-}
-
-.link-list > mat-card {
-    margin: 5px;
-}
