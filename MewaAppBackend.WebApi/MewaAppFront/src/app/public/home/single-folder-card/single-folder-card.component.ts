@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-single-folder-card',
@@ -7,7 +7,7 @@ import {Component, OnInit} from '@angular/core';
 })
 export class SingleFolderCardComponent implements OnInit {
   name: string = 'Folder 1';
-
+  @Input() url: string = "#";
 
   constructor() { }
 

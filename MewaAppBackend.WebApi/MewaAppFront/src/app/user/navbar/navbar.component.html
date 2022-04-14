@@ -1,11 +1,14 @@
-<mat-toolbar>
+<mat-toolbar 
+    (scroll)="onScroll()" 
+    [ngClass]="navbarFixed? 'fixed':''">
     <span>
         <a class="link">MewaApp</a>
     </span>
     <span class="spacer"></span>
     <button 
         mat-icon-button color="primary" 
-        aria-label="Dashboard" 
+        aria-label="Dashboard"
+        routerLink="dashboard" 
         matTooltip="Dashboard">
         <mat-icon>home</mat-icon>
     </button>
@@ -13,6 +16,7 @@
         mat-icon-button 
         color="primary" 
         aria-label="Foldery" 
+        routerLink="folders"
         matTooltip="Foldery">
         <mat-icon>folder</mat-icon>
     </button>

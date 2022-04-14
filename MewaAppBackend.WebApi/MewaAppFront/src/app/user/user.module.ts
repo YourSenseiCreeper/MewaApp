@@ -10,13 +10,18 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { PublicModule } from '../public/public.module';
+import { FoldersComponent } from './folders/folders.component';
+import { FolderContentsComponent } from './folder-contents/folder-contents.component';
 
 @NgModule({
   declarations: [
     UserComponent,
     DashboardComponent,
-    NavbarComponent
+    NavbarComponent,
+    FoldersComponent,
+    FolderContentsComponent
   ],
   imports: [
     CommonModule,
@@ -27,6 +32,7 @@ import { PublicModule } from '../public/public.module';
     MatButtonModule,
     MatMenuModule,
     MatTooltipModule,
+    MatGridListModule,
     PublicModule
   ]
 })

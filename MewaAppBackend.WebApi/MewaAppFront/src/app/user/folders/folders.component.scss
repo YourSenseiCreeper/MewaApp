@@ -1,0 +1,18 @@
+@import 'variables.scss';
+
+header {
+    margin: 2rem 16px 2rem 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    .title {
+        font-size: 40px;
+        color: $my-primary;
+        font-weight: bold;
+    }
+    .button{
+        margin-left: auto;
+        border: 1px solid $my-primary;
+        border-radius: 25px;
+    }
+}

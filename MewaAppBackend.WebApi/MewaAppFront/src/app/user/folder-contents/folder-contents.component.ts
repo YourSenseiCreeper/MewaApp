@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { MewaAppService } from 'src/app/shared/mewa-app.service';
+import { ActivatedRoute } from '@angular/router';
 import { Link } from 'src/app/shared/models';
 
 @Component({
-  selector: 'app-user-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
-  providers: [MewaAppService]
+  selector: 'app-folder-contents',
+  templateUrl: './folder-contents.component.html',
+  styleUrls: ['./folder-contents.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class FolderContentsComponent implements OnInit {
+
+  folderId: string = '';
   links: Link[] = [
     {
       id: 1,
@@ -57,10 +58,12 @@ export class DashboardComponent implements OnInit {
     }
   ];
 
-  constructor(public mewaService: MewaAppService) { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    // CORS not working :(
-    this.mewaService.getAllLinks().subscribe(data => this.links = data);
+    this.route.paramMap.subscribe(paramMap => {
+      this.folderId = paramMap.get('id') ? paramMap.get('id') as string : '';
+    });
   }
-} 
+
+}
