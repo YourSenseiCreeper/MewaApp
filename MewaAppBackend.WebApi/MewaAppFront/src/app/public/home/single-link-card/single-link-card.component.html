@@ -1,7 +1,21 @@
 <mat-card id="mainCard">
   <mat-card-header>
     <mat-card-title id="title">{{ link.name }}</mat-card-title>
-    <a id="moreIcon" ><mat-icon>more_vert</mat-icon></a>
+    <a id="moreIcon" [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></a>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="onAdd()">
+        <mat-icon>add</mat-icon>
+        <span>Dodaj</span>
+      </button>
+      <button mat-menu-item (click)="onDelete()">
+        <mat-icon>remove</mat-icon>
+        <span>Usuń</span>
+      </button>
+      <button mat-menu-item (click)="onShare()">
+        <mat-icon>share</mat-icon>
+        <span>Udostępnij</span>
+      </button>
+    </mat-menu>
   </mat-card-header>
   <mat-card-content>
     <img mat-card-image [ngStyle]="{'background-image': 'linear-gradient(0deg, #0099FF 0%, rgba(0, 153, 255, 0) 100%), url(' + imageUrl + ')'}">
@@ -9,8 +23,8 @@
   </mat-card-content>
 
   <mat-card-footer>
-    <mat-card-subtitle id="link">{{ 'https://' + link.url | customSlice:120 }}</mat-card-subtitle>
-    <a id="linkIcon" (click)="Copy();"><mat-icon>content_copy</mat-icon></a>
+    <mat-card-subtitle id="link">{{ 'https://' + link.url | customSlice:40 }}</mat-card-subtitle>
+    <a id="linkIcon" (click)="onCopy();"><mat-icon>content_copy</mat-icon></a>
 <!--    <a id="link"><mat-icon>link</mat-icon></a>-->
   </mat-card-footer>
 </mat-card>

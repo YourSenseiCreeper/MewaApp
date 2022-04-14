@@ -9,6 +9,7 @@ import { MatCardModule } from "@angular/material/card";
 import { SingleLinkCardComponent } from './home/single-link-card/single-link-card.component';
 import {MatIconModule} from "@angular/material/icon";
 import {CustomslicePipe} from "../shared/usefulTools/customslice.pipe";
+import {MatMenuModule} from "@angular/material/menu";
 
 @NgModule({
     declarations: [
@@ -21,13 +22,14 @@ import {CustomslicePipe} from "../shared/usefulTools/customslice.pipe";
     SingleFolderCardComponent,
     SingleLinkCardComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    PublicRoutingModule,
-    MatChipsModule,
-    MatCardModule,
-    MatIconModule,
-  ]
+    imports: [
+        CommonModule,
+        RouterModule,
+        PublicRoutingModule,
+        MatChipsModule,
+        MatCardModule,
+        MatIconModule,
+        MatMenuModule,
+    ]
 })
 export class PublicModule { }
