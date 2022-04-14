@@ -8,5 +8,5 @@
         Dodaj folder
     </button>
 </header>
-<app-single-folder-card></app-single-folder-card>
-<button [routerLink]="['/user/folder', folderId]">folder</button>
+<app-single-folder-card [url]="'/user/folder/' + folderId"></app-single-folder-card>
+<!-- <button [routerLink]="['/user/folder', folderId]">folder</button> -->
