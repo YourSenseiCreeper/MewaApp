@@ -1,7 +1,5 @@
 ﻿using MediatR;
-using MewaAppBackend.Model.Interfaces;
 using MewaAppBackend.Model.Model;
-using MewaAppBackend.WebApi.Commands;
 using MewaAppBackend.WebApi.Commands.Link;
 using MewaAppBackend.WebApi.Handlers.Link;
 using MewaAppBackend.WebApi.Queries;
@@ -15,12 +13,10 @@ namespace MewaAppBackend.WebApi.Controllers
     public class LinkController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly IUnitOfWork unitOfWork;
 
-        public LinkController(IMediator mediator, IUnitOfWork unitOfWork)
+        public LinkController(IMediator mediator)
         {
             _mediator = mediator;
-            this.unitOfWork = unitOfWork;
         }
 
         [HttpGet]
@@ -39,7 +35,7 @@ namespace MewaAppBackend.WebApi.Controllers
         }
 
 
-        [HttpPost ("Add")]
+        [HttpPost("Add")]
         public async Task<Unit> AddLink([FromBody] AddLinkCommand command)
         {
             return await _mediator.Send(command);

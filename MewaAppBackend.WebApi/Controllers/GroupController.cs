@@ -20,6 +20,10 @@ namespace MewaAppBackend.WebApi.Controllers
             this.unitOfWork = unitOfWork;
         }
 
+        /// <summary>
+        /// Geting all groups
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("GetAllGroups")]
         public async Task<ActionResult<IEnumerable<Group>>> GetAllGroups()
         {
@@ -28,7 +32,11 @@ namespace MewaAppBackend.WebApi.Controllers
 
             return Ok(result);
         }
-
+        /// <summary>
+        /// Get one group
+        /// </summary>
+        /// <param name="id"> Id of group that we want go get </param>
+        /// <returns> HTTP Response only </returns>
         [HttpGet("GetDetailGroup")]
         public async Task<ActionResult> GetDetailGroup(int id)
         {
