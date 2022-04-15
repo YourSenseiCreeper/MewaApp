@@ -40,7 +40,7 @@ export class SingleLinkCardComponent implements OnInit {
     }
   }
 
-  onAdd(): void {
+  onEdit(): void {
 
   }
 
