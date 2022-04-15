@@ -29,16 +29,27 @@ export class SingleLinkCardComponent implements OnInit {
 
   }
 
-  Copy() {
-
+  onCopy(): void {
     try {
       navigator.clipboard.writeText(this.link.url);
       this.snackBar.open("Link was copied", 'Ok', {
         duration: 2000
       });
-
-  }catch (e) {
+    }catch (e) {
       console.log(e);
     }
   }
+
+  onEdit(): void {
+
+  }
+
+  onDelete(): void {
+
+  }
+
+  onShare(): void {
+
+  }
+
 }
