@@ -23,8 +23,8 @@
   </mat-card-content>
 
   <mat-card-footer>
-    <mat-card-subtitle id="link">{{ 'https://' + link.url | customSlice:40 }}</mat-card-subtitle>
-    <a id="linkIcon" (click)="onCopy();"><mat-icon>content_copy</mat-icon></a>
+    <mat-card-subtitle id="link">{{ link.url | customSlice:40 }}</mat-card-subtitle>
+    <a id="linkIcon" (click)="onCopy()"><mat-icon>content_copy</mat-icon></a>
 <!--    <a id="link"><mat-icon>link</mat-icon></a>-->
   </mat-card-footer>
 </mat-card>
