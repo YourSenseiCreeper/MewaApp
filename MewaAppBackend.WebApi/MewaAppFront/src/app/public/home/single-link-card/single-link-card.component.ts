@@ -29,7 +29,7 @@ export class SingleLinkCardComponent implements OnInit {
 
   }
 
-  onCopy() {
+  onCopy(): void {
     try {
       navigator.clipboard.writeText(this.link.url);
       this.snackBar.open("Link was copied", 'Ok', {
@@ -40,15 +40,15 @@ export class SingleLinkCardComponent implements OnInit {
     }
   }
 
-  onAdd() {
+  onAdd(): void {
 
   }
 
-  onDelete() {
+  onDelete(): void {
 
   }
 
-  onShare() {
+  onShare(): void {
 
   }
 
