@@ -7,7 +7,6 @@ import { FormControl, Validators } from '@angular/forms';
   styleUrls: ['./page-content.component.scss']
 })
 
-
 export class PageContentComponent implements OnInit {
 
   public numberOfSlides: number = 3;
@@ -20,7 +19,6 @@ export class PageContentComponent implements OnInit {
     {
       this.selectedSlide--;
     }
-    console.log(this.selectedSlide)
   }
 
   onRightArrowClick() {
@@ -29,9 +27,7 @@ export class PageContentComponent implements OnInit {
       this.selectedSlide++;
       console.log('Click')
     }
-    console.log(this.selectedSlide)
   }
-
 
   ngOnInit(): void {
   }
