@@ -3,17 +3,20 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { RouterModule } from '@angular/router';
 import { PublicRoutingModule } from './public-routing.module';
-import {MatChipsModule} from '@angular/material/chips';
+import { MatChipsModule } from '@angular/material/chips';
 import { SingleFolderCardComponent } from '../user/single-folder-card/single-folder-card.component';
 import { MatCardModule } from "@angular/material/card";
 import { SingleLinkCardComponent } from '../user/single-link-card/single-link-card.component';
-import {MatIconModule} from "@angular/material/icon";
-import {CustomslicePipe} from "../shared/usefulTools/customslice.pipe";
-import {MatMenuModule} from "@angular/material/menu";
+import {MatIconModule } from "@angular/material/icon";
+import { CustomslicePipe } from "../shared/usefulTools/customslice.pipe";
+import { MatMenuModule } from "@angular/material/menu";
 import { FooterComponent } from './home/footer/footer.component';
 import { NavComponent } from './home/nav/nav.component';
 import { PageContentComponent } from './home/page-content/page-content.component';
-import {MatButtonModule} from "@angular/material/button";
+import { MatButtonModule } from "@angular/material/button";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
     declarations: [
@@ -38,6 +41,9 @@ import {MatButtonModule} from "@angular/material/button";
     MatIconModule,
     MatMenuModule,
     MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
   ]
 })
 export class PublicModule { }
