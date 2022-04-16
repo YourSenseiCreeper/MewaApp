@@ -36,6 +36,11 @@ Trello - https://trello.com/invite/b/SnydrmIc/8ee74516843f8135247dc3cb817b954d/m
 
 * https://bulldogjob.pl/news/1096-bezpieczna-implementacja-json-web-tokens-jwt-w-c
 
+## Dane do konta administratora
+Domyślne konto administratora posiada następujące dane do logowania:
+* email / nazwa użytkownika: `admin`
+* hasło: `123qwe`
+
 
 ## Slowa kluczowe:
 * WebApi, 
