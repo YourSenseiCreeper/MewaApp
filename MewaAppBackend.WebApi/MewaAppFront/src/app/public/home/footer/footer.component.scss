@@ -1,21 +1,19 @@
 footer {
   color: #FFFFFF;
   margin-top: auto;
-}
-
-footer .container {
-  background: #0099FF;
-  padding: 10px;
-  display: flex;
-  flex-flow: row;
-  justify-content: space-between;
-}
-
-footer .waves {
-  height: 204px;
-  width: 100%;
-  background-image: url("/assets/images/footer.svg");
-  background-size: 100% 204px;
+  .container {
+    background: #0099FF;
+    padding: 10px;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+  }
+  .waves {
+    height: 204px;
+    width: 100%;
+    background-image: url("/assets/images/footer.svg");
+    background-size: 100% 204px;
+  }
 }
 
 small, .text-url {
