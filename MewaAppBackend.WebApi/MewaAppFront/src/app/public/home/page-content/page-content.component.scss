@@ -1,0 +1,43 @@
+.content-container {
+  margin-top: 20vh;
+  margin-left: 8vw;
+  font-style: normal;
+  color: #000000;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 100px;
+  line-height: 117px;
+}
+
+.description {
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 35px;
+}
+
+.arrow-left, .arrow-right {
+  top: 50%;
+  width: 25px;
+  height: 22px;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+}
+
+.arrow-left:hover, .arrow-right:hover, .arrow-left:active, .arrow-right:active {
+  opacity: 0.8;
+}
+
+.arrow-left {
+  left: 10px;
+  background: url('/assets/images/arrow-left.svg') no-repeat;
+  background-size: contain;
+}
+
+.arrow-right {
+  right: 10px;
+  background: url('/assets/images/arrow-right.svg') no-repeat;
+  background-size: contain;
+ }

@@ -1,0 +1,13 @@
+nav {
+  display: inline-block;
+  margin: 10px 0 10px 0;
+  width: 100%;
+
+  .mat-stroked-button {
+    float: right;
+    margin-right: 20px;
+    padding: 5px 30px 5px 30px;
+    border-radius: .65rem;
+    text-transform: uppercase;
+  }
+}
