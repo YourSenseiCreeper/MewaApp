@@ -5,6 +5,10 @@ footer {
 
 footer .container {
   background: #0099FF;
+  padding: 10px;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
 }
 
 footer .waves {
@@ -14,6 +18,36 @@ footer .waves {
   background-size: 100% 204px;
 }
 
-small {
+small, .text-url {
   color: #D6D6D6;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.footer-text {
+  font-size: 19px;
+}
+
+.facebook-text, .copyright-text {
+  vertical-align: bottom;
+  display: inline-block;
+}
+
+.facebook, .copyright {
+  display: flex;
+  vertical-align: bottom;
+}
+
+.facebook-icon {
+  margin-top: -6px;
+}
+
+.facebook-text {
+  display: inline-block;
+  text-align: left;
+  margin-left: 10px;
+}
+
+.copyright-text {
+  text-align: right;
 }

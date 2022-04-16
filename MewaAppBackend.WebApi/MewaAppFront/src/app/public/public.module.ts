@@ -13,6 +13,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import { FooterComponent } from './home/footer/footer.component';
 import { NavComponent } from './home/nav/nav.component';
 import { PageContentComponent } from './home/page-content/page-content.component';
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
     declarations: [
@@ -28,14 +29,15 @@ import { PageContentComponent } from './home/page-content/page-content.component
     SingleFolderCardComponent,
     SingleLinkCardComponent
   ],
-    imports: [
-        CommonModule,
-        RouterModule,
-        PublicRoutingModule,
-        MatChipsModule,
-        MatCardModule,
-        MatIconModule,
-        MatMenuModule,
-    ]
+  imports: [
+    CommonModule,
+    RouterModule,
+    PublicRoutingModule,
+    MatChipsModule,
+    MatCardModule,
+    MatIconModule,
+    MatMenuModule,
+    MatButtonModule,
+  ]
 })
 export class PublicModule { }

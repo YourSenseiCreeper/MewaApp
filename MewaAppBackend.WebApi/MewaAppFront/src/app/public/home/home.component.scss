@@ -3,6 +3,9 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh !important;
+  background-image: url("/assets/images/background-circle.svg");
+  background-size: min(55vw, 55vh) min(60vw, 60vh);
+  background-repeat: no-repeat;
 }
 
 .content {
