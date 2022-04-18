@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {MatSnackBar} from "@angular/material/snack-bar";
+import { Component, Input, OnInit } from '@angular/core';
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { Link } from 'src/app/shared/models';
 
 @Component({
@@ -53,7 +53,7 @@ export class SingleLinkCardComponent implements OnInit {
     return result;
   }
 
-  dataURItoBlob(dataURI: string) {
+  dataURItoBlob(dataURI: string): Blob {
     const byteString = window.atob(dataURI);
     const arrayBuffer = new ArrayBuffer(byteString.length);
     const int8Array = new Uint8Array(arrayBuffer);

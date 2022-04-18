@@ -35,12 +35,9 @@ namespace MewaAppBackend.Services.Thumbnail
                 var match = regex.Match(imageSubstring);
                 if (match.Success)
                 {
-                    // kolejny request żeby pobrać zdjęcie;
-                    Console.WriteLine(match.Groups[0].Value);
                     var result = await GetImageAsByteArray(match.Groups[0].Value);
                     var base64Image = Convert.ToBase64String(result);
-                    var imageRepository = _unitOfWork.Repository<DbImage>();
-                    var newImageFromDb = imageRepository.Add(new DbImage { LinkId = linkId, Content = base64Image });
+                    var newImageFromDb = _unitOfWork.Repository<DbImage>().Add(new DbImage { LinkId = linkId, Content = base64Image });
                     _unitOfWork.SaveChanges();
                     return newImageFromDb.Id;
                 }
@@ -50,7 +47,6 @@ namespace MewaAppBackend.Services.Thumbnail
 
         private async Task<byte[]> GetImageAsByteArray(string urlImage)
         {
-
             var client = new HttpClient
             {
                 BaseAddress = new Uri(urlImage)

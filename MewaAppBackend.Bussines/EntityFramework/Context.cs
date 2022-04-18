@@ -8,7 +8,6 @@ namespace MewaAppBackend.WebApi
     {
         public Context(DbContextOptions<Context> options) : base(options)
         {
-
         }
 
         public DbSet<Model.Model.File> File { get; set; }
@@ -25,11 +24,6 @@ namespace MewaAppBackend.WebApi
                 .HasOne(u => u.Avatar)
                 .WithOne(f => f.User)
                 .HasForeignKey<Model.Model.File>(f => f.UserId);
-
-            //modelBuilder.Entity<Model.Model.File>()
-            //    .HasOne(u => u.Link)
-            //    .WithOne(f => f.Thumbnail)
-            //    .HasForeignKey<Link>(f => f.ThumbnailId);
 
             modelBuilder.Entity<Link>()
                 .Property("CreationDate")

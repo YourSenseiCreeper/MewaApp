@@ -3,7 +3,6 @@
 	<app-single-link-card 
 		*ngFor="let link of links" 
 		[link]="link"
-		style="padding: 1rem;"
-		(click)="onClick(link.url)">
+		class="link-card">
 	</app-single-link-card>
 </div>
