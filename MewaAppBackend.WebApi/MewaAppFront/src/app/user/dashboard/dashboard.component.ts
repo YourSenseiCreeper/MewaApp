@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MewaAppService } from 'src/app/shared/mewa-app.service';
 import { Link } from 'src/app/shared/models';
+import { ThumbnailService } from 'src/app/shared/thumbnail.service';
 
 @Component({
   selector: 'app-user-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-  providers: [MewaAppService]
+  providers: [MewaAppService, ThumbnailService]
 })
 export class DashboardComponent implements OnInit {
   links: Link[] = [
@@ -17,7 +18,8 @@ export class DashboardComponent implements OnInit {
       url: "https://bardzoDobryLink.org/link2",
       expiryDate: null,
       thumbnailId: null,
-      userId: null
+      userId: null,
+      thumbnailContent: null
     },
     {
       id: 2,
@@ -26,7 +28,8 @@ export class DashboardComponent implements OnInit {
       url: "https://bardzoDobryLink.org/link2",
       expiryDate: null,
       thumbnailId: null,
-      userId: null
+      userId: null,
+      thumbnailContent: null
     },
     {
       id: 3,
@@ -35,7 +38,8 @@ export class DashboardComponent implements OnInit {
       url: "https://bardzoDobryLink.org/link2",
       expiryDate: null,
       thumbnailId: null,
-      userId: null
+      userId: null,
+      thumbnailContent: null
     },
     {
       id: 4,
@@ -44,7 +48,8 @@ export class DashboardComponent implements OnInit {
       url: "https://bardzoDobryLink.org/link2",
       expiryDate: null,
       thumbnailId: null,
-      userId: null
+      userId: null,
+      thumbnailContent: null
     },
     {
       id: 5,
@@ -53,14 +58,20 @@ export class DashboardComponent implements OnInit {
       url: "https://bardzoDobryLink.org/link2",
       expiryDate: null,
       thumbnailId: null,
-      userId: null
+      userId: null,
+      thumbnailContent: null
     }
   ];
 
   constructor(public mewaService: MewaAppService) { }
 
   ngOnInit(): void {
-    // CORS not working :(
-    this.mewaService.getAllLinks().subscribe(data => this.links = data);
+    this.mewaService.getAllLinks().subscribe(data => {
+
+      this.links = data;
+
+    });
   }
+
+  onClick(url: string) {}
 } 

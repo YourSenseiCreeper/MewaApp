@@ -13,7 +13,7 @@
         public DateTime ExpiryDate { get; set; }
         public User Owner { get; set; }
         public string OwnerId { get; set; }
-        public File Thumbnail { get; set; }
+        public DbImage? Thumbnail { get; set; }
         public int? ThumbnailId { get; set; }
         public virtual ICollection<Tag> Tags { get; set; }
         public virtual ICollection<Group> Groups { get; set; }

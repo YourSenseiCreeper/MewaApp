@@ -6,6 +6,7 @@ export interface Link {
     expiryDate: Date | null;
     userId: number | null;
     //thumbnail: string | null; // byte[] powinno być
+    thumbnailContent: string | null;
     thumbnailId: number | null;
 }
 

@@ -11,6 +11,10 @@ export class MewaAppService {
 
   constructor(private service: MewaHttpService) { }
 
+  get(url: string): Observable<any> {
+    return this.service.get(url);
+  }
+  
   getAllLinks(): Observable<Link[]> {
     return this.service.get("/link").pipe(map(data => this.mapLinks(data)))
   }
@@ -28,6 +32,7 @@ export class MewaAppService {
       expiryDate: rawLink.expiryDate ? rawLink.expiryDate : null,
       userId: rawLink.userId,
       thumbnailId: rawLink.thumbnailId ? rawLink.thumbnailId : null,
+      thumbnailContent: rawLink.thumbnailContent ? rawLink.thumbnailContent : null,
     } as Link;
     return link;
   }

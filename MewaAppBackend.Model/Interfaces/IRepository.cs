@@ -7,7 +7,7 @@ namespace MewaAppBackend.Model.Interfaces
         IQueryable<T> GetAllIncluding(params Expression<Func<T, object>>[] includes);
         IQueryable<T> GetAll();
         T GetDetail(Func<T, bool> predicate);
-        void Add(T entity);
+        T Add(T entity);
         void Delete(T entity);
         void Edit(T entity);
     }

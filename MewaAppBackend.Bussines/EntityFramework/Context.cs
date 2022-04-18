@@ -15,6 +15,7 @@ namespace MewaAppBackend.WebApi
         public DbSet<Group> Group { get; set; }
         public DbSet<Link> Link { get; set; }
         public DbSet<Tag> Tag { get; set; }
+        public DbSet<DbImage> Images { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,16 +26,21 @@ namespace MewaAppBackend.WebApi
                 .WithOne(f => f.User)
                 .HasForeignKey<Model.Model.File>(f => f.UserId);
 
-            modelBuilder.Entity<Model.Model.File>()
-                .HasOne(u => u.Link)
-                .WithOne(f => f.Thumbnail)
-                .HasForeignKey<Link>(f => f.ThumbnailId);
+            //modelBuilder.Entity<Model.Model.File>()
+            //    .HasOne(u => u.Link)
+            //    .WithOne(f => f.Thumbnail)
+            //    .HasForeignKey<Link>(f => f.ThumbnailId);
 
             modelBuilder.Entity<Link>()
                 .Property("CreationDate")
                 .IsRequired()
                 .HasDefaultValueSql("SYSDATETIME()")
                 .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Link>()
+                .HasOne(u => u.Thumbnail)
+                .WithOne(i => i.Link)
+                .HasForeignKey<DbImage>(i => i.LinkId);
         }
     }
 }
