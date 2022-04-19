@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { MewaAppService } from 'src/app/shared/mewa-app.service';
 import { Link } from 'src/app/shared/models';
+import { ConfirmationDialogComponent } from '../dialog/confirmation/confirmation-dialog.component';
 
 @Component({
   selector: 'app-single-link-card',
@@ -24,7 +27,10 @@ export class SingleLinkCardComponent implements OnInit {
   imageUrl = "/assets/images/asp-net-core-identity-with-patterns-1.png";
 
 
-  constructor(private snackBar: MatSnackBar) { }
+  constructor(
+    private snackBar: MatSnackBar,
+    private service: MewaAppService,
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.convertThumbnailBase64ToImage(this.link.thumbnailContent);
@@ -80,7 +86,17 @@ export class SingleLinkCardComponent implements OnInit {
   }
 
   onDelete(): void {
-
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '50%',
+      data: {title: 'Czy jesteś pewien?', text: "Czy rzeczywiście chcesz usunąć ten link?"},
+    });
+    dialogRef.componentInstance.onDecide.subscribe(result => {
+      if (result) {
+        this.service.deleteLink(this.link.id).subscribe(response => {
+          console.log('Link został usunięty');
+        });
+      }
+    });
   }
 
   onShare(): void {

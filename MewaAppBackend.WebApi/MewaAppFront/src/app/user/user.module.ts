@@ -14,6 +14,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { PublicModule } from '../public/public.module';
 import { FoldersComponent } from './folders/folders.component';
 import { FolderContentsComponent } from './folder-contents/folder-contents.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from './dialog/confirmation/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { FolderContentsComponent } from './folder-contents/folder-contents.compo
     DashboardComponent,
     NavbarComponent,
     FoldersComponent,
-    FolderContentsComponent
+    FolderContentsComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +36,8 @@ import { FolderContentsComponent } from './folder-contents/folder-contents.compo
     MatMenuModule,
     MatTooltipModule,
     MatGridListModule,
-    PublicModule
+    PublicModule,
+    MatDialogModule
   ]
 })
 export class UserModule { }

@@ -17,7 +17,7 @@ namespace MewaAppBackend.Services.Thumbnail
         {
             string html = string.Empty;
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.AutomaticDecompression = DecompressionMethods.GZip;
+            request.AutomaticDecompression = DecompressionMethods.None;
 
             using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
             using (Stream stream = response.GetResponseStream())

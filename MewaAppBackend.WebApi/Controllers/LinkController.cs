@@ -41,10 +41,11 @@ namespace MewaAppBackend.WebApi.Controllers
         {
             return await _mediator.Send(command);
         }
+
         [HttpDelete]
-        public async Task<DeleteLinkCommandResult> Delete(int id)
+        public async Task<DeleteLinkCommandResult> Delete([FromBody] DeleteLinkCommand command)
         {
-            return await _mediator.Send(new DeleteLinkCommand { Id = id });
+            return await _mediator.Send(command);
         }
 
         [HttpPut]

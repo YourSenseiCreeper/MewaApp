@@ -19,6 +19,10 @@ export class MewaAppService {
     return this.service.get("/link").pipe(map(data => this.mapLinks(data)))
   }
 
+  deleteLink(id: number): Observable<any> {
+    return this.service.delete("/link", { id: id });
+  }
+
   mapLinks(links: any[]): Link[] {
     return links.map(l => this.mapLink(l));
   }

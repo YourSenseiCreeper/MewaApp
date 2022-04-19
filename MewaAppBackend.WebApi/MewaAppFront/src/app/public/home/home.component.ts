@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NotificationService } from "src/app/shared/notification.service";
-import { ThumbnailService } from 'src/app/shared/thumbnail.service';
 
 @Component({
   selector: 'app-home',
