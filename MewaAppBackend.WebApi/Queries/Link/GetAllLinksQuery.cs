@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using MewaAppBackend.Model.Model;
+using MewaAppBackend.Model.Dtos.Link;
 
 namespace MewaAppBackend.WebApi.Queries
 {
-    public record GetAllLinksQuery : IRequest<IEnumerable<Model.Model.Link>>
+    public record GetAllLinksQuery : IRequest<IEnumerable<LinkDto>>
     {
     }
 }

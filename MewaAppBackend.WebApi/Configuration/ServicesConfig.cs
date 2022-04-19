@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using MewaAppBackend.Model.Interfaces;
+using MewaAppBackend.Services.Thumbnail;
 using MewaAppBackend.Services.User;
 using MewaAppBackend.WebApi.UnitOfWork;
 using System.Reflection;
@@ -15,6 +16,7 @@ namespace MewaAppBackend.WebApi.Configuration
 
             builder.Services.AddTransient<IUnitOfWork, GenericUnitOfWork>();
             builder.Services.AddScoped<IUserCreationService, UserCreationService>();
+            builder.Services.AddScoped<IPageThumbnailService, PageThumbnailService>();
 
             var mapperConfig = new MapperConfiguration(mc =>
             {

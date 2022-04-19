@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {MatSnackBar} from "@angular/material/snack-bar";
+import { Component, Input, OnInit } from '@angular/core';
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { Link } from 'src/app/shared/models';
 
 @Component({
@@ -17,7 +17,8 @@ export class SingleLinkCardComponent implements OnInit {
     url: "https://bardzoDobryLink.org/link2",
     expiryDate: null,
     thumbnailId: null,
-    userId: null
+    userId: null,
+    thumbnailContent: null
   };
 
   imageUrl = "/assets/images/asp-net-core-identity-with-patterns-1.png";
@@ -26,8 +27,42 @@ export class SingleLinkCardComponent implements OnInit {
   constructor(private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-
+    this.convertThumbnailBase64ToImage(this.link.thumbnailContent);
   }
+
+  convertThumbnailBase64ToImage(base64: string | null): string {
+    let result = '';
+    const imageName = 'name.png';
+    if (base64 === null) {
+      return this.imageUrl;
+    }
+    const imageBlob = this.dataURItoBlob(base64);
+    const imageFile = new File([imageBlob], imageName, { type: 'image/png' });
+
+    var reader = new FileReader();
+
+    reader.onload = (event: any) => {
+      this.imageUrl = event.target.result;
+    };
+
+    reader.onerror = (event: any) => {
+      console.log("File could not be read: " + event.target.error.code);
+    };
+
+    reader.readAsDataURL(imageFile);
+    return result;
+  }
+
+  dataURItoBlob(dataURI: string): Blob {
+    const byteString = window.atob(dataURI);
+    const arrayBuffer = new ArrayBuffer(byteString.length);
+    const int8Array = new Uint8Array(arrayBuffer);
+    for (let i = 0; i < byteString.length; i++) {
+      int8Array[i] = byteString.charCodeAt(i);
+    }
+    const blob = new Blob([int8Array], { type: 'image/png' });    
+    return blob;
+ }
 
   onCopy(): void {
     try {

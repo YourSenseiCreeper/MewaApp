@@ -17,8 +17,9 @@ export class FolderContentsComponent implements OnInit {
       description: "To jest pierwsza karta oraz jej jakis tam tekst, który musi zostać sformatowany. Powinny być zazwyczaj dwa wiersze tekstu.",
       url: "https://bardzoDobryLink.org/link2",
       expiryDate: null,
-      thumbnailId: null,
-      userId: null
+      thumbnailId: null, 
+      userId: null,
+      thumbnailContent: null,
     },
     {
       id: 2,
@@ -27,7 +28,8 @@ export class FolderContentsComponent implements OnInit {
       url: "https://bardzoDobryLink.org/link2",
       expiryDate: null,
       thumbnailId: null,
-      userId: null
+      userId: null,
+      thumbnailContent: null,
     },
     {
       id: 3,
@@ -36,7 +38,8 @@ export class FolderContentsComponent implements OnInit {
       url: "https://bardzoDobryLink.org/link2",
       expiryDate: null,
       thumbnailId: null,
-      userId: null
+      userId: null,
+      thumbnailContent: null,
     },
     {
       id: 4,
@@ -45,7 +48,8 @@ export class FolderContentsComponent implements OnInit {
       url: "https://bardzoDobryLink.org/link2",
       expiryDate: null,
       thumbnailId: null,
-      userId: null
+      userId: null,
+      thumbnailContent: null,
     },
     {
       id: 5,
@@ -54,7 +58,8 @@ export class FolderContentsComponent implements OnInit {
       url: "https://bardzoDobryLink.org/link2",
       expiryDate: null,
       thumbnailId: null,
-      userId: null
+      userId: null,
+      thumbnailContent: null,
     }
   ];
 
