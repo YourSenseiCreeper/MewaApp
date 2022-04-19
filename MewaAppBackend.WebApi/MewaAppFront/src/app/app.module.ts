@@ -10,7 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PublicModule } from './public/public.module';
 import { JwtModule } from '@auth0/angular-jwt';
 
-export function tokenGetter() {
+export function tokenGetter(): string | null {
   return localStorage.getItem("access_token");
 }
 
