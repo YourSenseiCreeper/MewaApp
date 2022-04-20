@@ -10,17 +10,11 @@ namespace MewaAppBackend.WebApi.Handlers.Group
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IRepository<Model.Model.Group> groupRepository;
-        private readonly IRepository<Model.Model.Link> linkRepository;
-        private readonly IRepository<Model.Model.User> userRepository;
-        private readonly IRepository<Model.Model.Tag> tagRepository;
         protected readonly IMapper _mapper;
         public UpdateGroupCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
             this.unitOfWork = unitOfWork;
             groupRepository = unitOfWork.Repository<Model.Model.Group>();
-            linkRepository = unitOfWork.Repository<Model.Model.Link>();
-            userRepository = unitOfWork.Repository<Model.Model.User>();
-            tagRepository = unitOfWork.Repository<Tag>();
             _mapper = mapper;
         }
 
@@ -33,7 +27,7 @@ namespace MewaAppBackend.WebApi.Handlers.Group
             group.RedirectURL = request.RedirectURL;
             group.IsFolder = request.IsFolder;
             group.Links = _mapper.Map<ICollection<Model.Model.Link>>(request.Links);
-            group.Tags = _mapper.Map<ICollection<Tag>>(request.Tags);
+            group.Tags = _mapper.Map<ICollection<Model.Model.Tag>>(request.Tags);
             group.Users = _mapper.Map<ICollection<Model.Model.User>>(request.Users);
 
             groupRepository.Edit(group);

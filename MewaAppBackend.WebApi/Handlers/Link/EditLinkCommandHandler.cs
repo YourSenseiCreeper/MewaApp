@@ -29,7 +29,7 @@ namespace MewaAppBackend.WebApi.Handlers.Link
 
         private Model.Model.Link MapToLink(Model.Model.Link entity, EditLinkCommand request)
         {
-            var tagsRepository = unitOfWork.Repository<Tag>();
+            var tagsRepository = unitOfWork.Repository<Model.Model.Tag>();
             var groupsRepository = unitOfWork.Repository<Model.Model.Group>();
 
             entity.Url = request.Url;

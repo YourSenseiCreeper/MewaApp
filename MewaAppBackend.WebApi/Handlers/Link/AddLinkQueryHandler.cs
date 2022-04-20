@@ -27,7 +27,7 @@ namespace MewaAppBackend.WebApi.Handlers.Link
                 Description = request.Description,
                 ExpiryDate = request.ExpiryDate,
                 OwnerId = request.OwnerId,
-                Tags = unitOfWork.Repository<Tag>().GetAll().Where(t => request.Tags.Contains(t.Id)).ToList(),
+                Tags = unitOfWork.Repository<Model.Model.Tag>().GetAll().Where(t => request.Tags.Contains(t.Id)).ToList(),
                 Groups = unitOfWork.Repository<Model.Model.Group>().GetAll().Where(t => request.Groups.Contains(t.Id)).ToList(),
 
             };

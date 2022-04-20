@@ -1,4 +1,5 @@
-﻿using MewaAppBackend.Model.Model;
+﻿using MewaAppBackend.Model.Dtos.Tag;
+using MewaAppBackend.Model.Model;
 
 namespace MewaAppBackend.Model.Dtos.Link
 {
@@ -11,7 +12,7 @@ namespace MewaAppBackend.Model.Dtos.Link
         public DateTime ExpiryDate { get; set; }
         public string OwnerId { get; set; }
         public string ThumbnailContent { get; set; }
-        public IEnumerable<TagDto> Tags { get; set; }
+        public IEnumerable<MicroTagDto> Tags { get; set; }
         public IEnumerable<GroupDto> Groups { get; set; }
     }
 }
