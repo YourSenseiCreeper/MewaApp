@@ -1,13 +1,30 @@
 <div class="control-arrows">
-  <button class="arrow-left"></button>
-  <button class="arrow-right"></button>
+  <button
+    class="arrow-left"
+    (click)="onLeftArrowClick()"
+    *ngIf="this.selectedSlide > 1">
+  </button>
+  <button
+    class="arrow-right"
+    (click)="onRightArrowClick()"
+    *ngIf="this.selectedSlide < this.numberOfSlides">
+  </button>
 </div>
 
 <div class="content-container">
-  <p class="title">
-    MewaApp
-  </p>
-  <p class="description">
-    Twoje miejsce do przechowywania linków.
-  </p>
+  <div
+    class="slide"
+    *ngIf="this.selectedSlide == 1">
+    <app-slide-one></app-slide-one>
+  </div>
+  <div
+    class="slide"
+    *ngIf="this.selectedSlide == 2">
+    <app-slide-two></app-slide-two>
+  </div>
+  <div
+    class="slide"
+    *ngIf="this.selectedSlide == 3">
+    <app-slide-three></app-slide-three>
+  </div>
 </div>
