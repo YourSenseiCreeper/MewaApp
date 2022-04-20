@@ -1,4 +1,5 @@
-﻿using MewaAppBackend.Model.Dtos.Tag;
+﻿using MewaAppBackend.Model.Dtos.Group;
+using MewaAppBackend.Model.Dtos.Tag;
 using MewaAppBackend.Model.Model;
 
 namespace MewaAppBackend.Model.Dtos.Link
@@ -13,6 +14,6 @@ namespace MewaAppBackend.Model.Dtos.Link
         public string OwnerId { get; set; }
         public string ThumbnailContent { get; set; }
         public IEnumerable<MicroTagDto> Tags { get; set; }
-        public IEnumerable<GroupDto> Groups { get; set; }
+        public IEnumerable<MicroGroupDto> Groups { get; set; }
     }
 }

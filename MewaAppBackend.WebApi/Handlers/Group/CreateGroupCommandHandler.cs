@@ -25,12 +25,16 @@ namespace MewaAppBackend.WebApi.Handlers.Group
         {
             Model.Model.Group group = new();
 
+            var links = linkRepository.GetAll().Where(l => request.Links.Contains(l.Id)).ToList();
+            var tags = tagRepository.GetAll().Where(t => request.Tags.Contains(t.Id)).ToList();
+            var users = userRepository.GetAll().Where(u => request.Users.Contains(u.Id)).ToList();
+
             group.Name = request.Name;
             group.RedirectURL = request.RedirectURL;
             group.IsFolder = request.IsFolder;
-            group.Links = _mapper.Map<ICollection<Model.Model.Link>>(request.Links);
-            group.Tags = _mapper.Map<ICollection<Model.Model.Tag>>(request.Tags);
-            group.Users = _mapper.Map<ICollection<Model.Model.User>>(request.Users);
+            group.Links = links;
+            group.Tags = tags;
+            group.Users = users;
 
             unitOfWork.Repository<Model.Model.Group>().Add(group);
             unitOfWork.SaveChanges();

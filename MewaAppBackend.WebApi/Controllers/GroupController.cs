@@ -1,7 +1,9 @@
 ﻿using MediatR;
+using MewaAppBackend.Model.Dtos.Group;
 using MewaAppBackend.Model.Interfaces;
 using MewaAppBackend.Model.Model;
 using MewaAppBackend.WebApi.Commands.Group;
+using MewaAppBackend.WebApi.Handlers.Group;
 using MewaAppBackend.WebApi.Queries.Group;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,13 +26,10 @@ namespace MewaAppBackend.WebApi.Controllers
         /// Geting all groups
         /// </summary>
         /// <returns></returns>
-        [HttpGet("GetAllGroups")]
-        public async Task<ActionResult<IEnumerable<Group>>> GetAllGroups()
+        [HttpGet("GetAll")]
+        public async Task<IEnumerable<GroupDto>> GetAll()
         {
-            var request = new GetAllGroupsQuery();
-            var result = await _mediator.Send(request);
-
-            return Ok(result);
+            return await _mediator.Send(new GetAllGroupsQuery());
         }
         /// <summary>
         /// Get one group
@@ -38,12 +37,12 @@ namespace MewaAppBackend.WebApi.Controllers
         /// <param name="id"> Id of group that we want go get </param>
         /// <returns> HTTP Response only </returns>
         [HttpGet("GetDetailGroup")]
-        public async Task<ActionResult> GetDetailGroup(int id)
+        public async Task<GroupDto> GetDetailGroup(int id)
         {
-            return Ok(await _mediator.Send(new GetDetailGroupQuery { Id = id }));
+            return await _mediator.Send(new GetDetailGroupQuery { Id = id });
         }
 
-        [HttpPost("CreateGroup")]
+        [HttpPost]
         public async Task<ActionResult> Create(CreateGroupCommand createGroupCommand)
         {
             return Ok(await _mediator.Send(createGroupCommand));
@@ -82,9 +81,9 @@ namespace MewaAppBackend.WebApi.Controllers
         }
 
         [HttpDelete]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<DeleteGroupCommandResult> Delete([FromBody] DeleteGroupCommand command)
         {
-            return Ok();
+            return await _mediator.Send(command);
         }
     }
 }
