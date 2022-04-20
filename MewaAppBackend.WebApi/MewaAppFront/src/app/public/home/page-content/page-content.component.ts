@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-page-content',
@@ -11,14 +10,14 @@ export class PageContentComponent implements OnInit {
   public numberOfSlides: number = 3;
   public selectedSlide: number = 1;
 
-  onLeftArrowClick() {
+  onLeftArrowClick(): void {
     if (this.selectedSlide > 1)
     {
       this.selectedSlide--;
     }
   }
 
-  onRightArrowClick() {
+  onRightArrowClick(): void {
     if (this.numberOfSlides > this.selectedSlide)
     {
       this.selectedSlide++;
