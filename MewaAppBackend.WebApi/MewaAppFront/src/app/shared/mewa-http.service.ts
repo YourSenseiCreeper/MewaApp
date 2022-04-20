@@ -7,7 +7,7 @@ import { NotificationService } from './notification.service';
   providedIn: 'root'
 })
 export class MewaHttpService {
-  private urlAddres: string = 'https://localhost:7097/api';
+  urlAddres: string = 'https://localhost:7097/api';
   
   constructor(private http: HttpClient, private notificationService: NotificationService) { }
 
