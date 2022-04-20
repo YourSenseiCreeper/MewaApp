@@ -7,7 +7,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { SingleFolderCardComponent } from '../user/single-folder-card/single-folder-card.component';
 import { MatCardModule } from "@angular/material/card";
 import { SingleLinkCardComponent } from '../user/single-link-card/single-link-card.component';
-import {MatIconModule } from "@angular/material/icon";
+import { MatIconModule } from "@angular/material/icon";
 import { CustomslicePipe } from "../shared/usefulTools/customslice.pipe";
 import { MatMenuModule } from "@angular/material/menu";
 import { FooterComponent } from './home/footer/footer.component';
@@ -17,6 +17,9 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { ReactiveFormsModule } from "@angular/forms";
+import { SlideOneComponent } from './home/page-content/slide-one/slide-one.component';
+import { SlideTwoComponent } from './home/page-content/slide-two/slide-two.component';
+import { SlideThreeComponent } from './home/page-content/slide-three/slide-three.component';
 
 @NgModule({
     declarations: [
@@ -26,7 +29,10 @@ import { ReactiveFormsModule } from "@angular/forms";
         CustomslicePipe,
         FooterComponent,
         NavComponent,
-        PageContentComponent
+        PageContentComponent,
+        SlideOneComponent,
+        SlideTwoComponent,
+        SlideThreeComponent
     ],
   exports: [
     SingleFolderCardComponent,

@@ -12,71 +12,19 @@
 </div>
 
 <div class="content-container">
-  <!-- First slide -->
   <div
     class="slide"
     *ngIf="this.selectedSlide == 1">
-    <!-- First slide content -->
-    <p class="title">
-      MewaApp
-    </p>
-    <p class="description">
-      Twoje miejsce do przechowywania linków.
-    </p>
-    <form class="company-email-form">
-      <mat-form-field appearance="outline">
-        <mat-label>
-          Enter your company email here!
-        </mat-label>
-        <input
-          type="email"
-          matInput [formControl]="emailFormControl"
-          placeholder="name@company.com">
-        <mat-error
-          *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-          Please enter a valid email address
-        </mat-error>
-        <mat-error
-          *ngIf="emailFormControl.hasError('required')">
-          Email is <strong>required</strong>
-        </mat-error>
-      </mat-form-field>
-      <button
-        mat-flat-button
-        color="primary"
-        type="submit">
-        Get started
-      </button>
-    </form>
+    <app-slide-one></app-slide-one>
   </div>
-  <!-- Second slide -->
   <div
     class="slide"
     *ngIf="this.selectedSlide == 2">
-    <!-- Second slide content -->
-    <p class="title">
-      Dlaczego MewaApp ?
-    </p>
-    <p class="description">
-      Mewa App umożliwia Tobie magazynowienie linków niezależnie od urządzenia !
-    </p>
+    <app-slide-two></app-slide-two>
   </div>
-  <!-- Third slide -->
   <div
     class="slide"
     *ngIf="this.selectedSlide == 3">
-    <!-- Third slide content -->
-    <p class="title">
-      Zespół
-    </p>
-    <p class="description">
-      Politechnika Koszalińska
-    </p>
-    <button
-      mat-flat-button
-      color="primary"
-      routerLink="user">
-      Check our team
-    </button>
+    <app-slide-three></app-slide-three>
   </div>
 </div>
