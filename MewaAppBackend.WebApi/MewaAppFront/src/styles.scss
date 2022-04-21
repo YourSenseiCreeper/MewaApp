@@ -94,3 +94,12 @@ div.sidebar {
 .snackbar-success {
   background-color: #43c6ca;
 }
+
+.mat-card {
+  transition: transform .8s !important;
+  box-shadow: 0 5px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%) !important;
+
+  &:hover {
+    transform: scale(1.013) !important;
+  }
+}
