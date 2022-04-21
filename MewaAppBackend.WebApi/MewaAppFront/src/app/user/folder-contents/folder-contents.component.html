@@ -10,14 +10,18 @@
             <li class="breadcrumb-item">Folder 1</li>
         </ol>
     </div>
-    <button class="button" mat-stroked-button color="primary">
-        <mat-icon>add</mat-icon>
-        Dodaj link
-    </button>
+  <button
+    class="button"
+    mat-stroked-button
+    color="primary"
+    (click)="addLink()">
+    <mat-icon>note_add</mat-icon>
+    Dodaj link
+  </button>
 </header>
 <div class="link-card-container">
-    <app-single-link-card 
-	    *ngFor="let link of links" 
+    <app-single-link-card
+	    *ngFor="let link of links"
 	    [link]="link"
         style="padding: 1rem;">
     </app-single-link-card>

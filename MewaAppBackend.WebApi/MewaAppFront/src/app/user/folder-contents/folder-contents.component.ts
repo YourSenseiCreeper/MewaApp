@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Link } from 'src/app/shared/models';
+import { AddLinkDialogComponent } from '../dialog/add-link-dialog/add-link-dialog.component';
+import { MewaAppService } from "../../shared/mewa-app.service";
+import { MatDialog } from "@angular/material/dialog";
 
 @Component({
   selector: 'app-folder-contents',
@@ -17,7 +20,7 @@ export class FolderContentsComponent implements OnInit {
       description: "To jest pierwsza karta oraz jej jakis tam tekst, który musi zostać sformatowany. Powinny być zazwyczaj dwa wiersze tekstu.",
       url: "https://bardzoDobryLink.org/link2",
       expiryDate: null,
-      thumbnailId: null, 
+      thumbnailId: null,
       userId: null,
       thumbnailContent: null,
     },
@@ -63,7 +66,7 @@ export class FolderContentsComponent implements OnInit {
     }
   ];
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, public mewaService: MewaAppService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(paramMap => {
@@ -71,4 +74,7 @@ export class FolderContentsComponent implements OnInit {
     });
   }
 
+  addLink(): void {
+    this.dialog.open(AddLinkDialogComponent, { width: '50%' });
+  }
 }
