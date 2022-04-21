@@ -1,6 +1,6 @@
 ﻿using MewaAppBackend.Business.Seed;
 
-namespace MewaAppBackend.WebApi
+namespace MewaAppBackend.WebApi.Extentions
 {
     public static class AnotherSeedExtension
     {
