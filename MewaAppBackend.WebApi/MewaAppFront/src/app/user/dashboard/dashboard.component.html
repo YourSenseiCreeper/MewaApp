@@ -1,8 +1,28 @@
-<h1>Popularne linki</h1>
+<header>
+    <span class="title">Linki</span>
+	<div class="button-group">
+		<mat-slide-toggle color="primary">Widok uproszczony</mat-slide-toggle>
+		<button 
+			style="margin-left: 1rem"
+        	mat-stroked-button 
+        	color="primary"
+			(click)="addLink()">
+			<mat-icon>note_add</mat-icon>
+			Dodaj link
+		</button>
+		<button 
+			style="margin-left: 1rem"
+			mat-stroked-button 
+			color="primary">
+			<mat-icon>create_new_folder</mat-icon>
+			Dodaj folder
+		</button>
+	</div>
+</header>
 <div class="link-card-container">
-	<app-single-link-card 
+	<app-inline-link-card 
 		*ngFor="let link of links" 
 		[link]="link"
 		class="link-card">
-	</app-single-link-card>
+	</app-inline-link-card>
 </div>

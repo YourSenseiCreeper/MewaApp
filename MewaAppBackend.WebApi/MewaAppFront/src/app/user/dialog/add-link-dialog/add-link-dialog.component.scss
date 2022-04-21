@@ -14,7 +14,6 @@ header {
         margin-left: auto;
         display: flex;
         flex-direction: row;
-        align-items: center;
 
         button {
             margin-left: auto;
@@ -29,18 +28,27 @@ h1{
     font-weight: bold;
     text-align: center;
     font-size: 40px;
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
 .link-card-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    margin: 0 auto;
-    width: 90%;
 }
 
 .link-card {
-    padding: 0.5rem;
+    padding: 1rem;
+}
+
+mat-form-field.mat-form-field {
     width: 100%;
+
+    ::ng-deep.mat-form-field-wrapper {
+        padding-bottom: 0.34375em;
+    }
+}
+
+.mat-dialog-actions {
+    justify-content: flex-end;
 }

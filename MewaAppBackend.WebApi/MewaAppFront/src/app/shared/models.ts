@@ -4,10 +4,19 @@ export interface Link {
     name: string;
     description: string | null;
     expiryDate: Date | null;
-    userId: number | null;
-    //thumbnail: string | null; // byte[] powinno być
+    userId: string | null;
     thumbnailContent: string | null;
     thumbnailId: number | null;
+}
+
+export interface AddLink {
+    url: string;
+    name: string;
+    description: string | null;
+    expiryDate: Date | null;
+    ownerId: string | null;
+    tags: number[];
+    groups: number[];
 }
 
 export interface RegisterCommand {
@@ -29,4 +38,15 @@ export interface LoginCommandResult {
     message: string;
     success: boolean;
     token: string;
+}
+
+export interface SuccessResult {
+    success: boolean;
+    message: string | null;
+}
+
+export interface TagDto {
+    id: number;
+    name: string;
+    description: string | null;
 }

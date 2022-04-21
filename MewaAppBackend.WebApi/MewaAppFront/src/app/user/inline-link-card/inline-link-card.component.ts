@@ -6,26 +6,15 @@ import { Link } from 'src/app/shared/models';
 import { ConfirmationDialogComponent } from '../dialog/confirmation/confirmation-dialog.component';
 
 @Component({
-  selector: 'app-single-link-card',
-  templateUrl: './single-link-card.component.html',
-  styleUrls: [
-    './single-link-card.component.scss'
-  ]
+  selector: 'app-inline-link-card',
+  templateUrl: './inline-link-card.component.html',
+  styleUrls: ['./inline-link-card.component.scss']
 })
-export class SingleLinkCardComponent implements OnInit {
-  @Input() link: Link = {
-    id: 1,
-    name: 'Link 1',
-    description: "To jest pierwsza karta oraz jej jakis tam tekst, który musi zostać sformatowany. Powinny być zazwyczaj dwa wiersze tekstu.",
-    url: "https://bardzoDobryLink.org/link2",
-    expiryDate: null,
-    thumbnailId: null,
-    userId: null,
-    thumbnailContent: null
-  };
+export class InlineLinkCardComponent implements OnInit {
+  @Input()
+  link!: Link;
 
   imageUrl = "/assets/images/asp-net-core-identity-with-patterns-1.png";
-
 
   constructor(
     private snackBar: MatSnackBar,
@@ -33,7 +22,7 @@ export class SingleLinkCardComponent implements OnInit {
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.convertThumbnailBase64ToImage(this.link.thumbnailContent);
+    // this.convertThumbnailBase64ToImage(this.link.thumbnailContent);
   }
 
   convertThumbnailBase64ToImage(base64: string | null): string {

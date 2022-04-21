@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/internal/operators/map';
 import { MewaHttpService } from './mewa-http.service';
-import { Link, LoginCommand, LoginCommandResult, RegisterCommand, RegisterCommandResult } from './models';
+import { AddLink, Link, LoginCommand, LoginCommandResult, RegisterCommand, RegisterCommandResult, SuccessResult, TagDto } from './models';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,10 @@ export class MewaAppService {
   
   getAllLinks(): Observable<Link[]> {
     return this.service.get("/link").pipe(map(data => this.mapLinks(data)))
+  }
+
+  addLink(newLink: AddLink): Observable<SuccessResult> {
+    return this.service.post("/link/add", newLink);
   }
 
   deleteLink(id: number): Observable<any> {
@@ -55,5 +59,22 @@ export class MewaAppService {
 
   mapLoginResult(rawResult: any): LoginCommandResult {
     return rawResult as LoginCommandResult;
+  }
+
+  getAllTags(): Observable<TagDto[]> {
+    return this.service.get('/tag').pipe(map(t => this.mapTags(t)))
+  }
+
+  private mapTags(tags: any[]): TagDto[] {
+    return tags.map(t => this.mapTag(t));
+  }
+
+  private mapTag(rawTag: any): TagDto {
+    let tag = {
+      id: rawTag.id,
+      name: rawTag.name,
+      description: rawTag.desciption ? rawTag.desciption : null
+    } as TagDto;
+    return tag;
   }
 }
