@@ -24,6 +24,7 @@ import { InlineLinkCardComponent } from './inline-link-card/inline-link-card.com
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { AddEditFolderDialogComponent } from './dialog/add-edit-folder/add-edit-folder-dialog.component';
 @NgModule({
   declarations: [
     UserComponent,
@@ -34,6 +35,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     ConfirmationDialogComponent,
     AddLinkDialogComponent,
     InlineLinkCardComponent,
+    AddEditFolderDialogComponent
   ],
   imports: [
     CommonModule,

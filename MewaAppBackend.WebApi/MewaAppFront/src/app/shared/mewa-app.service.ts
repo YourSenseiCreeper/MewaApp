@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/internal/operators/map';
 import { MewaHttpService } from './mewa-http.service';
-import { AddLink, Link, LoginCommand, LoginCommandResult, RegisterCommand, RegisterCommandResult, SuccessResult, TagDto } from './models';
+import { AddGroup, AddLink, GroupDto, Link, LoginCommand, LoginCommandResult, RegisterCommand, RegisterCommandResult, SuccessResult, TagDto } from './models';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +43,14 @@ export class MewaAppService {
       thumbnailContent: rawLink.thumbnailContent ? rawLink.thumbnailContent : null,
     } as Link;
     return link;
+  }
+
+  addGroup(newGroup: AddGroup): Observable<SuccessResult> {
+    return this.service.post('/group', newGroup);
+  }
+
+  getAllGroups(): Observable<GroupDto[]> {
+    return this.service.get('/group/getall');
   }
 
   register(command: RegisterCommand): Observable<RegisterCommandResult> {

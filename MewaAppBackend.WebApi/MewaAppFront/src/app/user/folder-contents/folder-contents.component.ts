@@ -4,6 +4,7 @@ import { Link } from 'src/app/shared/models';
 import { AddLinkDialogComponent } from '../dialog/add-link-dialog/add-link-dialog.component';
 import { MewaAppService } from "../../shared/mewa-app.service";
 import { MatDialog } from "@angular/material/dialog";
+import { AddEditFolderDialogComponent } from '../dialog/add-edit-folder/add-edit-folder-dialog.component';
 
 @Component({
   selector: 'app-folder-contents',

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MewaAppService } from 'src/app/shared/mewa-app.service';
+import { GroupDto } from 'src/app/shared/models';
+import { AddEditFolderDialogComponent } from '../dialog/add-edit-folder/add-edit-folder-dialog.component';
 
 @Component({
   selector: 'app-folders',
@@ -7,13 +11,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FoldersComponent implements OnInit {
 
-  folderId: string;
+  groups: GroupDto[] = [];
 
-  constructor() {
-    this.folderId = 'fbx245shd';
+  constructor(
+    private service: MewaAppService,
+    private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
+    this.service.getAllGroups().subscribe(r => this.groups = r);
+  }
+
+  addGroup(): void {
+    this.dialog.open(AddEditFolderDialogComponent, { width: '50%' });
   }
 
 }

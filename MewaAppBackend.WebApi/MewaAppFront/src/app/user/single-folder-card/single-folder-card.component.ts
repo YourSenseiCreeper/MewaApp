@@ -1,17 +1,15 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { GroupDto } from 'src/app/shared/models';
 
 @Component({
   selector: 'app-single-folder-card',
   templateUrl: './single-folder-card.component.html',
   styleUrls: ['./single-folder-card.component.scss']
 })
-export class SingleFolderCardComponent implements OnInit {
-  name: string = 'Folder 1';
-  @Input() url: string = "#";
+export class SingleFolderCardComponent {
+  
+  @Input() url: string = "";
+  @Input() group: GroupDto = { id: 0, name: 'Folder', description: '', isFolder: true };
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }
