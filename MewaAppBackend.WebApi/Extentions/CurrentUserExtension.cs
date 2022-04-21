@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
 
-namespace MewaAppBackend.WebApi.Controllers
+namespace MewaAppBackend.WebApi.Extentions
 {
     public static class CurrentUserExtension
     {
