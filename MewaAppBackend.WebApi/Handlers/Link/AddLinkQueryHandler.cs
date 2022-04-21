@@ -7,7 +7,7 @@ using MewaAppBackend.WebApi.Queries.Link;
 
 namespace MewaAppBackend.WebApi.Handlers.Link
 {
-    public class AddLinkQueryHandler : IRequestHandler<AddLinkCommand>
+    public class AddLinkQueryHandler : IRequestHandler<AddLinkCommand, AddLinkCommandResult>
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IPageThumbnailService _pageThumbnailService;
@@ -17,7 +17,7 @@ namespace MewaAppBackend.WebApi.Handlers.Link
             this.unitOfWork = unitOfWork;
             _pageThumbnailService = pageThumbnailService;
         }
-        public async Task<Unit> Handle(AddLinkCommand request, CancellationToken cancellationToken)
+        public async Task<AddLinkCommandResult> Handle(AddLinkCommand request, CancellationToken cancellationToken)
         {
             var repository = unitOfWork.Repository<Model.Model.Link>();
             var link = new Model.Model.Link
@@ -39,7 +39,7 @@ namespace MewaAppBackend.WebApi.Handlers.Link
             repository.Edit(newLinkFromDb);
             unitOfWork.SaveChanges();
 
-            return Unit.Value;
+            return new AddLinkCommandResult { Success = true };
         }
     }
 }

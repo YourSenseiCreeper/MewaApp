@@ -1,8 +1,9 @@
 ﻿using MediatR;
+using MewaAppBackend.WebApi.Handlers.Link;
 
 namespace MewaAppBackend.WebApi.Queries.Link
 {
-    public record AddLinkCommand : IRequest 
+    public record AddLinkCommand : IRequest<AddLinkCommandResult>
     {
         public string Url { get; set; }
         public string Name { get; set; }

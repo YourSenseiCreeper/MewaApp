@@ -1,7 +1,7 @@
 <header>
     <span class="title">Linki</span>
 	<div class="button-group">
-		<mat-slide-toggle color="primary">Widok uproszczony</mat-slide-toggle>
+		<mat-slide-toggle color="primary" (change)="toggleChange()">Widok uproszczony</mat-slide-toggle>
 		<button 
 			style="margin-left: 1rem"
         	mat-stroked-button 
@@ -20,9 +20,18 @@
 	</div>
 </header>
 <div class="link-card-container">
-	<app-inline-link-card 
-		*ngFor="let link of links" 
-		[link]="link"
-		class="link-card">
-	</app-inline-link-card>
+	<div *ngIf="simpleLinks === true">
+		<app-inline-link-card
+			*ngFor="let link of links" 
+			[link]="link"
+			class="link-card">
+		</app-inline-link-card>
+	</div>
+	<div *ngIf="simpleLinks === false">
+		<app-single-link-card 
+			*ngFor="let link of links" 
+			[link]="link"
+			class="single-link-card">
+		</app-single-link-card>
+	</div>
 </div>

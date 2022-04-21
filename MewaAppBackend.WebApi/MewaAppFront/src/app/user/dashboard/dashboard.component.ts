@@ -12,6 +12,7 @@ import { AddLinkDialogComponent } from '../dialog/add-link-dialog/add-link-dialo
 })
 export class DashboardComponent implements OnInit {
   links: Link[] = [];
+  simpleLinks = false;
 
   constructor(public mewaService: MewaAppService, private dialog: MatDialog) { }
 
@@ -21,5 +22,9 @@ export class DashboardComponent implements OnInit {
 
   addLink() {
     this.dialog.open(AddLinkDialogComponent, { width: '50%' });
+  }
+
+  toggleChange() {
+    this.simpleLinks = !this.simpleLinks;
   }
 } 

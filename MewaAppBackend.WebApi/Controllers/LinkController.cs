@@ -37,7 +37,7 @@ namespace MewaAppBackend.WebApi.Controllers
 
 
         [HttpPost("Add")]
-        public async Task<Unit> AddLink([FromBody] AddLinkCommand command)
+        public async Task<AddLinkCommandResult> AddLink([FromBody] AddLinkCommand command)
         {
             return await _mediator.Send(command);
         }
