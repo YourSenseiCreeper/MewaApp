@@ -1,10 +1,10 @@
-<mat-card id="mainCard">
+<mat-card id="mainCard" class="card-with-link">
   <mat-card-header>
     <div class="card-header">
       <mat-card-title id="title">{{ link.name }}</mat-card-title>
     </div>
     <a id="moreIcon" [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></a>
-    <mat-menu #menu="matMenu">
+    <mat-menu #menu="matMenu" xPosition="before">
       <button mat-menu-item (click)="onEdit()">
         <mat-icon>edit</mat-icon>
         <span>Edytuj</span>
