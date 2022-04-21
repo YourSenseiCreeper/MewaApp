@@ -40,6 +40,12 @@ h1{
     width: 90%;
 }
 
+.link-card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
 .link-card {
     padding: 0.5rem;
     width: 100%;

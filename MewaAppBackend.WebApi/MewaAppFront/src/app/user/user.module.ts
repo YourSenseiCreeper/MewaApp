@@ -33,7 +33,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     FolderContentsComponent,
     ConfirmationDialogComponent,
     AddLinkDialogComponent,
-    InlineLinkCardComponent
+    InlineLinkCardComponent,
   ],
   imports: [
     CommonModule,

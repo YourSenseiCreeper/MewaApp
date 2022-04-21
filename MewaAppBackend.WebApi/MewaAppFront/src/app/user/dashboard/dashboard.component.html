@@ -1,37 +1,28 @@
 <header>
-    <span class="title">Linki</span>
+    <span class="title">Popularne linki</span>
 	<div class="button-group">
-		<mat-slide-toggle color="primary" (change)="toggleChange()">Widok uproszczony</mat-slide-toggle>
-		<button 
-			style="margin-left: 1rem"
-        	mat-stroked-button 
-        	color="primary"
-			(click)="addLink()">
-			<mat-icon>note_add</mat-icon>
-			Dodaj link
-		</button>
-		<button 
-			style="margin-left: 1rem"
-			mat-stroked-button 
-			color="primary">
-			<mat-icon>create_new_folder</mat-icon>
-			Dodaj folder
-		</button>
-	</div>
+		<mat-slide-toggle
+      color="primary"
+      (change)="toggleChange()">
+      Widok uproszczony
+    </mat-slide-toggle>
+  </div>
 </header>
 <div class="link-card-container">
 	<div *ngIf="simpleLinks === true">
 		<app-inline-link-card
-			*ngFor="let link of links" 
+			*ngFor="let link of links"
 			[link]="link"
 			class="link-card">
 		</app-inline-link-card>
 	</div>
 	<div *ngIf="simpleLinks === false">
-		<app-single-link-card 
-			*ngFor="let link of links" 
-			[link]="link"
-			class="single-link-card">
-		</app-single-link-card>
+    <div class="link-card-grid">
+      <app-single-link-card
+        *ngFor="let link of links"
+        [link]="link"
+        class="single-link-card">
+      </app-single-link-card>
+    </div>
 	</div>
 </div>
