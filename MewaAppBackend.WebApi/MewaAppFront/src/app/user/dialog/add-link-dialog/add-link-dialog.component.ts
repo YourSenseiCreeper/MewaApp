@@ -29,11 +29,6 @@ export class AddLinkDialogComponent implements OnInit {
     public mewaService: MewaAppService,
     public dialogRef: MatDialogRef<AddLinkDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-    // this.addLinkForm = fb.group({
-    //   url: fb.control('', [Validators.required, Validators.maxLength(300), Validators.minLength(6)]),
-    //   name: fb.control('', [Validators.maxLength(300)]),
-    //   description: fb.control('', [Validators.maxLength(300)])
-    // })
     this.filteredTags = this.tagControl.valueChanges.pipe(
       startWith(null),
       map((tag: string | null) => (tag ? this._filter(tag) : this.allTags.slice())),
@@ -49,14 +44,14 @@ export class AddLinkDialogComponent implements OnInit {
        name: this.name.value,
        description: this.description.value,
        expiryDate: new Date(2023, 1, 1),
-       ownerId: "5258bc73-24ec-4087-87ab-cec32e351067",
+       // ownerId is assigned on backend based on JWT token claim
        tags: [],
        groups: []
      } as AddLink;
      this.mewaService.addLink(values).subscribe(r => {
        if (r.success) {
         this.notification.showSuccess("Link dodany");
-        this.dialogRef.close();
+        this.close();
        } else {
         this.notification.showError(r.message as string);
        }

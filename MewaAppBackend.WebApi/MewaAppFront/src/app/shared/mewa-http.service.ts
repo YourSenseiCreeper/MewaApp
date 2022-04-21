@@ -12,15 +12,28 @@ export class MewaHttpService {
   constructor(private http: HttpClient, private notificationService: NotificationService) { }
 
   request(method: string, path: string, body: Object = {}): Observable<any> {
+    let token = localStorage.getItem('access_token');
+    let headers: HttpHeaders;
+    if (token) {
+      headers = new HttpHeaders({
+        "Content-Type": "application/json-patch+json",
+        "Accept": "text/plain",
+        'Access-Control-Allow-Origin': "*",
+        'Authorization': token as string
+      });
+    } else {
+      headers = new HttpHeaders({
+        "Content-Type": "application/json-patch+json",
+        "Accept": "text/plain",
+        'Access-Control-Allow-Origin': "*"
+      });
+    }
+    
     return this.http.request(method, `${this.urlAddres}${path}`, {
       body: JSON.stringify(body),
       observe: "response",
       responseType: "json",
-      headers: new HttpHeaders({
-        "Content-Type": "application/json-patch+json",
-        "Accept": "text/plain",
-        'Access-Control-Allow-Origin': "*",
-      })
+      headers: headers
     }).pipe(catchError((err) => this.handleError(err)), map(r => r.body));
   }
 

@@ -6,6 +6,7 @@ using MewaAppBackend.WebApi.Handlers.Link;
 using MewaAppBackend.WebApi.Queries;
 using MewaAppBackend.WebApi.Queries.Link;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace MewaAppBackend.WebApi.Controllers
 {
@@ -37,8 +38,23 @@ namespace MewaAppBackend.WebApi.Controllers
 
 
         [HttpPost("Add")]
-        public async Task<AddLinkCommandResult> AddLink([FromBody] AddLinkCommand command)
+        public async Task<AddLinkCommandResult> AddLink([FromBody] AddLinkDto dto)
         {
+            var userId = this.GetUserGuidFromRequest();
+            if (userId == null)
+            {
+                return new AddLinkCommandResult { Message = "You are not logged in", Success = false };
+            }
+
+            var command = new AddLinkCommand
+            {
+                Url = dto.Url,
+                Name = dto.Name,
+                Description = dto.Description,
+                OwnerId = userId,
+                Tags = dto.Tags,
+                Groups = dto.Groups
+            };
             return await _mediator.Send(command);
         }
 

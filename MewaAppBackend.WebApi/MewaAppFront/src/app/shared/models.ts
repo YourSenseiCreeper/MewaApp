@@ -14,7 +14,6 @@ export interface AddLink {
     name: string;
     description: string | null;
     expiryDate: Date | null;
-    ownerId: string | null;
     tags: number[];
     groups: number[];
 }
