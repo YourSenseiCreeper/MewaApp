@@ -74,7 +74,7 @@ export class FolderContentsComponent implements OnInit {
     });
   }
 
-  addLink() {
+  addLink(): void {
     this.dialog.open(AddLinkDialogComponent, { width: '50%' });
   }
 }
