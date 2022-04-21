@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -9,7 +10,7 @@ export class NavbarComponent implements OnInit {
 
   navbarFixed: boolean = false;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -21,6 +22,11 @@ export class NavbarComponent implements OnInit {
     else {
       this.navbarFixed = false;
     }
+  }
+
+  logout() {
+    localStorage.removeItem('access_token');
+    this.router.navigate(['/']);
   }
 
 }
