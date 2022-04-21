@@ -11,7 +11,7 @@ import { Link } from 'src/app/shared/models';
 })
 export class DashboardComponent implements OnInit {
   links: Link[] = [];
-  simpleLinks = false;
+  simpleLinks: boolean = false;
 
   constructor(public mewaService: MewaAppService, private dialog: MatDialog) { }
 
@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
     this.mewaService.getAllLinks().subscribe(data => this.links = data);
   }
 
-  toggleChange() {
+  toggleChange(): void {
     this.simpleLinks = !this.simpleLinks;
   }
 }
