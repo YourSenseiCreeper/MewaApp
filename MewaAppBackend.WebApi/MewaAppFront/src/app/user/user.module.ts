@@ -17,13 +17,13 @@ import { FolderContentsComponent } from './folder-contents/folder-contents.compo
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from './dialog/confirmation/confirmation-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AddLinkDialogComponent } from './dialog/add-link-dialog/add-link-dialog.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { InlineLinkCardComponent } from './inline-link-card/inline-link-card.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { AddEditLinkDialogComponent } from './dialog/add-edit-link-dialog/add-edit-link-dialog.component';
 @NgModule({
   declarations: [
     UserComponent,
@@ -32,7 +32,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     FoldersComponent,
     FolderContentsComponent,
     ConfirmationDialogComponent,
-    AddLinkDialogComponent,
+    AddEditLinkDialogComponent,
     InlineLinkCardComponent,
   ],
   imports: [
