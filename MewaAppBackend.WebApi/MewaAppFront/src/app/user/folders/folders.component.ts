@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class FoldersComponent implements OnInit {
 
   folderId: string;
+  simpleLinks: boolean = false;
 
   constructor() {
     this.folderId = 'fbx245shd';
@@ -16,4 +17,7 @@ export class FoldersComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  toggleChange(): void {
+    this.simpleLinks = !this.simpleLinks;
+  }
 }

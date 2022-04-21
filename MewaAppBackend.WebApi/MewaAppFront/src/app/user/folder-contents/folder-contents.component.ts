@@ -65,6 +65,7 @@ export class FolderContentsComponent implements OnInit {
       thumbnailContent: null,
     }
   ];
+  simpleLinks: boolean = false;
 
   constructor(private route: ActivatedRoute, public mewaService: MewaAppService, private dialog: MatDialog) { }
 
@@ -76,5 +77,9 @@ export class FolderContentsComponent implements OnInit {
 
   addLink(): void {
     this.dialog.open(AddLinkDialogComponent, { width: '50%' });
+  }
+
+  toggleChange(): void {
+    this.simpleLinks = !this.simpleLinks;
   }
 }

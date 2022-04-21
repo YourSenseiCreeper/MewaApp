@@ -1,11 +1,24 @@
 <header>
-    <span class="title">Foldery</span>
-    <button 
-        class="button" 
-        mat-stroked-button 
-        color="primary">
-        <mat-icon>create_new_folder</mat-icon>
-        Dodaj folder
+  <span class="title">
+    Foldery
+  </span>
+  <div class="button-group">
+    <mat-slide-toggle
+      color="primary"
+      (change)="toggleChange()">
+      Widok uproszczony
+    </mat-slide-toggle>
+    <button
+      class="button"
+      mat-stroked-button
+      color="primary">
+      <mat-icon>
+        create_new_folder
+      </mat-icon>
+      Dodaj folder
     </button>
+  </div>
 </header>
-<app-single-folder-card [url]="'/user/folder/' + folderId"></app-single-folder-card>
+<app-single-folder-card
+  [url]="'/user/folder/' + folderId">
+</app-single-folder-card>
