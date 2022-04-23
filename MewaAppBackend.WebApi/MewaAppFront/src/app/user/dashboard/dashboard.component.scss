@@ -31,26 +31,3 @@ h1{
     font-size: 40px;
     margin-top: 2rem;
 }
-
-.link-card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    margin: 0 auto;
-    width: 90%;
-}
-
-.link-card-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-}
-
-.link-card {
-    padding: 0.5rem;
-    width: 100%;
-}
-
-.single-link-card {
-    padding: 1rem;
-}

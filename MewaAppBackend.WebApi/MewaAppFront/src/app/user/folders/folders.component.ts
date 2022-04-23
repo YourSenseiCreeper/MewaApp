@@ -12,6 +12,7 @@ import { AddEditFolderDialogComponent } from '../dialog/add-edit-folder/add-edit
 export class FoldersComponent implements OnInit {
 
   groups: GroupDto[] = [];
+  simpleLinks: boolean = false;
 
   constructor(
     private service: MewaAppService,
@@ -22,6 +23,9 @@ export class FoldersComponent implements OnInit {
     this.service.getAllGroups().subscribe(r => this.groups = r);
   }
 
+  toggleChange(): void {
+    this.simpleLinks = !this.simpleLinks;
+  }
   addGroup(): void {
     this.dialog.open(AddEditFolderDialogComponent, { width: '50%' });
   }

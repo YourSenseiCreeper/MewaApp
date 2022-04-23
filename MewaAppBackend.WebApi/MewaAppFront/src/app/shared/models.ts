@@ -4,9 +4,21 @@ export interface Link {
     name: string;
     description: string | null;
     expiryDate: Date | null;
-    userId: string | null;
+    ownerId: string | null;
     thumbnailContent: string | null;
     thumbnailId: number | null;
+    tags: MicroTag[];
+    groups: MicroGroup[];
+}
+
+export interface MicroTag {
+    id: number;
+    name: string;
+}
+
+export interface MicroGroup {
+    id: number;
+    name: string;
 }
 
 export interface AddLink {

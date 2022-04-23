@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Link } from 'src/app/shared/models';
-import { AddLinkDialogComponent } from '../dialog/add-link-dialog/add-link-dialog.component';
+import { AddEditLinkDialogComponent } from '../dialog/add-edit-link-dialog/add-edit-link-dialog.component';
 import { MewaAppService } from "../../shared/mewa-app.service";
 import { MatDialog } from "@angular/material/dialog";
+import { NotificationService } from 'src/app/shared/notification.service';
 import { AddEditFolderDialogComponent } from '../dialog/add-edit-folder/add-edit-folder-dialog.component';
 
 @Component({
@@ -22,8 +23,10 @@ export class FolderContentsComponent implements OnInit {
       url: "https://bardzoDobryLink.org/link2",
       expiryDate: null,
       thumbnailId: null,
-      userId: null,
+      ownerId: null,
       thumbnailContent: null,
+      tags: [],
+      groups: []
     },
     {
       id: 2,
@@ -32,8 +35,10 @@ export class FolderContentsComponent implements OnInit {
       url: "https://bardzoDobryLink.org/link2",
       expiryDate: null,
       thumbnailId: null,
-      userId: null,
+      ownerId: null,
       thumbnailContent: null,
+      tags: [],
+      groups: []
     },
     {
       id: 3,
@@ -42,8 +47,10 @@ export class FolderContentsComponent implements OnInit {
       url: "https://bardzoDobryLink.org/link2",
       expiryDate: null,
       thumbnailId: null,
-      userId: null,
+      ownerId: null,
       thumbnailContent: null,
+      tags: [],
+      groups: []
     },
     {
       id: 4,
@@ -52,8 +59,10 @@ export class FolderContentsComponent implements OnInit {
       url: "https://bardzoDobryLink.org/link2",
       expiryDate: null,
       thumbnailId: null,
-      userId: null,
+      ownerId: null,
       thumbnailContent: null,
+      tags: [],
+      groups: []
     },
     {
       id: 5,
@@ -62,12 +71,19 @@ export class FolderContentsComponent implements OnInit {
       url: "https://bardzoDobryLink.org/link2",
       expiryDate: null,
       thumbnailId: null,
-      userId: null,
+      ownerId: null,
       thumbnailContent: null,
+      tags: [],
+      groups: []
     }
   ];
+  simpleLinks: boolean = false;
 
-  constructor(private route: ActivatedRoute, public mewaService: MewaAppService, private dialog: MatDialog) { }
+  constructor(
+    private route: ActivatedRoute,
+    public service: MewaAppService,
+    private dialog: MatDialog,
+    private notification: NotificationService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(paramMap => {
@@ -76,6 +92,24 @@ export class FolderContentsComponent implements OnInit {
   }
 
   addLink(): void {
-    this.dialog.open(AddLinkDialogComponent, { width: '50%' });
+    let dialog = this.dialog.open(AddEditLinkDialogComponent,
+      {
+        data: { title: 'Edycja linku' },
+        width: '50%'
+      });
+      dialog.componentInstance.onSave.subscribe(v => {
+        this.service.addLink(v).subscribe(r => {
+          if (r.success) {
+           this.notification.showSuccess("Link dodany");
+           dialog.componentInstance.close();
+          } else {
+           this.notification.showError(r.message as string);
+          }
+        })
+      });
+  }
+
+  toggleChange(): void {
+    this.simpleLinks = !this.simpleLinks;
   }
 }

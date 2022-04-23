@@ -23,6 +23,10 @@ export class MewaAppService {
     return this.service.post("/link/add", newLink);
   }
 
+  editLink(existingLink: Link): Observable<SuccessResult> {
+    return this.service.put('/link', existingLink);
+  }
+
   deleteLink(id: number): Observable<any> {
     return this.service.delete("/link", { id: id });
   }
@@ -38,9 +42,11 @@ export class MewaAppService {
       name: rawLink.name,
       description: rawLink.desciption ? rawLink.desciption : null,
       expiryDate: rawLink.expiryDate ? rawLink.expiryDate : null,
-      userId: rawLink.userId,
+      ownerId: rawLink.ownerId,
       thumbnailId: rawLink.thumbnailId ? rawLink.thumbnailId : null,
       thumbnailContent: rawLink.thumbnailContent ? rawLink.thumbnailContent : null,
+      tags: rawLink.tags,
+      groups: rawLink.groups
     } as Link;
     return link;
   }
