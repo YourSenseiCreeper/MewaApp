@@ -3,6 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MewaAppService } from 'src/app/shared/mewa-app.service';
 import { Link } from 'src/app/shared/models';
+import { NotificationService } from 'src/app/shared/notification.service';
+import { AddEditLinkDialogComponent } from '../dialog/add-edit-link-dialog/add-edit-link-dialog.component';
 import { ConfirmationDialogComponent } from '../dialog/confirmation/confirmation-dialog.component';
 
 @Component({
@@ -20,8 +22,10 @@ export class SingleLinkCardComponent implements OnInit {
     url: "https://bardzoDobryLink.org/link2",
     expiryDate: null,
     thumbnailId: null,
-    userId: null,
-    thumbnailContent: null
+    ownerId: null,
+    thumbnailContent: null,
+    tags: [],
+    groups: []
   };
 
   imageUrl = "/assets/images/asp-net-core-identity-with-patterns-1.png";
@@ -30,6 +34,7 @@ export class SingleLinkCardComponent implements OnInit {
   constructor(
     private snackBar: MatSnackBar,
     private service: MewaAppService,
+    private notification: NotificationService,
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -82,7 +87,24 @@ export class SingleLinkCardComponent implements OnInit {
   }
 
   onEdit(): void {
-
+    let dialog = this.dialog.open(AddEditLinkDialogComponent,
+    {
+      data: {
+        link: this.link,
+        title: 'Edycja linku'
+      },
+      width: '75%'
+    });
+    dialog.componentInstance.onSave.subscribe(v => {
+      this.service.editLink(v).subscribe(r => {
+        if (r.success) {
+         this.notification.showSuccess("Link zmieniony");
+         dialog.componentInstance.close();
+        } else {
+         this.notification.showError(r.message as string);
+        }
+      })
+    });
   }
 
   onDelete(): void {
