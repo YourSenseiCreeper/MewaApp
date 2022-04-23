@@ -43,8 +43,10 @@ namespace MewaAppBackend.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(CreateGroupCommand createGroupCommand)
+        public async Task<ActionResult<CreateGroupCommandResult>> Create(CreateGroupCommand createGroupCommand)
         {
+            var currentUserId = this.GetUserGuidFromRequest();
+            createGroupCommand.Users = new[] { currentUserId };
             return Ok(await _mediator.Send(createGroupCommand));
         }
 

@@ -65,8 +65,24 @@ namespace MewaAppBackend.WebApi.Controllers
         }
 
         [HttpPut]
-        public async Task<EditLinkCommandResult> Edit([FromBody] EditLinkCommand command)
+        public async Task<EditLinkCommandResult> Edit([FromBody] EditLinkCommand dto)
         {
+            var userId = this.GetUserGuidFromRequest();
+            if (userId == null)
+            {
+                return new EditLinkCommandResult { Message = "You are not logged in", Success = false };
+            }
+
+            var command = new EditLinkCommand
+            {
+                Id = dto.Id,
+                Url = dto.Url,
+                Name = dto.Name,
+                Description = dto.Description,
+                OwnerId = userId,
+                Tags = dto.Tags,
+                Groups = dto.Groups
+            };
             return await _mediator.Send(command);
         }
     }

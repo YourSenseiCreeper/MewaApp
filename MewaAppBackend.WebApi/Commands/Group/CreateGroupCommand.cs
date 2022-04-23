@@ -1,8 +1,9 @@
 ﻿using MediatR;
+using MewaAppBackend.WebApi.Handlers.Group;
 
 namespace MewaAppBackend.WebApi.Commands.Group
 {
-    public class CreateGroupCommand : IRequest
+    public class CreateGroupCommand : IRequest<CreateGroupCommandResult>
     {
         public string RedirectURL { get; set; }
         public string Name { get; set; }
