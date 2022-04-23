@@ -1,6 +1,6 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, ElementRef, Inject, OnInit, Output, ViewChild } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips/chip-input';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -11,6 +11,7 @@ import { Link, TagDto } from 'src/app/shared/models';
 export interface AddEditLinkDialogData {
   link?: Link;
   title: string;
+  icon: string;
 }
 
 @Component({
@@ -23,13 +24,27 @@ export class AddEditLinkDialogComponent implements OnInit {
   
   @Output() public onSave!: Observable<any>;
 
+  addEditLink: FormGroup = new FormGroup({
+    url: new FormControl('', [Validators.required, Validators.maxLength(300), Validators.minLength(6)]),
+    name: new FormControl('', [Validators.maxLength(300)]),
+    description: new FormControl('', [Validators.maxLength(300)])
+  });
   onSave$ = new Subject();
-  url = new FormControl('', [Validators.required, Validators.maxLength(300), Validators.minLength(6)]);
-  name = new FormControl('', [Validators.maxLength(300)]);
-  description = new FormControl('', [Validators.maxLength(300)]);
   tags: TagDto[] = [];
   allTags: TagDto[] = [];
   filteredTags: Observable<TagDto[]>;
+
+  get urlForm() {
+    return this.addEditLink.get('url');
+  }
+
+  get nameForm() {
+    return this.addEditLink.get('name');
+  }
+
+  get descriptionForm() {
+    return this.addEditLink.get('description');
+  }
 
   constructor(
     public mewaService: MewaAppService,
@@ -56,9 +71,9 @@ export class AddEditLinkDialogComponent implements OnInit {
   }
 
   private loadFormFromLink(): void {
-    this.url.setValue(this.data.link?.url);
-    this.name.setValue(this.data.link?.name);
-    this.description.setValue(this.data.link?.description);
+    this.urlForm?.setValue(this.data.link?.url);
+    this.nameForm?.setValue(this.data.link?.name);
+    this.descriptionForm?.setValue(this.data.link?.description);
   }
 
   submit(): void {
@@ -71,11 +86,10 @@ export class AddEditLinkDialogComponent implements OnInit {
 
   submitNewLink(): void {
     let value = {
-      url: this.url.value,
-      name: this.name.value,
-      description: this.description.value,
+      url: this.urlForm?.value,
+      name: this.nameForm?.value,
+      description: this.descriptionForm?.value,
       expiryDate: new Date(2023, 1, 1),
-      // ownerId is assigned on backend based on JWT token claim
       tags: this.tags.map(t => t.id),
       groups: []
     };
@@ -85,9 +99,9 @@ export class AddEditLinkDialogComponent implements OnInit {
   submitModifiedLink(): void {
     let value = {
       id: this.data.link?.id,
-      url: this.url.value,
-      name: this.name.value,
-      description: this.description.value,
+      url: this.urlForm?.value,
+      name: this.nameForm?.value,
+      description: this.descriptionForm?.value,
       expiryDate: this.data.link?.expiryDate,
       ownerId: this.data.link?.ownerId,
       tags: this.tags.map(t => t.id),

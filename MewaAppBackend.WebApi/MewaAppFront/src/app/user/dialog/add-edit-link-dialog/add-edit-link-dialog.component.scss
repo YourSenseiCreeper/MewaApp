@@ -1,54 +1,37 @@
 @import 'variables.scss';
 
-header {
-    margin: 2rem 16px 2rem 16px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    .title {
-        font-size: 40px;
-        color: $my-primary;
-        font-weight: bold;
-    }
-    .button-group {
-        margin-left: auto;
-        display: flex;
-        flex-direction: row;
-
-        button {
-            margin-left: auto;
-            border: 1px solid $my-primary;
-            border-radius: 25px;
-        }
-    }
+button {
+    border-radius: 25px;
 }
 
-h1{
+h1 {
     color: $my-primary;
     font-weight: bold;
-    text-align: center;
-    font-size: 40px;
-    margin-top: 1rem;
-}
-
-.link-card-container {
+    font-size: 25px;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-}
+    justify-content: center;
+    align-items: center;
+    line-height: initial;
 
-.link-card {
-    padding: 1rem;
-}
-
-mat-form-field.mat-form-field {
-    width: 100%;
-
-    ::ng-deep.mat-form-field-wrapper {
-        padding-bottom: 0.34375em;
+    .icon {
+        transform: scale(1.25);
+        margin-right: 0.5rem;
     }
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: white;
 }
 
 .mat-dialog-actions {
     justify-content: flex-end;
+}
+
+form .icon {
+    color: $my-primary;
+    margin-right: 0.25rem;
 }
