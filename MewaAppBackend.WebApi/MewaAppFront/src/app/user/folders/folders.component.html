@@ -9,16 +9,16 @@
       Widok uproszczony
     </mat-slide-toggle>
     <button
-      class="button"
-      mat-stroked-button
-      color="primary">
-      <mat-icon>
-        create_new_folder
-      </mat-icon>
-      Dodaj folder
+        class="button" 
+        mat-stroked-button 
+        color="primary"
+        (click)="addGroup()">
+        <mat-icon>create_new_folder</mat-icon>
+        Dodaj folder
     </button>
   </div>
 </header>
-<app-single-folder-card
-  [url]="'/user/folder/' + folderId">
+
+<app-single-folder-card 
+    *ngFor="let group of groups" [group]="group" [url]="'/user/folder/' + group.id">
 </app-single-folder-card>

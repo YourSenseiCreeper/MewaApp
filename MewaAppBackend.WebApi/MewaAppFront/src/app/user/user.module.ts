@@ -23,6 +23,7 @@ import { InlineLinkCardComponent } from './inline-link-card/inline-link-card.com
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { AddEditFolderDialogComponent } from './dialog/add-edit-folder/add-edit-folder-dialog.component';
 import { AddEditLinkDialogComponent } from './dialog/add-edit-link-dialog/add-edit-link-dialog.component';
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { AddEditLinkDialogComponent } from './dialog/add-edit-link-dialog/add-ed
     ConfirmationDialogComponent,
     AddEditLinkDialogComponent,
     InlineLinkCardComponent,
+    AddEditFolderDialogComponent
   ],
   imports: [
     CommonModule,

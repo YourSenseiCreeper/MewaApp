@@ -5,7 +5,7 @@ using MewaAppBackend.WebApi.Commands.Group;
 
 namespace MewaAppBackend.WebApi.Handlers.Group
 {
-    public class CreateGroupCommandHandler : IRequestHandler<CreateGroupCommand, Unit>
+    public class CreateGroupCommandHandler : IRequestHandler<CreateGroupCommand, CreateGroupCommandResult>
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IRepository<Model.Model.Link> linkRepository;
@@ -21,7 +21,7 @@ namespace MewaAppBackend.WebApi.Handlers.Group
             _mapper = mapper;
         }
 
-        public async Task<Unit> Handle(CreateGroupCommand request, CancellationToken cancellationToken)
+        public async Task<CreateGroupCommandResult> Handle(CreateGroupCommand request, CancellationToken cancellationToken)
         {
             Model.Model.Group group = new();
 
@@ -39,7 +39,7 @@ namespace MewaAppBackend.WebApi.Handlers.Group
             unitOfWork.Repository<Model.Model.Group>().Add(group);
             unitOfWork.SaveChanges();
 
-            return Unit.Value;
+            return new CreateGroupCommandResult { Success = true };
         }
     }
 }

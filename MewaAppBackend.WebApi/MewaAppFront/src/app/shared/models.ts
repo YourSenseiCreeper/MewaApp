@@ -30,6 +30,23 @@ export interface AddLink {
     groups: number[];
 }
 
+export interface AddGroup {
+    redirectUrl: string,
+    name: string,
+    description: string,
+    isFolder: boolean,
+    links: number[],
+    tags: number[],
+    users: string[]
+}
+
+export interface GroupDto {
+    id: number,
+    name: string,
+    description: string,
+    isFolder: boolean
+}
+
 export interface RegisterCommand {
     userName: string;
     email: string;
