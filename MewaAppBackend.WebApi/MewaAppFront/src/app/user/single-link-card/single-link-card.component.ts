@@ -110,7 +110,7 @@ export class SingleLinkCardComponent implements OnInit {
   onDelete(): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: '50%',
-      data: {title: 'Czy jesteś pewien?', text: "Czy rzeczywiście chcesz usunąć ten link?"},
+      data: {title: 'Usuwanie linku', text: "Czy na pewno chcesz usunąć ten link?"},
     });
     dialogRef.componentInstance.onDecide.subscribe(result => {
       if (result) {

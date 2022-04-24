@@ -3,6 +3,19 @@
   <p>{{ data.text ? data.text : text }}</p>
 </div>
 <div mat-dialog-actions>
-  <button *ngIf="isCancelVisible" mat-button (click)="closeOrCancel()">Anuluj</button>
-  <button mat-button cdkFocusInitial (click)="accept()">Tak</button>
+  <button 
+    mat-button 
+    color="primary" 
+    type="button"
+    *ngIf="isCancelVisible"
+    (click)="closeOrCancel()">
+    Anuluj
+  </button>
+  <button
+    mat-flat-button
+    color="primary"
+    type="button" 
+    (click)="accept()">
+    Tak
+  </button>
 </div>
