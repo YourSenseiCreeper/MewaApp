@@ -26,6 +26,8 @@ namespace MewaAppBackend.Business.Seed
             await SeedLinksAsync(context, adminUser);
             //await SeedGroupsAsync(context);
             await context.SaveChangesAsync();
+
+            await TagsSeeder.Seed(context,adminUser);
         }
 
         private static async Task<User> SeedUsersAsync(UserManager<User> userManager)
@@ -54,6 +56,20 @@ namespace MewaAppBackend.Business.Seed
                 var youTubeTag = tags.First(t => t.Name == "YouTube");
                 var twitterTag = tags.First(t => t.Name == "Twitter");
                 var politechnikaTag = tags.First(t => t.Name == "Politechnika");
+                var redditTag = tags.First(t => t.Name == "Reddit");
+                var przepisyTag = tags.First(t => t.Name == "Przepisy");
+                var gotujmyTag = tags.First(t => t.Name == "Gotujmy");
+                var StrimsTags = tags.First(t => t.Name == "Strims.world");
+                var allegroTags = tags.First(t => t.Name == "Allegro");
+                var przepisyTags = tags.First(t => t.Name == "Przepisy");
+                var instagramTags = tags.First(t => t.Name == "Instagram");
+                var wykopTags = tags.First(t => t.Name == "Wykop");
+                var googleMapsTags = tags.First(t => t.Name == "GoogleMaps");
+                var tiktokTags = tags.First(t => t.Name == "Tiktok");
+                var twitchTags = tags.First(t => t.Name == "Twitch");
+                var amazonTags = tags.First(t => t.Name == "Amazon");
+                var wyspagierTags = tags.First(t => t.Name == "Wyspagier");
+                var chomikujTags = tags.First(t => t.Name == "Chomikuj");
 
                 var newLinks = new List<Link>
                 {
@@ -74,7 +90,10 @@ namespace MewaAppBackend.Business.Seed
                 {
                     new Tag { Name = "YouTube", Description = "Związane z YouTube", UserId = user.Id },
                     new Tag { Name = "Twitter", Description = "Związane z Twitterem", UserId = user.Id},
-                    new Tag { Name = "Politechnika", Description = "Związane z politechniką", UserId = user.Id}
+                    new Tag { Name = "Politechnika", Description = "Związane z politechniką", UserId = user.Id},
+                    new Tag { Name = "Reddit", Description = "Związane z redditem", UserId = user.Id },
+                    new Tag { Name = "Reddit", Description = "Związane z redditem", UserId = user.Id },
+
                 };
                 await context.Tag.AddRangeAsync(newTags);
             }
