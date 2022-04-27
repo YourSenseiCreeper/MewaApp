@@ -16,6 +16,9 @@ namespace MewaAppBackend.Business.Seed
             var userSeeder = new UserSeeder(userManager);
             await userSeeder.Seed();
 
+            var linkSeeder = new LinkSeeder(context);
+            await linkSeeder.Seed();
+
             var adminUser = await SeedUsersAsync(userManager);
             await context.SaveChangesAsync();
 

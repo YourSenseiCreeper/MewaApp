@@ -4,12 +4,19 @@ using MewaAppBackend.WebApi;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace MewaAppBackend.Business.Seed;
+namespace MewaAppBackend.Business.Seed
+{
+    public class TagsSeederNames
+    {
+        public const string Youtube = "Youtube";
+        public const string Twitter = "Twitter";
+        public const string Politechnika = "Politechnika";
+        public const string Przepisy = "Przepisy";
+    }
 
-    
     public class TagsSeeder
     {
-         public static async Task Seed(Context context, User user)
+        public static async Task Seed(Context context, User user)
         {
             var existingTags = await context.Tag.ToListAsync();
             if (existingTags.Count == 0)
@@ -57,4 +64,5 @@ namespace MewaAppBackend.Business.Seed;
             }
         }
     }
+}
 
