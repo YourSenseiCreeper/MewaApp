@@ -1,0 +1,14 @@
+@import 'variables.scss';
+
+button {
+    border-radius: 25px;
+}
+
+.mat-dialog-actions {
+    justify-content: flex-end;
+}
+
+h1 {
+    color: $my-primary;
+    font-weight: 500;
+}

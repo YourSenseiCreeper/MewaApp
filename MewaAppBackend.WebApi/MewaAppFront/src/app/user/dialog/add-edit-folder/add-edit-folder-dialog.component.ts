@@ -1,6 +1,6 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips/chip-input';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -17,12 +17,26 @@ import { NotificationService } from 'src/app/shared/notification.service';
 })
 export class AddEditFolderDialogComponent implements OnInit {
   
-  url = new FormControl('', [Validators.required, Validators.maxLength(300), Validators.minLength(6)]);
-  name = new FormControl('', [Validators.maxLength(300)]);
-  description = new FormControl('', [Validators.maxLength(300)]);
+  addEditFolder: FormGroup = new FormGroup({
+    url: new FormControl('', [Validators.required, Validators.maxLength(300), Validators.minLength(6)]),
+    name: new FormControl('', [Validators.maxLength(300)]),
+    description: new FormControl('', [Validators.maxLength(300)]),
+  });
   tags: TagDto[] = [];
   allTags: TagDto[] = [];
   filteredTags: Observable<TagDto[]>;
+
+  get urlForm() {
+    return this.addEditFolder.get("url");
+  }
+
+  get nameForm() {
+    return this.addEditFolder.get("name");
+  }
+
+  get descriptionForm() {
+    return this.addEditFolder.get("description");
+  }
 
   constructor(
     private notification: NotificationService,
@@ -39,25 +53,25 @@ export class AddEditFolderDialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
-   submit() {
-     let values = {
-       redirectUrl: this.url.value,
-       name: this.name.value,
-       description: this.description.value,
-       isFolder: true,
-       links: [],
-       tags: [],
-       users: []
-     } as AddGroup;
-     this.service.addGroup(values).subscribe(r => {
-       if (r.success) {
-        this.notification.showSuccess("Folder dodany");
-        this.close();
-       } else {
-        this.notification.showError(r.message as string);
-       }
-     })
-   }
+  submit() {
+    let values = {
+      redirectUrl: this.urlForm?.value,
+      name: this.nameForm?.value,
+      description: this.descriptionForm?.value,
+      isFolder: true,
+      links: [],
+      tags: [],
+      users: []
+    } as AddGroup;
+    this.service.addGroup(values).subscribe(r => {
+      if (r.success) {
+      this.notification.showSuccess("Folder dodany");
+      this.close();
+      } else {
+      this.notification.showError(r.message as string);
+      }
+    })
+  }
 
    close() {
      this.dialogRef.close();
@@ -72,7 +86,7 @@ export class AddEditFolderDialogComponent implements OnInit {
     const value = (event.value || '').trim();
     let tag = this.allTags.filter(t => t.name == value)[0];
 
-    if (value) {
+    if (value && tag !== undefined) {
       this.tags.push(tag);
     }
 

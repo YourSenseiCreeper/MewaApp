@@ -1,44 +1,117 @@
-<h1 mat-dialog-title>Nowy folder</h1>
-<div mat-dialog-content>
-	<form>
-		<mat-form-field appearance="outline">
+<h1 mat-dialog-title>
+	<mat-icon class="icon">
+		share
+	</mat-icon>
+	<span>
+		Nowy folder
+	</span>
+</h1>
+<form 
+	[formGroup]="addEditFolder" 
+	(ngSubmit)="submit()">
+	<div mat-dialog-content>
+		<mat-form-field appearance="fill">
+			<mat-icon 
+				class="icon" 
+				matPrefix>
+				link
+			</mat-icon>
 			<mat-label>
 				RedirectUrl
 			</mat-label>
-			<input type="url" placeholder="https://example.com" matInput [formControl]="url" [disabled]="true">
+			<input 
+				type="url" 
+				placeholder="https://example.com" 
+				matInput 
+				formControlName="url" 
+				[disabled]="true">
 		</mat-form-field>
-		<mat-form-field appearance="outline">
-			<mat-label> Nazwa </mat-label>
-			<input type="text" placeholder="Link" matInput [formControl]="name">
+		<mat-form-field appearance="fill">
+			<mat-icon 
+				class="icon" 
+				matPrefix>
+				title
+			</mat-icon>
+			<mat-label>
+				Nazwa
+			</mat-label>
+			<input 
+				type="text" 
+				placeholder="Link" 
+				matInput 
+				formControlName="name">
 		</mat-form-field>
-		<mat-form-field appearance="outline">
-			<mat-label> Opis </mat-label>
-			<input type="text" placeholder="Opis" matInput [formControl]="description">
+		<mat-form-field appearance="fill">
+			<mat-icon 
+				class="icon" 
+				matPrefix>
+				text_fields
+			</mat-icon>
+			<mat-label>
+				Opis
+			</mat-label>
+			<input 
+				type="text" 
+				placeholder="Opis" 
+				matInput 
+				formControlName="description">
 		</mat-form-field>
-		<mat-form-field class="example-chip-list" appearance="outline">
-			<mat-label>Linki</mat-label>
-			<mat-chip-list #chipList aria-label="Tag selection">
-				<mat-chip *ngFor="let tag of tags" (removed)="remove(tag)">
-					{{tag.name}}
+		<mat-form-field appearance="fill">
+			<mat-icon 
+				class="icon" 
+				matPrefix>
+				label
+			</mat-icon>
+			<mat-label>
+				Linki
+			</mat-label>
+			<mat-chip-list 
+				#chipList 
+				aria-label="Tag selection">
+				<mat-chip 
+					*ngFor="let tag of tags" 
+					(removed)="remove(tag)">
+					{{ tag.name }}
 					<button matChipRemove>
-						<mat-icon>cancel</mat-icon>
+						<mat-icon>
+							cancel
+						</mat-icon>
 					</button>
 				</mat-chip>
-				<input placeholder="Nowy tag..." #tagInput [formControl]="tagControl" [matAutocomplete]="auto"
-					[matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+				<input 
+					placeholder="Nowy tag..." 
+					#tagInput 
+					[formControl]="tagControl" 
+					[matAutocomplete]="auto"
+					[matChipInputFor]="chipList" 
+					[matChipInputSeparatorKeyCodes]="separatorKeysCodes"
 					(matChipInputTokenEnd)="add($event)">
 			</mat-chip-list>
-			<mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-				<mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
-					{{tag.name}}
+			<mat-autocomplete 
+				#auto="matAutocomplete" 
+				(optionSelected)="selected($event)">
+				<mat-option 
+					*ngFor="let tag of filteredTags | async" 
+					[value]="tag">
+					{{ tag.name }}
 				</mat-option>
 			</mat-autocomplete>
 		</mat-form-field>
-	</form>
-</div>
-<div mat-dialog-actions>
-	<button mat-button (click)="close()">Anuluj</button>
-	<button mat-flat-button color="primary" cdkFocusInitial (click)="submit()">
-		Dodaj
-	</button>
-</div>
+	</div>
+	<div mat-dialog-actions>
+		<button 
+			mat-button 
+			color="primary" 
+			type="button"
+			(click)="close()">
+			Anuluj
+		</button>
+		<button 
+			mat-flat-button 
+			color="primary" 
+			type="submit" 
+			[disabled]="!addEditFolder.valid">
+			Dodaj
+		</button>
+	</div>
+</form>

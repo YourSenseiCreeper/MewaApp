@@ -94,7 +94,7 @@ export class FolderContentsComponent implements OnInit {
   addLink(): void {
     let dialog = this.dialog.open(AddEditLinkDialogComponent,
       {
-        data: { title: 'Edycja linku' },
+        data: { title: 'Dodaj nowy link', icon: 'add' },
         width: '50%'
       });
       dialog.componentInstance.onSave.subscribe(v => {
