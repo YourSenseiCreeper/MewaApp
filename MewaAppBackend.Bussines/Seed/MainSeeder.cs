@@ -13,6 +13,9 @@ namespace MewaAppBackend.Business.Seed
             var context = service.GetRequiredService<Context>();
             var userManager = service.GetRequiredService<UserManager<User>>();
 
+            var userSeeder = new UserSeeder(userManager);
+            await userSeeder.Seed();
+
             var adminUser = await SeedUsersAsync(userManager);
             await context.SaveChangesAsync();
 
@@ -40,11 +43,6 @@ namespace MewaAppBackend.Business.Seed
             }
 
             return adminUser;
-        }
-
-        private static async Task SeedImagesAsync(Context context)
-        {
-            var images = await context.File.ToListAsync();
         }
 
         private static async Task SeedLinksAsync(Context context, User user)
