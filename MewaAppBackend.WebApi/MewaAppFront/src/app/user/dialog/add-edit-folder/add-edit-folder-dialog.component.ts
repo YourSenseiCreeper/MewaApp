@@ -86,7 +86,7 @@ export class AddEditFolderDialogComponent implements OnInit {
     const value = (event.value || '').trim();
     let tag = this.allTags.filter(t => t.name == value)[0];
 
-    if (value) {
+    if (value && tag !== undefined) {
       this.tags.push(tag);
     }
 

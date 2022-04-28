@@ -71,7 +71,7 @@
 				<mat-chip 
 					*ngFor="let tag of tags" 
 					(removed)="remove(tag)">
-					{{tag.name}}
+					{{ tag.name }}
 					<button matChipRemove>
 						<mat-icon>
 							cancel
@@ -93,7 +93,7 @@
 				<mat-option 
 					*ngFor="let tag of filteredTags | async" 
 					[value]="tag">
-					{{tag.name}}
+					{{ tag.name }}
 				</mat-option>
 			</mat-autocomplete>
 		</mat-form-field>
