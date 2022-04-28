@@ -11,7 +11,9 @@
 	(ngSubmit)="submit()">
 	<div mat-dialog-content>
 		<mat-form-field appearance="fill">
-			<mat-icon class="icon" matPrefix>
+			<mat-icon 
+				class="icon" 
+				matPrefix>
 				link
 			</mat-icon>
 			<mat-label>
@@ -32,7 +34,9 @@
 				</mat-error> -->
 		</mat-form-field>
 		<mat-form-field appearance="fill">
-			<mat-icon class="icon" matPrefix>
+			<mat-icon 
+				class="icon" 
+				matPrefix>
 				title
 			</mat-icon>
 			<mat-label>
@@ -45,7 +49,9 @@
 				formControlName="name">
 		</mat-form-field>
 		<mat-form-field appearance="fill">
-			<mat-icon class="icon" matPrefix>
+			<mat-icon 
+				class="icon" 
+				matPrefix>
 				text_fields
 			</mat-icon>
 			<mat-label>
@@ -58,7 +64,9 @@
 				formControlName="description">
 		</mat-form-field>
 		<mat-form-field appearance="fill">
-			<mat-icon class="icon" matPrefix>
+			<mat-icon 
+				class="icon" 
+				matPrefix>
 				label
 			</mat-icon>
 			<mat-label>
@@ -72,7 +80,9 @@
 					(removed)="remove(tag)">
 					{{tag.name}}
 					<button matChipRemove>
-						<mat-icon>cancel</mat-icon>
+						<mat-icon>
+							cancel
+						</mat-icon>
 					</button>
 				</mat-chip>
 				<input
