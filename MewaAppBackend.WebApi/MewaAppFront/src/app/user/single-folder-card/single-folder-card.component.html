@@ -1,19 +1,20 @@
-<a [routerLink]="url">
-<span class="margin">
-   <div id="mainCard">
-    <div id="topGroup">
-      <div id="left" class="inline">
-        <div id="center" class="inline"></div>
-      </div>
-      <div id="right" class="inline"></div>
-    </div>
-    <mat-card id="card">
-      <mat-card-content id="container">
-        <div id="content">
+<div class="folder-button-container">
+  <div class="button-container">
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon button with a vertical three dot icon">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" xPosition="before">
+      <button mat-menu-item>Item 1</button>
+      <button mat-menu-item>Item 2</button>
+    </mat-menu>
+  </div>
+  <div class="folder-container">
+    <a [routerLink]="url">
+      <div class="folder-content">
+        <div>
           {{ group.name }}
         </div>
-      </mat-card-content>
-    </mat-card>
+      </div>
+    </a>
   </div>
-</span>
-</a>
+</div>
