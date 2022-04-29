@@ -33,6 +33,7 @@ export class AddEditLinkDialogComponent implements OnInit {
   tags: TagDto[] = [];
   allTags: TagDto[] = [];
   filteredTags: Observable<TagDto[]>;
+  autocomplete = false;
 
   get urlForm() {
     return this.addEditLink.get('url');
@@ -69,12 +70,40 @@ export class AddEditLinkDialogComponent implements OnInit {
         this.tags = this.allTags.filter(t => tagIds.includes(t.id));
       }
     });
+    this.urlForm?.valueChanges.subscribe((v: string) => {
+      if (this.autocomplete && !this.nameForm?.value) {
+        let lastUrlSection = v.slice(v.lastIndexOf('/'), v.length);
+        lastUrlSection = lastUrlSection.replace(/-/g, ' '); // replace hypens
+        lastUrlSection = lastUrlSection.replace(/\//g, ''); // replace slash
+
+        let name = v;
+        name = name.replace(/(?:http:\/\/|https:\/\/)/g, '');
+        name = name.replace(/-/g, ' '); // replace hypens
+        name = name.replace(/(?:\?.*)/g, ''); // replace query details
+        name = name.replace(/\//g, ''); // replace last slash
+        name = name.replace(/www./g, '');
+        if (lastUrlSection.length == 0) {
+          this.nameForm?.setValue(name);
+        } else {
+          this.nameForm?.setValue(lastUrlSection);
+        }
+
+        // autotag
+        let domain = name.slice(0, name.lastIndexOf('.'));
+        let tag = {id: 0, name: domain, description: '' } as TagDto;
+        this.tags.push(tag);
+      }
+    });
   }
 
   private loadFormFromLink(): void {
     this.urlForm?.setValue(this.data.link?.url);
     this.nameForm?.setValue(this.data.link?.name);
     this.descriptionForm?.setValue(this.data.link?.description);
+  }
+
+  toggleAutocomplete() {
+    this.autocomplete = !this.autocomplete;
   }
 
   submit(): void {
