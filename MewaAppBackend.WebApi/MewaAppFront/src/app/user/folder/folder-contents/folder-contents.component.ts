@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Link } from 'src/app/shared/models';
 import { LinkService } from 'src/app/shared/services/link.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
-import { AddEditLinkDialogComponent } from '../dialog/add-edit-link-dialog/add-edit-link-dialog.component';
+import { AddEditLinkDialogComponent } from '../../dialog/add-edit-link-dialog/add-edit-link-dialog.component';
 
 @Component({
   selector: 'app-folder-contents',

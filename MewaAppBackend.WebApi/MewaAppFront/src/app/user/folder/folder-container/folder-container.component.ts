@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { GroupDto } from 'src/app/shared/models';
-import { AddEditFolderDialogComponent } from '../dialog/add-edit-folder/add-edit-folder-dialog.component';
+import { AddEditFolderDialogComponent } from '../../dialog/add-edit-folder/add-edit-folder-dialog.component';
 import { GroupService } from 'src/app/shared/services/group.service';
 
 @Component({
-  selector: 'app-folders',
-  templateUrl: './folders.component.html',
-  styleUrls: ['./folders.component.scss']
+  selector: 'app-folder-container',
+  templateUrl: './folder-container.component.html',
+  styleUrls: ['./folder-container.component.scss']
 })
-export class FoldersComponent implements OnInit {
+export class FolderContainerComponent implements OnInit {
 
   groups: GroupDto[] = [];
   simpleLinks: boolean = false;

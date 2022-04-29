@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Link } from 'src/app/shared/models';
 import { LinkService } from 'src/app/shared/services/link.service';
-import { ConfirmationDialogComponent } from '../dialog/confirmation/confirmation-dialog.component';
+import { ConfirmationDialogComponent } from '../../dialog/confirmation/confirmation-dialog.component';
 
 @Component({
   selector: 'app-inline-link-card',

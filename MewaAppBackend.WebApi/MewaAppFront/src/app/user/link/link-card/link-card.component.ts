@@ -4,17 +4,15 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { Link } from 'src/app/shared/models';
 import { LinkService } from 'src/app/shared/services/link.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
-import { AddEditLinkDialogComponent } from '../dialog/add-edit-link-dialog/add-edit-link-dialog.component';
-import { ConfirmationDialogComponent } from '../dialog/confirmation/confirmation-dialog.component';
+import { AddEditLinkDialogComponent } from '../../dialog/add-edit-link-dialog/add-edit-link-dialog.component';
+import { ConfirmationDialogComponent } from '../../dialog/confirmation/confirmation-dialog.component';
 
 @Component({
-  selector: 'app-single-link-card',
-  templateUrl: './single-link-card.component.html',
-  styleUrls: [
-    './single-link-card.component.scss'
-  ]
+  selector: 'app-link-card',
+  templateUrl: './link-card.component.html',
+  styleUrls: [ './link-card.component.scss' ]
 })
-export class SingleLinkCardComponent implements OnInit {
+export class LinkCardComponent implements OnInit {
   @Input() link: Link = {
     id: 1,
     name: 'Link',

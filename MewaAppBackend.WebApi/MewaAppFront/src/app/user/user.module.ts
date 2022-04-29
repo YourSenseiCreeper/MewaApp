@@ -25,23 +25,28 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AddEditFolderDialogComponent } from './dialog/add-edit-folder/add-edit-folder-dialog.component';
 import { AddEditLinkDialogComponent } from './dialog/add-edit-link-dialog/add-edit-link-dialog.component';
 import { ConfirmationDialogComponent } from './dialog/confirmation/confirmation-dialog.component';
-import { FolderContentsComponent } from './folder-contents/folder-contents.component';
-import { FoldersComponent } from './folders/folders.component';
-import { InlineLinkCardComponent } from './inline-link-card/inline-link-card.component';
+import { FolderContentsComponent } from './folder/folder-contents/folder-contents.component';
+import { FolderContainerComponent } from './folder/folder-container/folder-container.component';
+import { InlineLinkCardComponent } from './link/inline-link-card/inline-link-card.component';
+import { LinkCardComponent } from './link/link-card/link-card.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { UserRoutingModule } from './user-routing.module';
 import { UserComponent } from './user/user.component';
+import { FolderCardComponent } from './folder/folder-card/folder-card.component';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
     UserComponent,
     DashboardComponent,
     NavbarComponent,
-    FoldersComponent,
+    FolderContainerComponent,
     FolderContentsComponent,
+    FolderCardComponent,
     ConfirmationDialogComponent,
     AddEditLinkDialogComponent,
     InlineLinkCardComponent,
+    LinkCardComponent,
     AddEditFolderDialogComponent
   ],
   imports: [
@@ -64,7 +69,8 @@ import { UserComponent } from './user/user.component';
     MatAutocompleteModule,
     MatSlideToggleModule,
     HttpClientModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatCardModule
   ],
   providers: [
     LinkService,
