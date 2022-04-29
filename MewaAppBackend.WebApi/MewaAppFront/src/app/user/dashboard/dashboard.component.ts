@@ -14,7 +14,7 @@ export class DashboardComponent implements OnInit {
   constructor(private service: LinkService) { }
 
   ngOnInit(): void {
-    this.service.getAllLinks().subscribe(data => this.links = data);
+    this.service.getUserLinks().subscribe(data => this.links = data);
   }
 
   toggleChange(): void {

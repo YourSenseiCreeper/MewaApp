@@ -15,6 +15,10 @@ export class LinkService {
         return this.service.get("/link").pipe(map(data => this.mapLinks(data)))
     }
 
+    getUserLinks(): Observable<Link[]> {
+        return this.service.get('/link/GetByUser').pipe(map(data => this.mapLinks(data)))
+    }
+
     addLink(newLink: AddLink): Observable<SuccessResult> {
         return this.service.post("/link/add", newLink);
     }

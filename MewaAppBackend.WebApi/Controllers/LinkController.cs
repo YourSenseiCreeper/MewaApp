@@ -30,6 +30,15 @@ namespace MewaAppBackend.WebApi.Controllers
             return Ok(result);
         }
 
+        [HttpGet("GetByUser")]
+        public async Task<ActionResult<IEnumerable<Link>>> GetUserLinks()
+        {
+            var userId = this.GetUserGuidFromRequest();
+            var result = await _mediator.Send(new GetUserLinksQuery { UserId = userId });
+
+            return Ok(result);
+        }
+
         [HttpGet("GetLinkById")]
         public async Task<LinkDto> GetLinkById(int id)
         {

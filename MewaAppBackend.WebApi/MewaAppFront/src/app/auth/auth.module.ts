@@ -12,6 +12,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from "@angular/material/icon";
 import { AuthService } from '../shared/services/auth.service';
 import { NotificationService } from '../shared/services/notification.service';
+import { HttpClientModule } from '@angular/common/http';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { NotificationService } from '../shared/services/notification.service';
         MatFormFieldModule,
         MatInputModule,
         MatIconModule,
+        HttpClientModule,
+        MatSnackBarModule
     ],
     providers: [
       AuthService,
