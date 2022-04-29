@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { MewaAppService } from 'src/app/shared/mewa-app.service';
 import { Link } from 'src/app/shared/models';
-import { NotificationService } from 'src/app/shared/notification.service';
+import { LinkService } from 'src/app/shared/services/link.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 import { AddEditLinkDialogComponent } from '../dialog/add-edit-link-dialog/add-edit-link-dialog.component';
 import { ConfirmationDialogComponent } from '../dialog/confirmation/confirmation-dialog.component';
 
@@ -17,9 +17,9 @@ import { ConfirmationDialogComponent } from '../dialog/confirmation/confirmation
 export class SingleLinkCardComponent implements OnInit {
   @Input() link: Link = {
     id: 1,
-    name: 'Link 1',
-    description: "To jest pierwsza karta oraz jej jakis tam tekst, który musi zostać sformatowany. Powinny być zazwyczaj dwa wiersze tekstu.",
-    url: "https://bardzoDobryLink.org/link2",
+    name: 'Link',
+    description: "Opis",
+    url: "https://google.com",
     expiryDate: null,
     thumbnailId: null,
     ownerId: null,
@@ -30,10 +30,9 @@ export class SingleLinkCardComponent implements OnInit {
 
   imageUrl = "/assets/images/asp-net-core-identity-with-patterns-1.png";
 
-
   constructor(
     private snackBar: MatSnackBar,
-    private service: MewaAppService,
+    private service: LinkService,
     private notification: NotificationService,
     private dialog: MatDialog) { }
 

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MewaAppService } from 'src/app/shared/mewa-app.service';
 import { GroupDto } from 'src/app/shared/models';
 import { AddEditFolderDialogComponent } from '../dialog/add-edit-folder/add-edit-folder-dialog.component';
+import { GroupService } from 'src/app/shared/services/group.service';
 
 @Component({
   selector: 'app-folders',
@@ -15,7 +15,7 @@ export class FoldersComponent implements OnInit {
   simpleLinks: boolean = false;
 
   constructor(
-    private service: MewaAppService,
+    private service: GroupService,
     private dialog: MatDialog) {
   }
 

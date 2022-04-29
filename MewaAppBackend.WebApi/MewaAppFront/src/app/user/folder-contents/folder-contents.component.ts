@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute } from '@angular/router';
 import { Link } from 'src/app/shared/models';
+import { LinkService } from 'src/app/shared/services/link.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 import { AddEditLinkDialogComponent } from '../dialog/add-edit-link-dialog/add-edit-link-dialog.component';
-import { MewaAppService } from "../../shared/mewa-app.service";
-import { MatDialog } from "@angular/material/dialog";
-import { NotificationService } from 'src/app/shared/notification.service';
-import { AddEditFolderDialogComponent } from '../dialog/add-edit-folder/add-edit-folder-dialog.component';
 
 @Component({
   selector: 'app-folder-contents',
@@ -81,7 +80,7 @@ export class FolderContentsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    public service: MewaAppService,
+    public service: LinkService,
     private dialog: MatDialog,
     private notification: NotificationService) { }
 

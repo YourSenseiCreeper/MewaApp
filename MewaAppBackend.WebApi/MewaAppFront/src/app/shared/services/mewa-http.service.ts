@@ -1,18 +1,15 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { NotificationService } from './notification.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'any' })
 export class MewaHttpService {
   urlAddres: string = 'https://localhost:7097/api';
   
-  constructor(private http: HttpClient, private notificationService: NotificationService) { }
+  constructor(private http: HttpClient) {}
 
   request(method: string, path: string, body: Object = {}): Observable<any> {
-    let token = localStorage.getItem('access_token');
+    let token = localStorage.getItem('access_token'); // nie można tu ustawić consta z auth.service.ts -> to powoduje circular dependency
     let headers: HttpHeaders;
     if (token) {
       headers = new HttpHeaders({
@@ -61,7 +58,7 @@ export class MewaHttpService {
     else {
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    this.notificationService.showError(errorMessage);
+    // this.notificationService.showError(errorMessage);
 
     return throwError(() => error)
   }

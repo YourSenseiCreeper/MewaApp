@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { MewaAppService } from 'src/app/shared/mewa-app.service';
 import { Link } from 'src/app/shared/models';
+import { LinkService } from 'src/app/shared/services/link.service';
 import { ConfirmationDialogComponent } from '../dialog/confirmation/confirmation-dialog.component';
 
 @Component({
@@ -18,7 +18,7 @@ export class InlineLinkCardComponent implements OnInit {
 
   constructor(
     private snackBar: MatSnackBar,
-    private service: MewaAppService,
+    private service: LinkService,
     private dialog: MatDialog) { }
 
   ngOnInit(): void {

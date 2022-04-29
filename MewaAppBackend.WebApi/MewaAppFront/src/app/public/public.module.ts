@@ -49,7 +49,7 @@ import { SlideThreeComponent } from './home/page-content/slide-three/slide-three
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ]
 })
 export class PublicModule { }

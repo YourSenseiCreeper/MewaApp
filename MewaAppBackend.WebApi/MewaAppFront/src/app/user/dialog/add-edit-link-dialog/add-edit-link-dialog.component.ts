@@ -5,8 +5,9 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips/chip-input';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { map, Observable, startWith, Subject } from 'rxjs';
-import { MewaAppService } from 'src/app/shared/mewa-app.service';
 import { Link, TagDto } from 'src/app/shared/models';
+import { LinkService } from 'src/app/shared/services/link.service';
+import { TagService } from 'src/app/shared/services/tag.service';
 
 export interface AddEditLinkDialogData {
   link?: Link;
@@ -17,8 +18,7 @@ export interface AddEditLinkDialogData {
 @Component({
   selector: 'app-add-edit-link-dialog',
   templateUrl: './add-edit-link-dialog.component.html',
-  styleUrls: ['./add-edit-link-dialog.component.scss'],
-  providers: [MewaAppService]
+  styleUrls: ['./add-edit-link-dialog.component.scss']
 })
 export class AddEditLinkDialogComponent implements OnInit {
   
@@ -47,7 +47,8 @@ export class AddEditLinkDialogComponent implements OnInit {
   }
 
   constructor(
-    public mewaService: MewaAppService,
+    public tagService: TagService,
+    public linkService: LinkService,
     public dialogRef: MatDialogRef<AddEditLinkDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: AddEditLinkDialogData) {
       this.onSave = this.onSave$.asObservable();
@@ -61,7 +62,7 @@ export class AddEditLinkDialogComponent implements OnInit {
     if (this.data.link) {
       this.loadFormFromLink();
     }
-    this.mewaService.getAllTags().subscribe(d => { 
+    this.tagService.getAllTags().subscribe(d => { 
       this.allTags = d;
       if (this.data.link?.tags) {
         let tagIds = this.data.link.tags.map(t => t.id);
