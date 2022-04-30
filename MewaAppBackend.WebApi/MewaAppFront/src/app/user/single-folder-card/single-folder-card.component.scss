@@ -1,12 +1,12 @@
 @import "variables";
 
-.folder-button-container {
+.folder-button-name-container {
   height: auto;
   max-width: 14rem;
   margin: 1rem;
 
   .button-container {
-    width: 100%;
+    width: auto;
     height: 40px;
     display: flex;
     justify-content: flex-end;
@@ -18,19 +18,19 @@
     position: relative;
     background-color: $my-primary;
     border-radius: 0 4px 4px 4px;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-    padding: 0.15rem;
+    box-shadow: 5px 7px 10px rgba(0, 0, 0, 0.3);
   
     &::before {
       content: '';
       width: 50%;
       height: 1.5rem;
       border-radius: 4px 0 0 0;
-      background-color: $my-primary;
+      background-color: $my-primary-dark;
       position: absolute;
-      top: -1.35rem;
+      top: -1.4rem;
       left: 0;
       clip-path: polygon(0 0, 70% 0, 100% 100%, 0% 100%);
+      z-index: -1;
     }
 
     a {
@@ -38,9 +38,10 @@
     }
 
     .folder-content {
+      border: 0.1rem solid $my-primary;
       background-color: white;
       height: 100%;
-      width: 100%;
+      width: auto;
       border-radius: 0 4px 4px 4px;
       transition: 0.2s ease;
       display: flex;
@@ -54,6 +55,19 @@
         background-color: $my-primary;
         color: white;
       }
+
+      .folder-text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        line-height: normal;
+        margin: 0 0.5rem 0 0.5rem;
+      }
     }
+  }
+
+  .folder-name {
+    padding: 0.5rem;
+    text-align: center;
   }
 }

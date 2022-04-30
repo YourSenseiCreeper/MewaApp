@@ -12,4 +12,16 @@ export class SingleFolderCardComponent {
   @Input() group: GroupDto = { id: 0, name: 'Folder', description: '', isFolder: true };
 
   constructor() { }
+
+  onEdit():void {
+
+  }
+
+  onDelete():void {
+
+  }
+
+  onShare():void {
+
+  }
 }
