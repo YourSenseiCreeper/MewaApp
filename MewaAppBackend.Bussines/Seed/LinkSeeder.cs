@@ -1,11 +1,6 @@
 ﻿using MewaAppBackend.Model.Model;
 using MewaAppBackend.WebApi;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MewaAppBackend.Business.Seed
 {
@@ -13,8 +8,8 @@ namespace MewaAppBackend.Business.Seed
     {
         public const string youtubeLink = "Link do YouTube";
         public const string fbLink = "Link do Facebooka";
-
-
+        
+        
     }
     public class LinkSeeder
     {
@@ -56,8 +51,20 @@ namespace MewaAppBackend.Business.Seed
                     CreateSingleLink("Strona koła .NET", "https://www.facebook.com/grupadotnetpk/" , UserSeederNames.User4, new[]{TagsSeederNames.Przepisy}),
                     CreateSingleLink("Poczta", "https://gmail.com", UserSeederNames.User3, new[]{TagsSeederNames.Przepisy} ),
                     CreateSingleLink("Usos", "https://usosweb.tu.koszalin.pl", UserSeederNames.User2, new[]{TagsSeederNames.Przepisy} ),
-                    CreateSingleLink("Amazon", "https://amazon.com", UserSeederNames.User4, new[]{TagsSeederNames.Przepisy} )
-
+                    CreateSingleLink("Amazon", "https://amazon.com", UserSeederNames.User4, new[]{TagsSeederNames.Przepisy} ),
+                    CreateSingleLink("Worble and Cobra Man’s “Worble III” Video", "https://www.youtube.com/watch?v=kWhyPZgiXI8",UserSeederNames.Teriyaki,new []{TagsSeederNames.Youtube, TagsSeederNames.Skate}),
+                    CreateSingleLink("I tried beating Elden Ring Without Dying..","https://www.youtube.com/watch?v=F-yEoHL7MYY",UserSeederNames.User10,new []{TagsSeederNames.Youtube,TagsSeederNames.Funny}),
+                    CreateSingleLink("6 Years of Learning Game Development","https://www.youtube.com/watch?v=kRVQYb9wzaU",UserSeederNames.Teriyaki,new []{TagsSeederNames.Programowanie,TagsSeederNames.Youtube}),
+                    CreateSingleLink("The $10,000 Micro-Park","https://www.youtube.com/watch?v=8q-T-9txU1w",UserSeederNames.User5,new []{TagsSeederNames.Funny,TagsSeederNames.Youtube}),
+                    CreateSingleLink("King salmon","https://www.youtube.com/watch?v=HQEaFT7Q0nk",UserSeederNames.User8,new []{TagsSeederNames.Youtube, TagsSeederNames.Gotujemy}),
+                    CreateSingleLink("Lego Rubik","https://www.youtube.com/watch?v=tolQCt76LBk",UserSeederNames.User7,new []{TagsSeederNames.Lego,TagsSeederNames.Youtube}),
+                    CreateSingleLink("Cooking Vegetables","https://www.youtube.com/watch?v=zKEwA__rOHk",UserSeederNames.User9,new []{TagsSeederNames.Youtube,TagsSeederNames.Gotujemy}),
+                    CreateSingleLink("Mickey Is Forced To Choose Between Goofy And His Country","https://www.youtube.com/watch?v=Gz04mwXeBGQ",UserSeederNames.User5,new []{TagsSeederNames.Funny,TagsSeederNames.Youtube}),
+                    CreateSingleLink("10 EASIEST SKATEPARK TRICKS FOR BEGINNERS!","https://www.youtube.com/watch?v=58MaCFhDLKg",UserSeederNames.User5,new []{TagsSeederNames.Skate,TagsSeederNames.Youtube}),
+                    CreateSingleLink("Create a neon button with a reflection using CSS","https://www.youtube.com/watch?v=6xNcXwC6ikQ",UserSeederNames.User10,new []{TagsSeederNames.Funny}),
+                    CreateSingleLink("Adidas Reverb Video","https://www.youtube.com/watch?v=LXhAwcn51k8",UserSeederNames.User6,new []{TagsSeederNames.Skate,TagsSeederNames.Youtube}),
+                    CreateSingleLink("Simulating alternate voting systems","https://www.youtube.com/watch?v=yhO6jfHPFQU",UserSeederNames.User8,new []{TagsSeederNames.Youtube,TagsSeederNames.Programowanie}),
+                    CreateSingleLink("Magenta Mountain","https://open.spotify.com/album/5lqPdkAz8XUdjYIiTnZTZz?si=sTtK1BskR8Ca0CFJ3-irMQ",UserSeederNames.Teriyaki,new []{TagsSeederNames.Spotify}),
                 };
                 await _context.Link.AddRangeAsync(newLinks);
             }

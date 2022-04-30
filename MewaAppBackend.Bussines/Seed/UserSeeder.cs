@@ -16,6 +16,7 @@ namespace MewaAppBackend.Business.Seed
         public const string User8 = "user8";
         public const string User9 = "user9";
         public const string User10 = "user10";
+        public const string Teriyaki = "TeriyakiGod";
     }
 
     public class UserSeeder
@@ -39,7 +40,8 @@ namespace MewaAppBackend.Business.Seed
                 CreateSingleUser(UserSeederNames.User7, "user7@gmail.com"),
                 CreateSingleUser(UserSeederNames.User8, "user8@gmail.com"),
                 CreateSingleUser(UserSeederNames.User9, "user9@gmail.com"),
-                CreateSingleUser(UserSeederNames.User10, "user10@gmail.com")
+                CreateSingleUser(UserSeederNames.User10, "user10@gmail.com"),
+                CreateSingleUser(UserSeederNames.Teriyaki,"teriyaki@mewaapp.pl")
             );
         }
 
