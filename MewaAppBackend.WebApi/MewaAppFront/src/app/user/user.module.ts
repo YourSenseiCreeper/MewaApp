@@ -34,6 +34,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { UserComponent } from './user/user.component';
 import { FolderCardComponent } from './folder/folder-card/folder-card.component';
 import { MatCardModule } from '@angular/material/card';
+import { MobileNavbarComponent } from './navbar/mobile-navbar/mobile-navbar.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { MatCardModule } from '@angular/material/card';
     AddEditLinkDialogComponent,
     InlineLinkCardComponent,
     LinkCardComponent,
-    AddEditFolderDialogComponent
+    AddEditFolderDialogComponent,
+    MobileNavbarComponent
   ],
   imports: [
     CommonModule,

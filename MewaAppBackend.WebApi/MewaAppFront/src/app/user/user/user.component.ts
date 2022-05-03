@@ -1,3 +1,4 @@
+import { MediaMatcher } from '@angular/cdk/layout';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent {
-  constructor() {}
+  isMobile = false;
+
+  constructor(private matcher: MediaMatcher) {
+    let matcherResult = matcher.matchMedia("(max-width: 800px)");
+    this.isMobile = matcherResult.matches;
+  }
 } 
