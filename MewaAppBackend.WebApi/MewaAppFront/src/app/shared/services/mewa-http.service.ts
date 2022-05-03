@@ -34,8 +34,13 @@ export class MewaHttpService {
     }).pipe(catchError((err) => this.handleError(err)), map(r => r.body));
   }
 
-  get(path: string): Observable<any> {
-    return this.request("get", path);
+  get(path: string, args: Object = {}): Observable<any> {
+    let requestArgs = [];
+    for(let kv of Object.entries(args)) {
+      requestArgs.push(`${kv[0]}=${kv[1]}`);
+    }
+    let requestPath = path + '?' + requestArgs.join('&');
+    return this.request("get", requestPath);
   }
 
   put(path: string, body: Object = {}) {

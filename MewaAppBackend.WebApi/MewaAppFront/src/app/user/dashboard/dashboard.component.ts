@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Link } from 'src/app/shared/models';
 import { LinkService } from 'src/app/shared/services/link.service';
 
@@ -11,9 +12,14 @@ export class DashboardComponent implements OnInit {
   links: Link[] = [];
   simpleLinks: boolean = false;
 
-  constructor(private service: LinkService) { }
+  constructor(private route: ActivatedRoute,
+    private service: LinkService) { }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(paramMap => {
+      let userName = paramMap.get('userName') ? paramMap.get('userName') as string : '';
+      console.log(userName);
+    });
     this.service.getUserLinks().subscribe(data => this.links = data);
   }
 
