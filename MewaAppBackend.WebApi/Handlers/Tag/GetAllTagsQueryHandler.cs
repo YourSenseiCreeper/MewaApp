@@ -3,6 +3,7 @@ using MediatR;
 using MewaAppBackend.Model.Dtos.Tag;
 using MewaAppBackend.Model.Interfaces;
 using MewaAppBackend.WebApi.Queries.Tag;
+using Microsoft.EntityFrameworkCore;
 
 namespace MewaAppBackend.WebApi.Handlers.Tag
 {
@@ -20,7 +21,10 @@ namespace MewaAppBackend.WebApi.Handlers.Tag
         public async Task<IEnumerable<TagDto>> Handle(GetAllTagsQuery request, CancellationToken cancellationToken)
         {
             var repository = _unitOfWork.Repository<Model.Model.Tag>();
-            var data = repository.GetAll().ToList();
+            var data = repository.GetAll()
+                .Where(t => t.Name.ToLower().Contains(request.TagQuery))
+                .Take(request.Amount)
+                .AsNoTracking().ToList();
             var dto = _mapper.Map<IEnumerable<TagDto>>(data);
             return dto;
         }

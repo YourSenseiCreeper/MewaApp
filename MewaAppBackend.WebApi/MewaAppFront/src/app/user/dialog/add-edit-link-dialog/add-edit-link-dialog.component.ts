@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips/chip-input';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { map, Observable, startWith, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, Observable, of, startWith, Subject, switchMap } from 'rxjs';
 import { Link, TagDto } from 'src/app/shared/models';
 import { LinkService } from 'src/app/shared/services/link.service';
 import { TagService } from 'src/app/shared/services/tag.service';
@@ -32,8 +32,8 @@ export class AddEditLinkDialogComponent implements OnInit {
   });
   onSave$ = new Subject();
   tags: TagDto[] = [];
-  allTags: TagDto[] = [];
-  filteredTags: Observable<TagDto[]>;
+  filteredTags$: Observable<TagDto[]>;
+  filteredTags: TagDto[] = [];
   autocomplete = false;
 
   get urlForm() {
@@ -58,23 +58,26 @@ export class AddEditLinkDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<AddEditLinkDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: AddEditLinkDialogData) {
       this.onSave = this.onSave$.asObservable();
-      this.filteredTags = this.tagControl.valueChanges.pipe(
+      this.filteredTags$ = this.tagControl.valueChanges.pipe(
         startWith(null),
-        map((tag: string | null) => (tag ? this._filter(tag) : this.allTags.slice())),
+        debounceTime(300),
+        distinctUntilChanged(),
+        switchMap((tag: string | null) => this._filter(tag)),
       );
+      this.filteredTags$.subscribe(v => this.filteredTags = v);
    }
 
   ngOnInit(): void {
     if (this.data.link) {
       this.loadFormFromLink();
     }
-    this.tagService.getAllTags().subscribe(d => { 
-      this.allTags = d;
-      if (this.data.link?.tags) {
-        let tagIds = this.data.link.tags.map(t => t.id);
-        this.tags = this.allTags.filter(t => tagIds.includes(t.id));
-      }
-    });
+    // this.tagService.getAllTags().subscribe(d => { 
+    //   this.allTags = d;
+    //   if (this.data.link?.tags) {
+    //     let tagIds = this.data.link.tags.map(t => t.id);
+    //     this.tags = this.allTags.filter(t => tagIds.includes(t.id));
+    //   }
+    // });
     this.urlForm?.valueChanges.subscribe((v: string) => {
       if (this.autocomplete && !this.nameForm?.value) {
         let lastUrlSection = v.slice(v.lastIndexOf('/'), v.length);
@@ -99,6 +102,8 @@ export class AddEditLinkDialogComponent implements OnInit {
         this.tags.push(tag);
       }
     });
+
+    this.addEditLink.get('tag')
   }
 
   private loadFormFromLink(): void {
@@ -159,10 +164,9 @@ export class AddEditLinkDialogComponent implements OnInit {
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
-    let tag = this.allTags.filter(t => t.name == value)[0];
+    let tag = this.filteredTags.filter(t => t.name == value)[0];
     if (value && tag !== undefined) {
       this.tags.push(tag);
-      this.removeTagFromPossibleToChoose(tag);
     }
 
     event.chipInput!.clear();
@@ -173,32 +177,24 @@ export class AddEditLinkDialogComponent implements OnInit {
     const index = this.tags.indexOf(tag);
 
     if (index >= 0) {
-      this.allTags.push(tag);
       this.tags.splice(index, 1);
     }
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    let tag = this.allTags.filter(t => t.name == event.option.viewValue)[0];
-    this.tags.push(tag);
-    
-    this.removeTagFromPossibleToChoose(tag);
+    let tag = this.filteredTags.filter(t => t.name == event.option.viewValue)[0];
+    if (!this.tags.find(t => t.name == event.option.viewValue))
+      this.tags.push(tag);
 
     this.tagInput!.nativeElement.value = '';
     this.tagControl.setValue(null);
   }
 
-  private removeTagFromPossibleToChoose(tag: TagDto): void {
-    const index = this.allTags.indexOf(tag);
-    this.allTags.splice(index, 1);
-  }
-
-  private _filter(value: any): TagDto[] {
+  private _filter(value: any): Observable<TagDto[]> {
     if (!value || !!value.name) {
-      return [];
+      return of([]);
     }
     const filterValue = value.toLowerCase();
-
-    return this.allTags.filter(t => t.name.toLowerCase().includes(filterValue));
+    return this.tagService.getAllTags(value.toLowerCase(), 10);
   }
 } 

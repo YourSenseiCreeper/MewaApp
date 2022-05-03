@@ -12,8 +12,8 @@ export class TagService {
         this.service = service;
     }
     
-    getAllTags(): Observable<TagDto[]> {
-        return this.service.get('/tag').pipe(map(t => this.mapTags(t)))
+    getAllTags(tagQuery: string, amount: number): Observable<TagDto[]> {
+        return this.service.get('/tag', { tagQuery: tagQuery, amount: amount }).pipe(map(t => this.mapTags(t)))
     }
 
     private mapTags(tags: any[]): TagDto[] {
