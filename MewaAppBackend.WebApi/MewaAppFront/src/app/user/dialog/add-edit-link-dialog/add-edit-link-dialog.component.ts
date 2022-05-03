@@ -27,7 +27,8 @@ export class AddEditLinkDialogComponent implements OnInit {
   addEditLink: FormGroup = new FormGroup({
     url: new FormControl('', [Validators.required, Validators.maxLength(300), Validators.minLength(6)]),
     name: new FormControl('', [Validators.maxLength(300)]),
-    description: new FormControl('', [Validators.maxLength(300)])
+    description: new FormControl('', [Validators.maxLength(300)]),
+    isPublic: new FormControl(false, null)
   });
   onSave$ = new Subject();
   tags: TagDto[] = [];
@@ -45,6 +46,10 @@ export class AddEditLinkDialogComponent implements OnInit {
 
   get descriptionForm() {
     return this.addEditLink.get('description');
+  }
+
+  get isPublicForm() {
+    return this.addEditLink.get('isPublic');
   }
 
   constructor(
@@ -100,6 +105,7 @@ export class AddEditLinkDialogComponent implements OnInit {
     this.urlForm?.setValue(this.data.link?.url);
     this.nameForm?.setValue(this.data.link?.name);
     this.descriptionForm?.setValue(this.data.link?.description);
+    this.isPublicForm?.setValue(this.data.link?.isPublic);
   }
 
   toggleAutocomplete() {
@@ -120,6 +126,7 @@ export class AddEditLinkDialogComponent implements OnInit {
       name: this.nameForm?.value,
       description: this.descriptionForm?.value,
       expiryDate: new Date(2023, 1, 1),
+      isPublic: this.isPublicForm?.value,
       tags: this.tags.map(t => t.id),
       groups: []
     };
@@ -133,6 +140,7 @@ export class AddEditLinkDialogComponent implements OnInit {
       name: this.nameForm?.value,
       description: this.descriptionForm?.value,
       expiryDate: this.data.link?.expiryDate,
+      isPublic: this.isPublicForm?.value,
       ownerId: this.data.link?.ownerId,
       tags: this.tags.map(t => t.id),
       groups: []

@@ -39,7 +39,10 @@ export class MewaHttpService {
     for(let kv of Object.entries(args)) {
       requestArgs.push(`${kv[0]}=${kv[1]}`);
     }
-    let requestPath = path + '?' + requestArgs.join('&');
+    let requestPath = path;
+    if (requestArgs.length > 0)
+      requestPath += '?' + requestArgs.join('&');
+    
     return this.request("get", requestPath);
   }
 

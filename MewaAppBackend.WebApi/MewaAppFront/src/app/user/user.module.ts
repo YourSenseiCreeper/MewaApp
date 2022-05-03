@@ -35,6 +35,7 @@ import { UserComponent } from './user/user.component';
 import { FolderCardComponent } from './folder/folder-card/folder-card.component';
 import { MatCardModule } from '@angular/material/card';
 import { MobileNavbarComponent } from './navbar/mobile-navbar/mobile-navbar.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { MobileNavbarComponent } from './navbar/mobile-navbar/mobile-navbar.comp
     MatSlideToggleModule,
     HttpClientModule,
     MatSnackBarModule,
-    MatCardModule
+    MatCardModule,
+    MatCheckboxModule,
   ],
   providers: [
     LinkService,

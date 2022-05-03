@@ -19,6 +19,7 @@ export class LinkCardComponent implements OnInit {
     description: "Opis",
     url: "https://google.com",
     expiryDate: null,
+    isPublic: true,
     thumbnailId: null,
     ownerId: null,
     thumbnailContent: null,

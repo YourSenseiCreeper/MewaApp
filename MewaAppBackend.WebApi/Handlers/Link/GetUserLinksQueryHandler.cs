@@ -19,7 +19,10 @@ namespace MewaAppBackend.WebApi.Handlers.Link
 
         public async Task<IEnumerable<LinkDto>> Handle(GetUserLinksQuery request, CancellationToken cancellationToken)
         {
-            var results = _unitOfWork.Repository<Model.Model.Link>()
+            var results = new List<Model.Model.Link>();
+            if (request.UserId != null)
+            {
+                results = _unitOfWork.Repository<Model.Model.Link>()
                 .GetAll()
                 .Where(l => l.OwnerId == request.UserId)
                 .Include(l => l.Thumbnail)
@@ -27,6 +30,22 @@ namespace MewaAppBackend.WebApi.Handlers.Link
                 .Include(l => l.Groups)
                 .AsNoTracking()
                 .ToList();
+            } else
+            {
+                results = _unitOfWork.Repository<Model.Model.Link>()
+                .GetAll()
+                .Include(l => l.Owner)
+                .Where(l => l.Owner.UserName == request.UserName)
+                .Include(l => l.Thumbnail)
+                .Include(l => l.Tags)
+                .Include(l => l.Groups)
+                .AsNoTracking()
+                .ToList();
+
+            }
+
+            if (string.IsNullOrEmpty(request.UserId))
+                results = results.Where(l => l.IsPublic).ToList();
 
             var dto = _mapper.Map<IEnumerable<LinkDto>>(results);
 

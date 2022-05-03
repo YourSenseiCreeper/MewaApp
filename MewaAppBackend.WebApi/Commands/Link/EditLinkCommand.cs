@@ -10,6 +10,7 @@ namespace MewaAppBackend.WebApi.Commands.Link
         public string Name { get; set; }
         public string? Description { get; set; }
         public DateTime ExpiryDate { get; set; }
+        public bool IsPublic { get; set; }
         public string OwnerId { get; set; }
         public int? ThumbnailId { get; set; }
         public IEnumerable<int> Tags { get; set; }

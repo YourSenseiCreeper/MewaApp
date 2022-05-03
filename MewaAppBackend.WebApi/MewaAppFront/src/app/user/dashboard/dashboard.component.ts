@@ -18,9 +18,8 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(paramMap => {
       let userName = paramMap.get('userName') ? paramMap.get('userName') as string : '';
-      console.log(userName);
+      this.service.getUserLinks(userName).subscribe(data => this.links = data);
     });
-    this.service.getUserLinks().subscribe(data => this.links = data);
   }
 
   toggleChange(): void {
