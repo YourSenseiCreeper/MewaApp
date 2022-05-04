@@ -36,6 +36,7 @@ namespace MewaAppBackend.WebApi.Handlers.Link
             entity.Name = request.Name;
             entity.Description = request.Description;
             entity.ExpiryDate = request.ExpiryDate;
+            entity.IsPublic = request.IsPublic;
             entity.OwnerId = request.OwnerId;
             entity.Tags = tagsRepository.GetAll().Where(t => request.Tags.Contains(t.Id)).ToList();
             entity.Groups = groupsRepository.GetAll().Where(g => request.Groups.Contains(g.Id)).ToList();

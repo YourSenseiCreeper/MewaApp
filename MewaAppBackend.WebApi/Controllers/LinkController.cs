@@ -30,6 +30,15 @@ namespace MewaAppBackend.WebApi.Controllers
             return Ok(result);
         }
 
+        [HttpGet("GetByUser")]
+        public async Task<ActionResult<IEnumerable<Link>>> GetUserLinks(string? userName = null)
+        {
+            var userId = this.GetUserGuidFromRequest();
+            var result = await _mediator.Send(new GetUserLinksQuery { UserId = userId, UserName = userName });
+
+            return Ok(result);
+        }
+
         [HttpGet("GetLinkById")]
         public async Task<LinkDto> GetLinkById(int id)
         {
@@ -73,17 +82,17 @@ namespace MewaAppBackend.WebApi.Controllers
                 return new EditLinkCommandResult { Message = "You are not logged in", Success = false };
             }
 
-            var command = new EditLinkCommand
-            {
-                Id = dto.Id,
-                Url = dto.Url,
-                Name = dto.Name,
-                Description = dto.Description,
-                OwnerId = userId,
-                Tags = dto.Tags,
-                Groups = dto.Groups
-            };
-            return await _mediator.Send(command);
+            //var command = new EditLinkCommand
+            //{
+            //    Id = dto.Id,
+            //    Url = dto.Url,
+            //    Name = dto.Name,
+            //    Description = dto.Description,
+            //    OwnerId = userId,
+            //    Tags = dto.Tags,
+            //    Groups = dto.Groups
+            //};
+            return await _mediator.Send(dto);
         }
     }
 }

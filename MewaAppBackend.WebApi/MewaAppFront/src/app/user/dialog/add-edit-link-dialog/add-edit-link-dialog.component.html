@@ -63,6 +63,10 @@
 				matInput 
 				formControlName="description">
 		</mat-form-field>
+		<mat-checkbox
+			formControlName="isPublic">
+			Link publiczny?
+		</mat-checkbox>
 		<mat-form-field appearance="fill">
 			<mat-icon 
 				class="icon" 
@@ -98,7 +102,7 @@
 				#auto="matAutocomplete" 
 				(optionSelected)="selected($event)">
 				<mat-option 
-					*ngFor="let tag of filteredTags | async" 
+					*ngFor="let tag of filteredTags$ | async" 
 					[value]="tag">
 					{{ tag.name }}
 				</mat-option>
@@ -106,6 +110,11 @@
 		</mat-form-field>
 	</div>
 	<div mat-dialog-actions>
+		<mat-slide-toggle
+      		color="primary"
+      		(change)="toggleAutocomplete()">
+      		Autocomplete
+    	</mat-slide-toggle>
 		<button 
 			mat-button 
 			color="primary" 

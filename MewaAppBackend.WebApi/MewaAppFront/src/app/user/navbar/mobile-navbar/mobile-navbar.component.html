@@ -1,10 +1,4 @@
-<mat-toolbar 
-    (scroll)="onScroll()" 
-    [ngClass]="navbarFixed? 'fixed':''">
-    <span>
-        <a class="link" routerLink="/">MewaApp</a>
-    </span>
-    <span class="spacer"></span>
+<div class="bottom-bar">
     <button 
         mat-icon-button color="primary" 
         aria-label="Dashboard"
@@ -21,8 +15,8 @@
         <mat-icon>folder</mat-icon>
     </button>
     <button 
-        mat-mini-fab color="primary" 
-        class="ml" 
+        mat-icon-button
+        color="primary" 
         [matMenuTriggerFor]="menu" 
         aria-label="Użytkownik">
         <mat-icon>account_circle</mat-icon>
@@ -40,4 +34,4 @@
             Wyloguj się
         </button>
     </mat-menu>
-</mat-toolbar>
+</div>

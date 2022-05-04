@@ -27,5 +27,11 @@ namespace MewaAppBackend.WebApi.Controllers
         {
             return await _mediator.Send(command, CancellationToken.None);
         }
+
+        [HttpGet("Exists")]
+        public async Task<bool> HasUserExists(string username)
+        {
+            return await _mediator.Send(new HasUserExistsCommand { UserName = username }, CancellationToken.None);
+        }
     }
 }

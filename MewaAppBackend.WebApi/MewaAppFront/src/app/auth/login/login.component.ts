@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'src/app/shared/auth-service';
-import { MewaAppService } from 'src/app/shared/mewa-app.service';
 import { LoginCommand } from 'src/app/shared/models';
-import { NotificationService } from 'src/app/shared/notification.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-auth-login',
@@ -19,7 +18,7 @@ export class LoginComponent {
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
-    private service: MewaAppService,
+    private service: AuthService,
     private notification: NotificationService,
     private authService: AuthService) {
     this.loginForm = fb.group(

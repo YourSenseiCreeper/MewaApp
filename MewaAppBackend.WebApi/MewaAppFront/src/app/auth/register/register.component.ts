@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { ActivatedRoute, Router } from '@angular/router';
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
-import { MewaAppService } from 'src/app/shared/mewa-app.service';
 import { RegisterCommand } from 'src/app/shared/models';
-import { NotificationService } from 'src/app/shared/notification.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-auth-register',
@@ -16,7 +16,7 @@ export class RegisterComponent {
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private service: MewaAppService,
+    private service: AuthService,
     private notification: NotificationService,
     private router: Router
   ) {

@@ -5,15 +5,14 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips/chip-input';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { map, Observable, startWith } from 'rxjs';
-import { MewaAppService } from 'src/app/shared/mewa-app.service';
 import { AddGroup, TagDto } from 'src/app/shared/models';
-import { NotificationService } from 'src/app/shared/notification.service';
+import { GroupService } from 'src/app/shared/services/group.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-add-edit-folder-dialog',
   templateUrl: './add-edit-folder-dialog.component.html',
-  styleUrls: ['./add-edit-folder-dialog.component.scss'],
-  providers: [MewaAppService]
+  styleUrls: ['./add-edit-folder-dialog.component.scss']
 })
 export class AddEditFolderDialogComponent implements OnInit {
   
@@ -40,7 +39,7 @@ export class AddEditFolderDialogComponent implements OnInit {
 
   constructor(
     private notification: NotificationService,
-    public service: MewaAppService,
+    public service: GroupService,
     public dialogRef: MatDialogRef<AddEditFolderDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     
