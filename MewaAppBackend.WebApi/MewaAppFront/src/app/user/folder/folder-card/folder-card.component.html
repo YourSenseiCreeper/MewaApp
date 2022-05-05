@@ -1,19 +1,58 @@
-<a [routerLink]="url">
-<span class="margin">
-   <div id="mainCard">
-    <div id="topGroup">
-      <div id="left" class="inline">
-        <div id="center" class="inline"></div>
-      </div>
-      <div id="right" class="inline"></div>
-    </div>
-    <mat-card id="card">
-      <mat-card-content id="container">
-        <div id="content">
+<div class="folder-button-name-container">
+  <div class="button-container">
+    <button 
+      mat-icon-button 
+      [matMenuTriggerFor]="menu" 
+      aria-label="Folder options">
+      <mat-icon>
+        more_vert
+      </mat-icon>
+    </button>
+    <mat-menu 
+      #menu="matMenu" 
+      xPosition="before">
+      <button
+        mat-menu-item
+        (click)="onEdit()">
+        <mat-icon>
+          edit
+        </mat-icon>
+        <span>
+          Edytuj
+        </span>
+      </button>
+      <button
+        mat-menu-item
+        (click)="onDelete()">
+        <mat-icon>
+          remove
+        </mat-icon>
+        <span>
+          Usuń
+        </span>
+      </button>
+      <button
+        mat-menu-item
+        (click)="onShare()">
+        <mat-icon>
+          share
+        </mat-icon>
+        <span>
+          Udostępnij
+        </span>
+      </button>
+    </mat-menu>
+  </div>
+  <div class="folder-container">
+    <a [routerLink]="url">
+      <div class="folder-content">
+        <div class="folder-text">
           {{ group.name }}
         </div>
-      </mat-card-content>
-    </mat-card>
+      </div>
+    </a>
   </div>
-</span>
-</a>
+  <div class="folder-name">
+    {{ group.name }}
+  </div>
+</div>
