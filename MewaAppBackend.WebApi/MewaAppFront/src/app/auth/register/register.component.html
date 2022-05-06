@@ -59,7 +59,11 @@
     <input 
       matInput 
       type="text" 
-      formControlName="name">
+      formControlName="name"
+      required>
+    <mat-error *ngIf="registerForm.controls['name'].invalid">
+      {{ getErrorMessage('name') }}
+    </mat-error>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-icon 
@@ -73,7 +77,11 @@
     <input 
       matInput 
       type="email" 
-      formControlName="email">
+      formControlName="email"
+      required>
+    <mat-error *ngIf="registerForm.controls['email'].invalid">
+      {{ getErrorMessage('email') }}
+    </mat-error>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-icon 
@@ -88,7 +96,11 @@
       matInput 
       [type]="hide ? 'password' : 'text'"
       formControlName="password"
-      (input)="registerForm.controls['repeatPassword'].updateValueAndValidity()">
+      (input)="registerForm.controls['repeatPassword'].updateValueAndValidity()"
+      required>
+    <mat-error *ngIf="registerForm.controls['password'].invalid">
+      {{ getErrorMessage('password') }}
+    </mat-error>
     <button 
       type="button"
       mat-icon-button 
@@ -114,7 +126,11 @@
       matInput 
       [type]="hide2 ? 'password' : 'text'"
       formControlName="repeatPassword"
-      appConfirmEqualValidator="password">
+      appConfirmEqualValidator="password"
+      required>
+    <mat-error *ngIf="registerForm.controls['repeatPassword'].invalid">
+      {{ getErrorMessage('repeatPassword') }}
+    </mat-error>
     <button 
       type="button"
       mat-icon-button 

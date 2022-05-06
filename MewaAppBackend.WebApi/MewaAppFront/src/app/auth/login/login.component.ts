@@ -47,4 +47,17 @@ export class LoginComponent {
       }
     });
   }
+
+  getErrorMessage(control: string): string {
+    if (control === 'login') {
+      if (this.loginForm.controls[control].hasError('required')) {
+        return 'To pole jest wymagane';
+      }
+      return this.loginForm.controls[control].hasError('email') ? 'Niepoprawny format email' : '';
+    }
+    else if (control === 'password') {
+      return this.loginForm.controls[control].hasError('required') ? 'To pole jest wymagane' : '';
+    }
+    return '';
+  }
 }

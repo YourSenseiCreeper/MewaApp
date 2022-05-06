@@ -16,7 +16,11 @@
     <input 
       matInput 
       type="email" 
-      formControlName="login">
+      formControlName="login"
+      required>
+    <mat-error *ngIf="loginForm.controls['login'].invalid">
+      {{ getErrorMessage('login') }}
+    </mat-error>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-icon 
@@ -30,7 +34,11 @@
     <input 
       matInput 
       [type]="hide ? 'password' : 'text'"
-      formControlName="password">
+      formControlName="password"
+      required>
+    <mat-error *ngIf="loginForm.controls['password'].invalid">
+      {{ getErrorMessage('password') }}
+    </mat-error>
     <button 
       type="button"
       mat-icon-button 

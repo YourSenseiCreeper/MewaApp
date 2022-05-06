@@ -57,4 +57,26 @@ export class RegisterComponent {
       }
     })
   }
+
+  getErrorMessage(control: string): string {
+    if (control === 'email') {
+      if (this.registerForm.controls[control].hasError('required')) {
+        return 'To pole jest wymagane';
+      }
+      return this.registerForm.controls[control].hasError('email') ? 'Niepoprawny format email' : '';
+    }
+    else if (control === 'name') {
+      return this.registerForm.controls[control].hasError('required') ? 'To pole jest wymagane' : '';
+    }
+    else if (control === 'password') {
+      return this.registerForm.controls[control].hasError('required') ? 'To pole jest wymagane' : '';
+    }
+    else if (control === 'repeatPassword') {
+      if (this.registerForm.controls[control].hasError('required')) {
+        return 'To pole jest wymagane';
+      }
+      return this.registerForm.controls[control].hasError('notEqual') ? 'Hasła są różne' : '';
+    }
+    return '';
+  }
 }
