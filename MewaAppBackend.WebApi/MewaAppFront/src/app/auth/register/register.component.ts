@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from '@angular/router';
 import { RegisterCommand } from 'src/app/shared/models';
 import { AuthService } from 'src/app/shared/services/auth.service';
@@ -11,7 +11,10 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
-  loginForm!: FormGroup;
+  hide: boolean = true;
+  hide2: boolean = true;
+  registerForm!: FormGroup;
+  submitDisabled: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -20,18 +23,19 @@ export class RegisterComponent {
     private notification: NotificationService,
     private router: Router
   ) {
-    this.loginForm = fb.group(
+    this.registerForm = fb.group(
       {
-        name: new FormControl('', null),
-        email: new FormControl('', null),
-        password: new FormControl('', null),
-        repeatPassword: new FormControl('', null)
+        name: new FormControl('', [Validators.required]),
+        email: new FormControl('', [Validators.required, Validators.email]),
+        password: new FormControl('', [Validators.required]),
+        repeatPassword: new FormControl('', [Validators.required])
       }
     )
   }
 
   submit() {
-    let rawForm = this.loginForm.getRawValue();
+    let rawForm = this.registerForm.getRawValue();
+    this.submitDisabled = true;
 
     if (rawForm.password !== rawForm.repeatPassword) {
       // powiadomienie na formularzu że hasła się nie zgadzają
@@ -49,6 +53,7 @@ export class RegisterComponent {
         this.router.navigate(['../']);
       } else {
         this.notification.showError("Coś poszło nie tak");
+        this.submitDisabled = false;
       }
     })
   }

@@ -1,66 +1,73 @@
-.login-card {
-  width: fit-content;
-  height: fit-content;
-  background-color: #FFFFFF;
-  border: 1px solid #0099ff;
+@import 'variables.scss';
 
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%);
+h2 {
+  color: $my-primary;
 }
 
-.login-area {
-  padding: 30px;
-  position: relative;
+form {
+  .mat-form-field {
+    width: 100%;
+
+    .icon {
+      color: $my-primary;
+      margin-right: 0.25rem;
+    }
+  }
+
+  p {
+    font-size: 0.9em;
+    margin: 0;
+  }
+
+  a {
+    color: $my-primary;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .submit {
+    width: 100%;
+    border-radius: 25px;
+    border-color: $my-primary;
+    margin: 1.5rem 0 1.5rem 0;
+
+    .submit-text {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .icon {
+        margin-right: 0.5rem;
+      }
+    }
+
+    .spinner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 34px;
+    }
+
+    &:disabled {
+      border-color: inherit;
+    }
+  }
+
+  h4 {
+    text-align: center;
+    margin: 0;
+  }
 }
 
-.login-form {
-  display: flex;
-  flex-direction: column;
-}
+::ng-deep {
+  .mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: white;
+  }
 
-.fontColor {
-  color: #0099ff;
-}
-
-.iconColor {
-  color: #0099ff;
-}
-
-.inputField {
-  max-width: 314px;
-}
-
-.forgot {
-  font-size: 12px;
-  cursor: pointer;
-}
-.button {
-  background-color: #FFFFFF;
-  border: 1px solid #0099ff;
-  border-radius: 40px;
-  height: 36px;
-  width: 100%;
-  font-size: 14px;
-  color: #0099ff;
-}
-
-#register {
-  margin-top: 10%;
-  text-align: center;
-  font-weight: 300;
-}
-
-mat-label {
-  margin-left: 5%;
-}
-
-a {
-  text-decoration: none;
-  color: #0099ff;
-}
-
-#Top {
-  margin-bottom: 10px;
+  .mat-progress-spinner circle, .mat-spinner circle {
+    stroke: rgba(0, 0, 0, 0.6);
+  }
 }
