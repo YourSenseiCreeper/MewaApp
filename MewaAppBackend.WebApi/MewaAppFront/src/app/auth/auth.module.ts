@@ -14,6 +14,8 @@ import { AuthService } from '../shared/services/auth.service';
 import { NotificationService } from '../shared/services/notification.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
         MatInputModule,
         MatIconModule,
         HttpClientModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatToolbarModule,
+        MatProgressSpinnerModule
     ],
     providers: [
       AuthService,

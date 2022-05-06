@@ -1,66 +1,104 @@
-.login-card {
-  width: fit-content;
-  height: fit-content;
-  background-color: #FFFFFF;
-  border: 1px solid #0099ff;
+@import 'variables.scss';
 
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%);
-}
 
-.login-area {
-  padding: 30px;
-  position: relative;
-}
-
-.login-form {
-    display: flex;
-    flex-direction: column;
-}
-
-.fontColor {
-  color: #0099ff;
-}
-
-.iconColor {
-  color: #0099ff;
-}
-
-.inputField {
-  max-width: 314px;
-}
-
-.forgot {
-  font-size: 12px;
-  cursor: pointer;
-}
-.button {
-  background-color: #FFFFFF;
-  border: 1px solid #0099ff;
-  border-radius: 40px;
-  height: 36px;
+.login-menu-container {
+  height: 100vh;
   width: 100%;
-  font-size: 14px;
-  color: #0099ff;
+  display: flex;
+  flex-direction: column;
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-size: min(55vw, 55vh);
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg width='495' height='495' viewBox='0 0 495 495' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='495' r='495' fill='%230099FF' fill-opacity='0.1'/%3E%3C/svg%3E");
+
+  .mat-toolbar {
+    background-color: transparent;
+  
+    a {
+      text-decoration: none;
+      color: black;
+    }
+  }
+
+  .login-card {
+    max-width: 18rem;
+    align-self: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    border: 1px solid $my-primary;
+    padding: 2rem 1.5rem 2rem 1.5rem;
+    border-radius: 4px;
+
+    h2 {
+      color: $my-primary;
+    }
+
+    form {
+      .mat-form-field {
+        width: 100%;
+
+        .icon {
+          color: $my-primary;
+          margin-right: 0.25rem;
+        }
+      }
+
+      p {
+        font-size: 0.9em;
+        margin: 0;
+      }
+
+      a {
+        color: $my-primary;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .submit {
+        width: 100%;
+        border-radius: 25px;
+        border-color: $my-primary;
+        margin: 1.5rem 0 1.5rem 0;
+
+        .submit-text {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .icon {
+            margin-right: 0.5rem;
+          }
+        }
+
+        .spinner {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 34px;
+        }
+
+        &:disabled {
+          border-color: inherit;
+        }
+      }
+
+      h4 {
+        text-align: center;
+        margin: 0;
+      }
+    }
+  }
 }
 
-#register {
-  margin-top: 10%;
-  text-align: center;
-  font-weight: 300;
-}
+::ng-deep {
+  .mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: white;
+  }
 
-mat-label {
-  margin-left: 5%;
-}
-
-a {
-  text-decoration: none;
-  color: #0099ff;
-}
-
-#Top {
-  margin-bottom: 10px;
+  .mat-progress-spinner circle, .mat-spinner circle {
+    stroke: rgba(0, 0, 0, 0.6);
+  }
 }
