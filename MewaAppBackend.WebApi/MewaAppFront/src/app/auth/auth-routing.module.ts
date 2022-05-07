@@ -7,6 +7,7 @@ import { RegisterComponent } from './register/register.component';
 @NgModule({
   imports: [
     RouterModule.forChild([
+      { path: '', redirectTo: 'login' },
       {
         path: '',
         component: AuthComponent,
@@ -16,7 +17,7 @@ import { RegisterComponent } from './register/register.component';
           //   { path: 'change-password', component: ChangePasswordComponent, canActivate: [AppRouteGuard], data: { title: "Zmiana hasła"}  }
         ]
       },
-      {path: '**', redirectTo: ''}
+      {path: '**', redirectTo: 'login'}
     ])
   ],
   exports: [RouterModule]
