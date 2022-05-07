@@ -17,13 +17,15 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ConfirmEqualValidatorDirective } from '../shared/confirm-equal-validator.directive';
+import { AutoFocus } from '../shared/auto-focus.directive';
 
 @NgModule({
   declarations: [
     AuthComponent,
     LoginComponent,
     RegisterComponent,
-    ConfirmEqualValidatorDirective
+    ConfirmEqualValidatorDirective,
+    AutoFocus
   ],
     imports: [
         CommonModule,

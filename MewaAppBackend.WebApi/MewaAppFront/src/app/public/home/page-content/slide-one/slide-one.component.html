@@ -4,21 +4,25 @@
 <p class="description">
   Twoje miejsce do przechowywania linków.
 </p>
-<form class="company-email-form">
+<form 
+  class="company-email-form"
+  [formGroup]="sendEmail"
+  (ngSubmit)="submit()">
   <mat-form-field appearance="outline">
     <mat-label>
       Twój email
     </mat-label>
     <input
       type="email"
-      matInput [formControl]="emailFormControl"
+      matInput 
+      formControlName="email"
       placeholder="name@company.com">
     <mat-error
-      *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+      *ngIf="sendEmail.controls['email'].hasError('email') && !sendEmail.controls['email'].hasError('required')">
       Proszę wprowadź poprawy andres email
     </mat-error>
     <mat-error
-      *ngIf="emailFormControl.hasError('required')">
+      *ngIf="sendEmail.controls['email'].hasError('required')">
       Email jest <strong>wymagany</strong>
     </mat-error>
   </mat-form-field>

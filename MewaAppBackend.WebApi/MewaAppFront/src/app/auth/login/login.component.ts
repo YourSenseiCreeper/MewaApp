@@ -8,7 +8,7 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
 @Component({
   selector: 'app-auth-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['../form.scss']
 })
 export class LoginComponent {
   hide: boolean = true;
@@ -49,14 +49,16 @@ export class LoginComponent {
   }
 
   getErrorMessage(control: string): string {
+    const required: string = 'To pole jest wymagane';
+
     if (control === 'login') {
       if (this.loginForm.controls[control].hasError('required')) {
-        return 'To pole jest wymagane';
+        return required;
       }
       return this.loginForm.controls[control].hasError('email') ? 'Niepoprawny format email' : '';
     }
     else if (control === 'password') {
-      return this.loginForm.controls[control].hasError('required') ? 'To pole jest wymagane' : '';
+      return this.loginForm.controls[control].hasError('required') ? required : '';
     }
     return '';
   }
