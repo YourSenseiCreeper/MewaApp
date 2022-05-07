@@ -31,14 +31,8 @@ namespace MewaAppBackend.Business.Seed
         private static async Task SeedGroupsAsync(Context context)
         {
             var groups = await context.Group.ToListAsync();
-
-            
-
-            
-
-
-            
-
+        
         }
+
     }
 }
