@@ -70,7 +70,10 @@ export class RegisterComponent {
         this.notification.showError("Coś poszło nie tak");
         this.submitDisabled = false;
       }
-    })
+    }, error => {
+      this.notification.showError("Problem z połączeniem: " + error.message);
+      this.submitDisabled = false;
+    });
   }
 
   getErrorMessage(control: string): string {

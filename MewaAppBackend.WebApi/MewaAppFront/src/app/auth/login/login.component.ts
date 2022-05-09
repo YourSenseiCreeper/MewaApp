@@ -45,6 +45,9 @@ export class LoginComponent {
         this.notification.showError(r.message);
         this.submitDisabled = false;
       }
+    }, error => {
+      this.notification.showError("Problem z połączeniem: " + error.message);
+      this.submitDisabled = false;
     });
   }
 
