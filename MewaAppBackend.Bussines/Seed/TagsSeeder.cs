@@ -38,6 +38,7 @@ namespace MewaAppBackend.Business.Seed
         public const string Fabrykasily = "Fabrykasily";
         public const string Polki = "Polki";
         public const string Gazeta = "Gazeta";
+        public const string Programowanie = "Programowanie";
     }
 
     public class TagsSeeder
