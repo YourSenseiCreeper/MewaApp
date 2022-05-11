@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Router } from '@angular/router';
+import { EmailService } from 'src/app/shared/services/email.service';
 
 @Component({
   selector: 'app-slide-one',
@@ -11,11 +13,28 @@ import { FormControl, Validators } from "@angular/forms";
 })
 export class SlideOneComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private emailService: EmailService) { }
 
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+  sendEmail: FormGroup = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email])
+  });
+
+  get emailForm() {
+    return this.sendEmail.get('email');
+  }
 
   ngOnInit(): void {
+  }
+
+  submit(): void {
+    if (this.emailForm?.valid) {
+/*       this.router.navigate(
+        ['/auth/register'],
+        { queryParams: { email: this.emailForm?.value }
+      }); */
+      this.emailService.setMessage(this.emailForm?.value);
+      this.router.navigate(['/auth/register']);
+    }
   }
 
 }

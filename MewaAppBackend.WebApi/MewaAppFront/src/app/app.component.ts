@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NotificationService } from "src/app/shared/notification.service";
 
 @Component({
   selector: 'app-root',
@@ -8,10 +7,4 @@ import { NotificationService } from "src/app/shared/notification.service";
 })
 export class AppComponent {
   title = 'Angular-Mewa';
-
-  constructor(private notificationService: NotificationService) {}
-
-  onClickAcction() {
-    this.notificationService.showTestMessage();
-  }
 } 

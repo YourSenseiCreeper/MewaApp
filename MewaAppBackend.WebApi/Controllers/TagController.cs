@@ -25,9 +25,9 @@ namespace MewaAppBackend.WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<TagDto>> GetAll()
+        public async Task<IEnumerable<TagDto>> GetAll(string tagQuery, int amount)
         {
-            return await _mediator.Send(new GetAllTagsQuery());
+            return await _mediator.Send(new GetAllTagsQuery { TagQuery = tagQuery, Amount = amount });
         }
 
         [HttpGet("{id}")]

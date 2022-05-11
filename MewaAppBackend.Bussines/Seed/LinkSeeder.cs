@@ -1,14 +1,16 @@
 ﻿using MewaAppBackend.Model.Model;
 using MewaAppBackend.WebApi;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MewaAppBackend.Business.Seed
 {
+    public class LinkSeederNames
+    {
+        public const string youtubeLink = "Link do YouTube";
+        public const string fbLink = "Link do Facebooka";
+        
+        
+    }
     public class LinkSeeder
     {
         private readonly Context _context;

@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute } from '@angular/router';
 import { Link } from 'src/app/shared/models';
-import { AddEditLinkDialogComponent } from '../dialog/add-edit-link-dialog/add-edit-link-dialog.component';
-import { MewaAppService } from "../../shared/mewa-app.service";
-import { MatDialog } from "@angular/material/dialog";
-import { NotificationService } from 'src/app/shared/notification.service';
-import { AddEditFolderDialogComponent } from '../dialog/add-edit-folder/add-edit-folder-dialog.component';
+import { LinkService } from 'src/app/shared/services/link.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
+import { AddEditLinkDialogComponent } from '../../dialog/add-edit-link-dialog/add-edit-link-dialog.component';
 
 @Component({
   selector: 'app-folder-contents',
@@ -22,6 +21,7 @@ export class FolderContentsComponent implements OnInit {
       description: "To jest pierwsza karta oraz jej jakis tam tekst, który musi zostać sformatowany. Powinny być zazwyczaj dwa wiersze tekstu.",
       url: "https://bardzoDobryLink.org/link2",
       expiryDate: null,
+      isPublic: true,
       thumbnailId: null,
       ownerId: null,
       thumbnailContent: null,
@@ -34,6 +34,7 @@ export class FolderContentsComponent implements OnInit {
       description: "To jest pierwsza karta oraz jej jakis tam tekst, który musi zostać sformatowany. Powinny być zazwyczaj dwa wiersze tekstu.",
       url: "https://bardzoDobryLink.org/link2",
       expiryDate: null,
+      isPublic: true,
       thumbnailId: null,
       ownerId: null,
       thumbnailContent: null,
@@ -47,6 +48,7 @@ export class FolderContentsComponent implements OnInit {
       url: "https://bardzoDobryLink.org/link2",
       expiryDate: null,
       thumbnailId: null,
+      isPublic: true,
       ownerId: null,
       thumbnailContent: null,
       tags: [],
@@ -59,6 +61,7 @@ export class FolderContentsComponent implements OnInit {
       url: "https://bardzoDobryLink.org/link2",
       expiryDate: null,
       thumbnailId: null,
+      isPublic: true,
       ownerId: null,
       thumbnailContent: null,
       tags: [],
@@ -71,6 +74,7 @@ export class FolderContentsComponent implements OnInit {
       url: "https://bardzoDobryLink.org/link2",
       expiryDate: null,
       thumbnailId: null,
+      isPublic: true,
       ownerId: null,
       thumbnailContent: null,
       tags: [],
@@ -81,7 +85,7 @@ export class FolderContentsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    public service: MewaAppService,
+    public service: LinkService,
     private dialog: MatDialog,
     private notification: NotificationService) { }
 
@@ -94,7 +98,7 @@ export class FolderContentsComponent implements OnInit {
   addLink(): void {
     let dialog = this.dialog.open(AddEditLinkDialogComponent,
       {
-        data: { title: 'Edycja linku' },
+        data: { title: 'Dodaj nowy link', icon: 'add' },
         width: '50%'
       });
       dialog.componentInstance.onSave.subscribe(v => {

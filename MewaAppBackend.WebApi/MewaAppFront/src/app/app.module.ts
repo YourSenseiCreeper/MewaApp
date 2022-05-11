@@ -6,7 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
 import { PublicModule } from './public/public.module';
 import { JwtModule } from '@auth0/angular-jwt';
 
@@ -22,9 +21,6 @@ export function tokenGetter(): string | null {
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule,
-    MatSnackBarModule,
-    MatButtonModule,
     PublicModule,
     RouterModule,
     JwtModule.forRoot({

@@ -1,28 +1,42 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { MewaAppService } from 'src/app/shared/mewa-app.service';
 import { Link } from 'src/app/shared/models';
-import { ConfirmationDialogComponent } from '../dialog/confirmation/confirmation-dialog.component';
+import { LinkService } from 'src/app/shared/services/link.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
+import { AddEditLinkDialogComponent } from '../../dialog/add-edit-link-dialog/add-edit-link-dialog.component';
+import { ConfirmationDialogComponent } from '../../dialog/confirmation/confirmation-dialog.component';
 
 @Component({
-  selector: 'app-inline-link-card',
-  templateUrl: './inline-link-card.component.html',
-  styleUrls: ['./inline-link-card.component.scss']
+  selector: 'app-link-card',
+  templateUrl: './link-card.component.html',
+  styleUrls: [ './link-card.component.scss' ]
 })
-export class InlineLinkCardComponent implements OnInit {
-  @Input()
-  link!: Link;
+export class LinkCardComponent implements OnInit {
+  @Input() link: Link = {
+    id: 1,
+    name: 'Link',
+    description: "Opis",
+    url: "https://google.com",
+    expiryDate: null,
+    isPublic: true,
+    thumbnailId: null,
+    ownerId: null,
+    thumbnailContent: null,
+    tags: [],
+    groups: []
+  };
 
   imageUrl = "/assets/images/asp-net-core-identity-with-patterns-1.png";
 
   constructor(
     private snackBar: MatSnackBar,
-    private service: MewaAppService,
+    private service: LinkService,
+    private notification: NotificationService,
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    // this.convertThumbnailBase64ToImage(this.link.thumbnailContent);
+    this.convertThumbnailBase64ToImage(this.link.thumbnailContent);
   }
 
   convertThumbnailBase64ToImage(base64: string | null): string {
@@ -71,13 +85,30 @@ export class InlineLinkCardComponent implements OnInit {
   }
 
   onEdit(): void {
-
+    let dialog = this.dialog.open(AddEditLinkDialogComponent,
+    {
+      data: {
+        link: this.link,
+        title: 'Edycja linku'
+      },
+      width: '75%'
+    });
+    dialog.componentInstance.onSave.subscribe(v => {
+      this.service.editLink(v).subscribe(r => {
+        if (r.success) {
+         this.notification.showSuccess("Link zmieniony");
+         dialog.componentInstance.close();
+        } else {
+         this.notification.showError(r.message as string);
+        }
+      })
+    });
   }
 
   onDelete(): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: '50%',
-      data: {title: 'Czy jesteś pewien?', text: "Czy rzeczywiście chcesz usunąć ten link?"},
+      data: {title: 'Usuwanie linku', text: "Czy na pewno chcesz usunąć ten link?"},
     });
     dialogRef.componentInstance.onDecide.subscribe(result => {
       if (result) {

@@ -1,44 +1,28 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { MewaAppService } from 'src/app/shared/mewa-app.service';
 import { Link } from 'src/app/shared/models';
-import { NotificationService } from 'src/app/shared/notification.service';
-import { AddEditLinkDialogComponent } from '../dialog/add-edit-link-dialog/add-edit-link-dialog.component';
-import { ConfirmationDialogComponent } from '../dialog/confirmation/confirmation-dialog.component';
+import { LinkService } from 'src/app/shared/services/link.service';
+import { ConfirmationDialogComponent } from '../../dialog/confirmation/confirmation-dialog.component';
 
 @Component({
-  selector: 'app-single-link-card',
-  templateUrl: './single-link-card.component.html',
-  styleUrls: [
-    './single-link-card.component.scss'
-  ]
+  selector: 'app-inline-link-card',
+  templateUrl: './inline-link-card.component.html',
+  styleUrls: ['./inline-link-card.component.scss']
 })
-export class SingleLinkCardComponent implements OnInit {
-  @Input() link: Link = {
-    id: 1,
-    name: 'Link 1',
-    description: "To jest pierwsza karta oraz jej jakis tam tekst, który musi zostać sformatowany. Powinny być zazwyczaj dwa wiersze tekstu.",
-    url: "https://bardzoDobryLink.org/link2",
-    expiryDate: null,
-    thumbnailId: null,
-    ownerId: null,
-    thumbnailContent: null,
-    tags: [],
-    groups: []
-  };
+export class InlineLinkCardComponent implements OnInit {
+  @Input()
+  link!: Link;
 
   imageUrl = "/assets/images/asp-net-core-identity-with-patterns-1.png";
 
-
   constructor(
     private snackBar: MatSnackBar,
-    private service: MewaAppService,
-    private notification: NotificationService,
+    private service: LinkService,
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.convertThumbnailBase64ToImage(this.link.thumbnailContent);
+    // this.convertThumbnailBase64ToImage(this.link.thumbnailContent);
   }
 
   convertThumbnailBase64ToImage(base64: string | null): string {
@@ -87,24 +71,7 @@ export class SingleLinkCardComponent implements OnInit {
   }
 
   onEdit(): void {
-    let dialog = this.dialog.open(AddEditLinkDialogComponent,
-    {
-      data: {
-        link: this.link,
-        title: 'Edycja linku'
-      },
-      width: '75%'
-    });
-    dialog.componentInstance.onSave.subscribe(v => {
-      this.service.editLink(v).subscribe(r => {
-        if (r.success) {
-         this.notification.showSuccess("Link zmieniony");
-         dialog.componentInstance.close();
-        } else {
-         this.notification.showError(r.message as string);
-        }
-      })
-    });
+
   }
 
   onDelete(): void {

@@ -1,0 +1,30 @@
+@import 'variables.scss';
+
+.bottom-bar {
+    background-color: white;
+    border-top: 1px solid #999999;
+    position: fixed;
+    bottom: 0;
+    z-index: 999;
+    width: 100%;
+    padding: 5px 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+::ng-deep .border {
+    border: 1px solid $my-primary;
+}
+
+.user-menu {
+    padding: 1rem;
+    font-size: medium;
+}
+
+hr {
+    margin: 0 1rem 0 1rem;
+    height: 1px;
+    background-color: $my-primary;
+    border: 0;
+}

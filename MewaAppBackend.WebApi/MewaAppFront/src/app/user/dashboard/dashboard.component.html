@@ -18,11 +18,11 @@
 	</div>
 	<div *ngIf="simpleLinks === false">
     <div class="link-card-grid">
-      <app-single-link-card
+      <app-link-card
         *ngFor="let link of links"
         [link]="link"
         class="single-link-card">
-      </app-single-link-card>
+      </app-link-card>
     </div>
 	</div>
 </div>

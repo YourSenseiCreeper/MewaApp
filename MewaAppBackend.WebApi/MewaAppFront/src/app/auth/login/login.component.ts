@@ -1,37 +1,38 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'src/app/shared/auth-service';
-import { MewaAppService } from 'src/app/shared/mewa-app.service';
 import { LoginCommand } from 'src/app/shared/models';
-import { NotificationService } from 'src/app/shared/notification.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-auth-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['../form.scss']
 })
 export class LoginComponent {
   hide: boolean = true;
   loginForm!: FormGroup;
+  submitDisabled: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
-    private service: MewaAppService,
+    private service: AuthService,
     private notification: NotificationService,
     private authService: AuthService) {
     this.loginForm = fb.group(
       {
-        login: this.fb.control('', null),
-        password: this.fb.control('', null)
+        login: this.fb.control('', [Validators.required, Validators.email]),
+        password: this.fb.control('', [Validators.required])
       }
     )
   }
 
   login(): void {
     let rawForm = this.loginForm.getRawValue();
+    this.submitDisabled = true;
     let command = {
       email: rawForm.login,
       password: rawForm.password
@@ -39,10 +40,29 @@ export class LoginComponent {
     this.service.login(command).subscribe(r => {
       if (r.success) {
         this.authService.setUserToken(r.token);
-        this.router.navigate(['/user/dashboard'])
+        this.router.navigate(['/user/dashboard']);
       } else {
         this.notification.showError(r.message);
+        this.submitDisabled = false;
       }
+    }, error => {
+      this.notification.showError("Problem z połączeniem: " + error.message);
+      this.submitDisabled = false;
     });
+  }
+
+  getErrorMessage(control: string): string {
+    const required: string = 'To pole jest wymagane';
+
+    if (control === 'login') {
+      if (this.loginForm.controls[control].hasError('required')) {
+        return required;
+      }
+      return this.loginForm.controls[control].hasError('email') ? 'Niepoprawny format email' : '';
+    }
+    else if (control === 'password') {
+      return this.loginForm.controls[control].hasError('required') ? required : '';
+    }
+    return '';
   }
 }

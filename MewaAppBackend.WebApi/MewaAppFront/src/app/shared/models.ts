@@ -4,6 +4,7 @@ export interface Link {
     name: string;
     description: string | null;
     expiryDate: Date | null;
+    isPublic: boolean;
     ownerId: string | null;
     thumbnailContent: string | null;
     thumbnailId: number | null;
@@ -26,6 +27,7 @@ export interface AddLink {
     name: string;
     description: string | null;
     expiryDate: Date | null;
+    isPublic: boolean;
     tags: number[];
     groups: number[];
 }

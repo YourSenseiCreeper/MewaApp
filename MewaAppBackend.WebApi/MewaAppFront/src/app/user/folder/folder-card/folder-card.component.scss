@@ -1,0 +1,73 @@
+@import "variables";
+
+.folder-button-name-container {
+  height: auto;
+  max-width: 14rem;
+  margin: 1rem;
+
+  .button-container {
+    width: auto;
+    height: 40px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .folder-container {
+    width: auto;
+    height: auto;
+    position: relative;
+    background-color: $my-primary;
+    border-radius: 0 4px 4px 4px;
+    box-shadow: 5px 7px 10px rgba(0, 0, 0, 0.3);
+  
+    &::before {
+      content: '';
+      width: 50%;
+      height: 1.5rem;
+      border-radius: 4px 0 0 0;
+      background-color: $my-primary-dark;
+      position: absolute;
+      top: -1.4rem;
+      left: 0;
+      clip-path: polygon(0 0, 70% 0, 100% 100%, 0% 100%);
+      z-index: -1;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .folder-content {
+      border: 0.15rem solid $my-primary;
+      background-color: white;
+      height: 8rem;
+      width: auto;
+      border-radius: 0 4px 4px 4px;
+      transition: 0.2s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: $my-primary;
+      font-weight: bold;
+      font-size: 1.5rem;
+  
+      &:hover {
+        background-color: $my-primary;
+        color: white;
+      }
+
+      .folder-text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        line-height: normal;
+        margin: 0 0.5em 0 0.5em;
+      }
+    }
+  }
+
+  .folder-name {
+    padding: 0.5rem;
+    text-align: center;
+  }
+}

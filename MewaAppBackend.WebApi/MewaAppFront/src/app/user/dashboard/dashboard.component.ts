@@ -1,27 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MewaAppService } from 'src/app/shared/mewa-app.service';
+import { ActivatedRoute } from '@angular/router';
 import { Link } from 'src/app/shared/models';
-import { NotificationService } from 'src/app/shared/notification.service';
-import { AddEditLinkDialogComponent } from '../dialog/add-edit-link-dialog/add-edit-link-dialog.component';
+import { LinkService } from 'src/app/shared/services/link.service';
 
 @Component({
   selector: 'app-user-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
-  providers: [MewaAppService]
+  styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
   links: Link[] = [];
   simpleLinks: boolean = false;
 
-  constructor(
-    public mewaService: MewaAppService,
-    private notification: NotificationService,
-    private dialog: MatDialog) { }
+  constructor(private route: ActivatedRoute,
+    private service: LinkService) { }
 
   ngOnInit(): void {
-    this.mewaService.getAllLinks().subscribe(data => this.links = data);
+    this.route.paramMap.subscribe(paramMap => {
+      let userName = paramMap.get('userName') ? paramMap.get('userName') as string : '';
+      this.service.getUserLinks(userName).subscribe(data => this.links = data);
+    });
   }
 
   toggleChange(): void {

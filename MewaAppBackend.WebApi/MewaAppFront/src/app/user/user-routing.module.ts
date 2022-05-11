@@ -1,28 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { FolderContentsComponent } from './folder-contents/folder-contents.component';
-import { FoldersComponent } from './folders/folders.component';
+import { FolderContentsComponent } from './folder/folder-contents/folder-contents.component';
+import { FolderContainerComponent } from './folder/folder-container/folder-container.component';
 import { UserComponent } from './user/user.component';
+import { UserExistanceGuard } from '../shared/user-existance.guard';
 
 @NgModule({
   imports: [
     RouterModule.forChild([
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      // { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       {
         path: '',
         component: UserComponent,
         children: [
-          { path: 'dashboard', component: DashboardComponent, data: { title: "Dashboard" } },
-          { path: 'folders', component: FoldersComponent, data: { title: "Foldery" } },
+          { path: ':userName', component: DashboardComponent, data: { title: "Dashboard" }, canActivate: [UserExistanceGuard] },
+          { path: 'folders', component: FolderContainerComponent, data: { title: "Foldery" } },
           { path: 'folder/:id', component: FolderContentsComponent, data: { title: "Folder Contents" } }
-          // { path: 'register', component: RegisterComponent, canActivate: [AppRouteGuard], data: { title: "Rejestracja"}  },
-          // { path: 'change-password', component: ChangePasswordComponent, canActivate: [AppRouteGuard], data: { title: "Zmiana hasła"}  }
         ]
       },
-      // { path: ':userName', component: DashboardComponent },
-      // { path: ':userName/:folder', component: DashboardComponent },
-
       // {path: '**', redirectTo: ''}
     ])
   ],

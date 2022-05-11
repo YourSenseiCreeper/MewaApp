@@ -173,6 +173,9 @@ namespace MewaAppBackend.Business.Migrations
                     b.Property<DateTime>("ExpiryDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsPublic")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -578,8 +581,7 @@ namespace MewaAppBackend.Business.Migrations
                 {
                     b.Navigation("Tags");
 
-                    b.Navigation("Thumbnail")
-                        .IsRequired();
+                    b.Navigation("Thumbnail");
                 });
 
             modelBuilder.Entity("MewaAppBackend.Model.Model.User", b =>
