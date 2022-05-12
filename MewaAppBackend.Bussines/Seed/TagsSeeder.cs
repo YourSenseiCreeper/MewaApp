@@ -38,7 +38,6 @@ namespace MewaAppBackend.Business.Seed
         public const string Fabrykasily = "Fabrykasily";
         public const string Polki = "Polki";
         public const string Gazeta = "Gazeta";
-        public const string Programowanie = "Programowanie";
         public const string Skate = "Skate";
         public const string Funny = "Funny";
         public const string Programowanie = "Programowanie";

@@ -84,11 +84,16 @@ namespace MewaAppBackend.Business.Seed
         }
         private Link CreateSingleLink(string name, string url, string userName, string[] groupFolder, string[] tagName)
         {
-            //var tag = (Tag)(from item in _context.Tag where item.Name.Equals(tagName) select item);
+            // Tutaj trzeba wyciągnąć te grupy i tak samo je odfiltrować i przypisać. Bez tego nasze dodawanie nie zadziała.
             var user = _context.Users.First(u => u.UserName == userName);
             var tags = _context.Tag.Where(t => tagName.Contains(t.Name)).ToList();
-            var link = new Link { Name = name, Url = url, Tags = tags, Owner = user};
+            var groups = _context.Group.Where(z => groupFolder.Contains(z.Name)).ToList();
+            var link = new Link { Name = name, Url = url, Tags = tags, Owner = user, Groups = groups};
             return link;
         }
     }
 }
+// context to bazy danych
+// Dbset odpowiednik tabeli w bazie dancyh
+//  => dziala jak foreach
+// encja jest reprezentacja obiektowa tego co jest w bazie danych
