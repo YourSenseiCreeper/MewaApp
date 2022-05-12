@@ -16,6 +16,9 @@ namespace MewaAppBackend.Business.Seed
         public const string User8 = "user8";
         public const string User9 = "user9";
         public const string User10 = "user10";
+        public const string User11 = "user11";
+        public const string User12 = "user12";
+        public const string User13 = "user13";
         public const string Teriyaki = "TeriyakiGod";
     }
 
@@ -26,7 +29,7 @@ namespace MewaAppBackend.Business.Seed
         {
             _userManager = userManager;
         }
-
+             
         public async Task Seed()
         {
             await Task.WhenAll(
@@ -60,4 +63,6 @@ namespace MewaAppBackend.Business.Seed
             }
         }
     }
+
+    
 }
