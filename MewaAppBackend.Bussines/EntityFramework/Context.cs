@@ -25,6 +25,11 @@ namespace MewaAppBackend.WebApi
                 .WithOne(f => f.User)
                 .HasForeignKey<Model.Model.File>(f => f.UserId);
 
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.Groups)
+                .WithOne(g => g.User)
+                .HasForeignKey(f => f.UserId);
+
             modelBuilder.Entity<Link>()
                 .Property("CreationDate")
                 .IsRequired()
@@ -38,10 +43,11 @@ namespace MewaAppBackend.WebApi
 
             modelBuilder.Entity<Group>()
                 .HasMany(u => u.Users)
-                .WithOne(g => g.User)
-                .UsingEntity<GroupUser>()
-                .ToTable("GroupUser");
+                .WithOne(g => g.Group)
+                .HasForeignKey(g => g.GroupId);
 
+            // Group -> GroupUser <- User ok
+            // Group -> <- User
             modelBuilder.Entity<GroupUser>()
                 .HasKey(gu => new { gu.UserId, gu.GroupId });
         }

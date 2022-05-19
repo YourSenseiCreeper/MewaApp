@@ -27,7 +27,7 @@ namespace MewaAppBackend.WebApi.Handlers.Dashboard
             // all groups
             var groups = await _unitOfWork.Repository<Model.Model.Group>()
                 .GetAllIncluding(g => g.Tags, g => g.Users)
-                .Where(g => g.Users.Any(u => u.Id == userFromName.Id || )) // user is owner or is a member of group
+                .Where(g => g.Users.Any(u => u.UserId == userFromName.Id)) // user is owner or is a member of group
                 .AsNoTracking()
                 .ToListAsync(cancellationToken);
 
@@ -37,28 +37,29 @@ namespace MewaAppBackend.WebApi.Handlers.Dashboard
                 .AsNoTracking()
                 .ToListAsync(cancellationToken);
 
-            var linksSharedWithUser = await _unitOfWork.Repository<Model.Model.Link>()
-                .GetAllIncluding(l => l.Groups)
-                .Where(l => l.Groups.Any(u => u.Users.Any(u => u.UserId == userFromName.Id)))
+            var groupsSharedWithUser = await _unitOfWork.Repository<Model.Model.Group>()
+                .GetAllIncluding(l => l.Users, l => l.Tags)
+                .Where(g => g.Users.Any(u => u.UserId == userFromName.Id))
                 .AsNoTracking()
                 .ToListAsync(cancellationToken);
 
-            var resultGroups = new List<Model.Model.Group>();
+            var resultGroups = new List<MicroGroupDto>();
             var resultLinks = new List<Model.Model.Link>();
 
             if (isCurrentUser)
             {
-                resultGroups = groups.Where(g => g.Tags.Any(t => t.Name.StartsWith("#"))).ToList();
+                resultGroups = groups.Select(g => new MicroGroupDto { Id = g.Id, Name = g.Name, IsShared = false}).ToList();
+                resultGroups.AddRange(groupsSharedWithUser.Select(g => new MicroGroupDto { Id = g.Id, Name = g.Name, IsShared = true }).ToList());
                 resultLinks = linksWithoutGroup;
             } else
             {
-                resultGroups = groups.Where(g => g.IsPublic && g.Tags.Any(t => t.Name.StartsWith("#"))).ToList();
+                resultGroups = groups.Where(g => g.IsPublic).Select(g => new MicroGroupDto { Id = g.Id, Name = g.Name, IsShared = false }).ToList();
                 resultLinks = linksWithoutGroup.Where(l => l.IsPublic).ToList();
             }
 
             var dto = new DashboardDto
             {
-                Groups = _mapper.Map<IEnumerable<MicroGroupDto>>(resultGroups),
+                Groups = resultGroups,
                 Links = _mapper.Map<IEnumerable<LinkDto>>(resultLinks)
             };
 

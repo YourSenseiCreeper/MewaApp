@@ -13,8 +13,6 @@
         public string Name { get; set; }
         public bool IsFolder { get; set; }
         public bool IsPublic { get; set; }
-        public string OwnerId { get; set; }
-        public User Owner { get; set; }
         public virtual ICollection<Link> Links { get; set; }
         public virtual ICollection<Tag> Tags { get; set; }
         public virtual ICollection<GroupUser> Users { get; set; }

@@ -6,10 +6,10 @@ namespace MewaAppBackend.Model.Model
     {
         public User()
         {
-            this.Groups = new HashSet<Group>();
+            this.Groups = new HashSet<GroupUser>();
         }
         public File Avatar { get; set; }
-        public virtual ICollection<Group> Groups { get; set; }
+        public virtual ICollection<GroupUser> Groups { get; set; }
         public virtual ICollection<Tag> Tags { get; set; }
         public virtual ICollection<Link> Links { get; set; }
     }

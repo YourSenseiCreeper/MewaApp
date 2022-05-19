@@ -31,7 +31,7 @@ namespace MewaAppBackend.WebApi.Handlers.Group
             // sender is admin
             var selectedUsers = new List<GroupUser>
             {
-                new GroupUser { User = null, Privilage = GroupPrivilage.Admin }
+                new GroupUser { User = null, Privilage = GroupPrivilage.Admin } // todo: attach current user
             };
             selectedUsers.AddRange(users.Select(u => new GroupUser { User = u, Privilage = GroupPrivilage.Reader }));
 

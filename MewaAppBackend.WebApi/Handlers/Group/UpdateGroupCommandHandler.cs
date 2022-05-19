@@ -28,7 +28,7 @@ namespace MewaAppBackend.WebApi.Handlers.Group
             group.IsFolder = request.IsFolder;
             group.Links = _mapper.Map<ICollection<Model.Model.Link>>(request.Links);
             group.Tags = _mapper.Map<ICollection<Model.Model.Tag>>(request.Tags);
-            group.Users = _mapper.Map<ICollection<Model.Model.User>>(request.Users);
+            group.Users = _mapper.Map<ICollection<Model.Model.GroupUser>>(request.Users);
 
             groupRepository.Edit(group);
             unitOfWork.SaveChanges();

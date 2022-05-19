@@ -21,6 +21,7 @@ namespace MewaAppBackend.WebApi.Configuration
             CreateMap<Group, MicroGroupDto>();
             CreateMap<User, AddUserToSomething>();
             CreateMap<Link, LinkDto>().AfterMap((link, dto) => dto.ThumbnailContent = link.Thumbnail?.Content);
+            CreateMap<User, UserDto>();
         }
     }
 }
