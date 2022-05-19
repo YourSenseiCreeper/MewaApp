@@ -54,14 +54,14 @@ namespace MewaAppBackend.WebApi.Controllers
         [HttpPost("TestDataGroup")]
         public async Task<ActionResult> TestData()
         {
-            unitOfWork.Repository<Link>().Add(new Link()
+            unitOfWork.Repository<Link>().Add(new Link
             {
                 Name = "Name",
                 OwnerId = "28ad5b21-258b-4b21-b44a-78fac15a9c37",
                 Url = "asd"
             });
 
-            unitOfWork.Repository<Tag>().Add(new Tag()
+            unitOfWork.Repository<Tag>().Add(new Tag
             {
                 Name = "Name",
                 UserId = "28ad5b21-258b-4b21-b44a-78fac15a9c37"

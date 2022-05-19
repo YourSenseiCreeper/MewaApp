@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using MewaAppBackend.Model.Interfaces;
+using MewaAppBackend.Model.Model;
 using MewaAppBackend.WebApi.Commands.Group;
 
 namespace MewaAppBackend.WebApi.Handlers.Group
@@ -23,18 +24,26 @@ namespace MewaAppBackend.WebApi.Handlers.Group
 
         public async Task<CreateGroupCommandResult> Handle(CreateGroupCommand request, CancellationToken cancellationToken)
         {
-            Model.Model.Group group = new();
-
             var links = linkRepository.GetAll().Where(l => request.Links.Contains(l.Id)).ToList();
             var tags = tagRepository.GetAll().Where(t => request.Tags.Contains(t.Id)).ToList();
             var users = userRepository.GetAll().Where(u => request.Users.Contains(u.Id)).ToList();
 
-            group.Name = request.Name;
-            group.RedirectURL = request.RedirectURL;
-            group.IsFolder = request.IsFolder;
-            group.Links = links;
-            group.Tags = tags;
-            group.Users = users;
+            // sender is admin
+            var selectedUsers = new List<GroupUser>
+            {
+                new GroupUser { User = null, Privilage = GroupPrivilage.Admin }
+            };
+            selectedUsers.AddRange(users.Select(u => new GroupUser { User = u, Privilage = GroupPrivilage.Reader }));
+
+            var group = new Model.Model.Group
+            {
+                Name = request.Name,
+                RedirectURL = request.RedirectURL,
+                IsFolder = request.IsFolder,
+                Links = links,
+                Tags = tags,
+                Users = selectedUsers,
+            };
 
             unitOfWork.Repository<Model.Model.Group>().Add(group);
             unitOfWork.SaveChanges();

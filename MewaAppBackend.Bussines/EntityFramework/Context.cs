@@ -35,6 +35,15 @@ namespace MewaAppBackend.WebApi
                 .HasOne(u => u.Thumbnail)
                 .WithOne(i => i.Link)
                 .HasForeignKey<DbImage>(i => i.LinkId);
+
+            modelBuilder.Entity<Group>()
+                .HasMany(u => u.Users)
+                .WithOne(g => g.User)
+                .UsingEntity<GroupUser>()
+                .ToTable("GroupUser");
+
+            modelBuilder.Entity<GroupUser>()
+                .HasKey(gu => new { gu.UserId, gu.GroupId });
         }
     }
 }

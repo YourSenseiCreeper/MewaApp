@@ -34,7 +34,7 @@ namespace MewaAppBackend.Business.Migrations
 
                     b.HasIndex("LinksId");
 
-                    b.ToTable("GroupLink");
+                    b.ToTable("GroupLink", (string)null);
                 });
 
             modelBuilder.Entity("GroupTag", b =>
@@ -49,7 +49,7 @@ namespace MewaAppBackend.Business.Migrations
 
                     b.HasIndex("TagsId");
 
-                    b.ToTable("GroupTag");
+                    b.ToTable("GroupTag", (string)null);
                 });
 
             modelBuilder.Entity("GroupUser", b =>
@@ -64,7 +64,7 @@ namespace MewaAppBackend.Business.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("GroupUser");
+                    b.ToTable("GroupUser", (string)null);
                 });
 
             modelBuilder.Entity("MewaAppBackend.Model.Model.DbImage", b =>
@@ -87,7 +87,7 @@ namespace MewaAppBackend.Business.Migrations
                     b.HasIndex("LinkId")
                         .IsUnique();
 
-                    b.ToTable("Images");
+                    b.ToTable("Images", (string)null);
                 });
 
             modelBuilder.Entity("MewaAppBackend.Model.Model.File", b =>
@@ -127,7 +127,7 @@ namespace MewaAppBackend.Business.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("File");
+                    b.ToTable("File", (string)null);
                 });
 
             modelBuilder.Entity("MewaAppBackend.Model.Model.Group", b =>
@@ -151,7 +151,7 @@ namespace MewaAppBackend.Business.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Group");
+                    b.ToTable("Group", (string)null);
                 });
 
             modelBuilder.Entity("MewaAppBackend.Model.Model.Link", b =>
@@ -195,7 +195,7 @@ namespace MewaAppBackend.Business.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Link");
+                    b.ToTable("Link", (string)null);
                 });
 
             modelBuilder.Entity("MewaAppBackend.Model.Model.Tag", b =>
@@ -226,7 +226,7 @@ namespace MewaAppBackend.Business.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Tag");
+                    b.ToTable("Tag", (string)null);
                 });
 
             modelBuilder.Entity("MewaAppBackend.Model.Model.User", b =>

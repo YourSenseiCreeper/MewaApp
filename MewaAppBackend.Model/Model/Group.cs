@@ -6,14 +6,17 @@
         {
             this.Tags = new HashSet<Tag>();
             this.Links = new HashSet<Link>();
-            this.Users = new HashSet<User>();
+            this.Users = new HashSet<GroupUser>();
         }
 
         public string RedirectURL { get; set; }
         public string Name { get; set; }
         public bool IsFolder { get; set; }
+        public bool IsPublic { get; set; }
+        public string OwnerId { get; set; }
+        public User Owner { get; set; }
         public virtual ICollection<Link> Links { get; set; }
         public virtual ICollection<Tag> Tags { get; set; }
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<GroupUser> Users { get; set; }
     }
 }
