@@ -21,6 +21,10 @@ namespace MewaAppBackend.WebApi.Controllers
             _mediator = mediator;
         }
 
+        /// <summary>
+        /// All links without thumbnails
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Link>>> GetAllLinks()
         {
