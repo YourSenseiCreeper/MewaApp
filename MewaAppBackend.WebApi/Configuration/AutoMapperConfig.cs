@@ -12,15 +12,30 @@ namespace MewaAppBackend.WebApi.Configuration
         public AutoMapperConfig()
         {
             CreateMap<Entity, Link>();
-            CreateMap<Link, MicroLinkDto>();
-            CreateMap<AddUserToSomething, User>();
             CreateMap<Entity, Tag>();
+            CreateMap<Link, MicroLinkDto>();
             CreateMap<Tag, MicroTagDto>();
             CreateMap<Tag, TagDto>();
             CreateMap<Group, GroupDto>();
             CreateMap<Group, MicroGroupDto>();
-            CreateMap<User, AddUserToSomething>();
             CreateMap<Link, LinkDto>().AfterMap((link, dto) => dto.ThumbnailContent = link.Thumbnail?.Content);
+            CreateMap<User, UserDto>();
+            CreateMap<GroupUser, UserDto>()
+                .ForMember(d => d.Id, options => options.MapFrom(t => t.User.Id))
+                .ForMember(d => d.UserName, options => options.MapFrom(t => t.User.UserName))
+                .ForMember(d => d.Email, options => options.MapFrom(t => t.User.Email));
+            //CreateMap<UserDto, GroupUser>()
+            //    .ForMember(d => d.User.Id, options => options.MapFrom(t => t.Id))
+            //    .ForMember(d => d.User.UserName, options => options.MapFrom(t => t.UserName))
+            //    .ForMember(d => d.User.Email, options => options.MapFrom(t => t.Email));
+            CreateMap<GroupUser, MicroGroupDto>()
+                .ForMember(d => d.Id, options => options.MapFrom(t => t.Group.Id))
+                .ForMember(d => d.Name, options => options.MapFrom(t => t.Group.Name));
+            //.ForMember(d => d.IsPublic, options => options.MapFrom(t => t.Group.IsPublic))
+            CreateMap<GroupUser, GroupDto>()
+                .ForMember(d => d.Id, options => options.MapFrom(t => t.Group.Id))
+                .ForMember(d => d.Name, options => options.MapFrom(t => t.Group.Name));
+
         }
     }
 }

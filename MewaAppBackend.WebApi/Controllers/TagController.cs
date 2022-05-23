@@ -1,13 +1,7 @@
 ﻿using MediatR;
-using MewaAppBackend.Model.Dtos.Link;
 using MewaAppBackend.Model.Dtos.Tag;
-using MewaAppBackend.Model.Model;
-using MewaAppBackend.WebApi.Commands.Link;
 using MewaAppBackend.WebApi.Commands.Tag;
-using MewaAppBackend.WebApi.Handlers.Link;
 using MewaAppBackend.WebApi.Handlers.Tag;
-using MewaAppBackend.WebApi.Queries;
-using MewaAppBackend.WebApi.Queries.Link;
 using MewaAppBackend.WebApi.Queries.Tag;
 using Microsoft.AspNetCore.Mvc;
 

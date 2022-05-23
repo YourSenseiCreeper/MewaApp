@@ -21,7 +21,7 @@ namespace MewaAppBackend.WebApi.Handlers.Link
         {
             var results = _unitOfWork.Repository<Model.Model.Link>()
                 .GetAll()
-                .Include(l => l.Thumbnail)
+                //.Include(l => l.Thumbnail)
                 .Include(l => l.Tags)
                 .Include(l => l.Groups)
                 .AsNoTracking()

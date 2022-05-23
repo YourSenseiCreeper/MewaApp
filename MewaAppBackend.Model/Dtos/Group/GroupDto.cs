@@ -11,6 +11,6 @@ namespace MewaAppBackend.Model.Dtos.Group
         public string Description { get; set; }
         public IEnumerable<TagDto> Tags { get; set; }
         public IEnumerable<MicroLinkDto> Links { get; set; }
-        public IEnumerable<AddUserToSomething> Users { get; set; }
+        public IEnumerable<UserDto> Users { get; set; }
     }
 }

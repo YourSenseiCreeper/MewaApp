@@ -14,11 +14,12 @@ import { UserExistanceGuard } from '../shared/user-existance.guard';
         path: '',
         component: UserComponent,
         children: [
-          { path: ':userName', component: DashboardComponent, data: { title: "Dashboard" }, canActivate: [UserExistanceGuard] },
-          { path: 'folders', component: FolderContainerComponent, data: { title: "Foldery" } },
-          { path: 'folder/:id', component: FolderContentsComponent, data: { title: "Folder Contents" } }
+          { path: ':userName', component: DashboardComponent, data: { title: "Dashboard" }, /*canActivate: [UserExistanceGuard]*/ },
+          { path: ':userName/:folderName', component: FolderContainerComponent, data: { title: "Folder" }, }
+          // { path: 'folders', component: FolderContainerComponent, data: { title: "Foldery" } },
+          // { path: 'folder/:id', component: FolderContentsComponent, data: { title: "Folder Contents" } }
         ]
-      },
+      }
       // {path: '**', redirectTo: ''}
     ])
   ],

@@ -1,11 +1,21 @@
 <header>
-    <span class="title">Popularne linki</span>
+    <span class="title">Linki</span>
 	<div class="button-group">
 		<mat-slide-toggle
       color="primary"
       (change)="toggleChange()">
       Widok uproszczony
     </mat-slide-toggle>
+    <button
+    class="button"
+    mat-stroked-button
+    color="primary"
+    (click)="addLink()">
+    <mat-icon>
+      add
+    </mat-icon>
+    Dodaj link
+  </button>
   </div>
 </header>
 <div class="link-card-container">

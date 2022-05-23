@@ -23,7 +23,7 @@ namespace MewaAppBackend.WebApi.Handlers.Group
                 .GetAll()
                 .Include(g => g.Links)
                 .Include(g => g.Tags)
-                .Include(g => g.Users)
+                .Include(g => g.Users).ThenInclude(g => g.User)
                 .AsNoTracking()
                 .ToList();
 

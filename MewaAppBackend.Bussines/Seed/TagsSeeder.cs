@@ -40,8 +40,8 @@ namespace MewaAppBackend.Business.Seed
         public const string Gazeta = "Gazeta";
         public const string Skate = "Skate";
         public const string Funny = "Funny";
-        public const string Programowanie = "Programowanie";
         public const string Lego = "Lego";
+        public const string Programowanie = "Programowanie";
     }
 
     public class TagsSeeder
@@ -88,6 +88,7 @@ namespace MewaAppBackend.Business.Seed
                     new Tag { Name = TagsSeederNames.Skate, Description = "Związane z skate", UserId = user.Id },
                     new Tag { Name = TagsSeederNames.Funny, Description = "Śmieszne", UserId = user.Id},
                     new Tag { Name = TagsSeederNames.Lego, Description = "Lego", UserId = user.Id},
+                    new Tag { Name = TagsSeederNames.Programowanie, Description = "Programowanie", UserId = user.Id},
                 };
                 await context.Tag.AddRangeAsync(newTags);
             }
