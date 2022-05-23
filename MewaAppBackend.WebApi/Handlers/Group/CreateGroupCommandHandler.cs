@@ -46,8 +46,12 @@ namespace MewaAppBackend.WebApi.Handlers.Group
             };
 
             var newGroup = _context.Group.Add(group).Entity;
-            newGroup.Users = userRepository.GetAll().Where(u => request.Users.Contains(u.Id))
-                .Select(u => new GroupUser { UserId = u.Id, GroupId = newGroup.Id, Privilage = 111 }).ToList();
+            var resultUsers = new List<GroupUser>();
+            foreach(var user in request.Users)
+            {
+                resultUsers.Add(new GroupUser { UserId = user.UserId, GroupId = newGroup.Id, Privilage = user.Privilage });
+            }
+            newGroup.Users = resultUsers;
 
             _context.SaveChanges();
 
