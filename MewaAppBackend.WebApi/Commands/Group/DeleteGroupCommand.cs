@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using MewaAppBackend.WebApi.Handlers.Group;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MewaAppBackend.WebApi.Commands.Group
 {
-    public class DeleteGroupCommand : IRequest<DeleteGroupCommandResult>
+    public class DeleteGroupCommand : IRequest<IActionResult>
     {
         public int Id { get; set; }
     }

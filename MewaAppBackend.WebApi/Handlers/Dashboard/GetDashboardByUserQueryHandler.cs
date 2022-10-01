@@ -31,11 +31,7 @@ namespace MewaAppBackend.WebApi.Handlers.Dashboard
                 .AsNoTracking()
                 .ToListAsync(cancellationToken);
 
-            var linksWithoutGroup = await _unitOfWork.Repository<Model.Model.Link>()
-                .GetAllIncluding(l => l.Groups)
-                .Where(l => !l.Groups.Any() && l.OwnerId == userFromName.Id)
-                .AsNoTracking()
-                .ToListAsync(cancellationToken);
+            var linksWithoutGroup = _unitOfWork.Repository<Model.Model.Link>().GetAllIncluding().ToList();
 
             var groupsSharedWithUser = await _unitOfWork.Repository<Model.Model.Group>()
                 .GetAllIncluding(l => l.Users, l => l.Tags)
@@ -53,8 +49,8 @@ namespace MewaAppBackend.WebApi.Handlers.Dashboard
                 resultLinks = linksWithoutGroup;
             } else
             {
-                resultGroups = groups.Where(g => g.IsPublic).Select(g => new MicroGroupDto { Id = g.Id, Name = g.Name, IsShared = false }).ToList();
-                resultLinks = linksWithoutGroup.Where(l => l.IsPublic).ToList();
+                resultGroups = groups.Select(g => new MicroGroupDto { Id = g.Id, Name = g.Name, IsShared = false }).ToList();
+                resultLinks = linksWithoutGroup.ToList();
             }
 
             var dto = new DashboardDto

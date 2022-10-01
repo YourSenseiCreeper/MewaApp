@@ -4,6 +4,7 @@ using MewaAppBackend.Model.Interfaces;
 using MewaAppBackend.Model.Model;
 using MewaAppBackend.WebApi.Commands.Group;
 using MewaAppBackend.WebApi.Extentions;
+using MewaAppBackend.WebApi.Handlers;
 using MewaAppBackend.WebApi.Handlers.Group;
 using MewaAppBackend.WebApi.Queries.Group;
 using Microsoft.AspNetCore.Mvc;
@@ -44,7 +45,7 @@ namespace MewaAppBackend.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<CreateGroupCommandResult>> Create(CreateGroupCommand createGroupCommand)
+        public async Task<IActionResult> Create(CreateGroupCommand createGroupCommand)
         {
             //var currentUserId = this.GetUserGuidFromRequest();
             //createGroupCommand.Users = new[] { currentUserId };
@@ -52,7 +53,7 @@ namespace MewaAppBackend.WebApi.Controllers
         }
 
         [HttpPost("TestDataGroup")]
-        public async Task<ActionResult> TestData()
+        public async Task<ActionResult<string>> TestData()
         {
             unitOfWork.Repository<Link>().Add(new Link
             {
@@ -84,7 +85,7 @@ namespace MewaAppBackend.WebApi.Controllers
         }
 
         [HttpDelete]
-        public async Task<DeleteGroupCommandResult> Delete([FromBody] DeleteGroupCommand command)
+        public async Task<IActionResult> Delete([FromBody] DeleteGroupCommand command)
         {
             return await _mediator.Send(command);
         }

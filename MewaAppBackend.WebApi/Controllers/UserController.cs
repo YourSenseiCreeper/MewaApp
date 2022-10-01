@@ -18,31 +18,15 @@ namespace MewaAppBackend.WebApi.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<RegisterCommandResult> Create([FromBody] RegisterCommand command)
+        public async Task<IActionResult> Create([FromBody] RegisterCommand command)
         {
             return await _mediator.Send(command, CancellationToken.None);
         }
 
         [HttpPost("Login")]
-        public async Task<LoginCommandResult> Login([FromBody] LoginCommand command)
+        public async Task<ActionResult<LoginCommandResult>> Login([FromBody] LoginCommand command)
         {
             return await _mediator.Send(command, CancellationToken.None);
-        }
-
-        [HttpGet("Exists")]
-        public async Task<bool> HasUserExists(string username)
-        {
-            return await _mediator.Send(new HasUserExistsCommand { UserName = username }, CancellationToken.None);
-        }
-
-        /// <summary>
-        /// It's a dev helper function. Should be commented-out during production
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public async Task<IEnumerable<UserDto>> GetAll()
-        {
-            return await _mediator.Send(new GetAllUsersCommand(), CancellationToken.None);
         }
     }
 }

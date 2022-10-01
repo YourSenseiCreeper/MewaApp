@@ -1,11 +1,11 @@
 ﻿using MediatR;
 using MewaAppBackend.Model.Interfaces;
-using MewaAppBackend.Model.Model;
 using MewaAppBackend.WebApi.Commands.Link;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MewaAppBackend.WebApi.Handlers.Link
 {
-    public class EditLinkCommandHandler : IRequestHandler<EditLinkCommand, EditLinkCommandResult>
+    public class EditLinkCommandHandler : IRequestHandler<EditLinkCommand, IActionResult>
     {
         private readonly IUnitOfWork unitOfWork;
         public EditLinkCommandHandler(IUnitOfWork unitOfWork)
@@ -13,18 +13,18 @@ namespace MewaAppBackend.WebApi.Handlers.Link
             this.unitOfWork = unitOfWork;
         }
 
-        public async Task<EditLinkCommandResult> Handle(EditLinkCommand request, CancellationToken cancellationToken)
+        public async Task<IActionResult> Handle(EditLinkCommand request, CancellationToken cancellationToken)
         {
             var repository = unitOfWork.Repository<Model.Model.Link>();
-            var entity = repository.GetAllIncluding(l => l.Tags, l => l.Groups).FirstOrDefault(l => l.Id == request.Id);
+            var entity = repository.GetAllIncluding(l => l.Tags).FirstOrDefault(l => l.Id == request.Id);
 
             if (entity == null)
-                return new EditLinkCommandResult { Message = $"Link o id: {request.Id} nie istnieje", Success = false };
+                return new BadRequestObjectResult($"Link with id: {request.Id} dose not exist");
 
             MapToLink(entity, request);
             unitOfWork.SaveChanges();
 
-            return new EditLinkCommandResult { Success = true };
+            return new OkResult();
         }
 
         private Model.Model.Link MapToLink(Model.Model.Link entity, EditLinkCommand request)
@@ -36,10 +36,8 @@ namespace MewaAppBackend.WebApi.Handlers.Link
             entity.Name = request.Name;
             entity.Description = request.Description;
             entity.ExpiryDate = request.ExpiryDate;
-            entity.IsPublic = request.IsPublic;
             entity.OwnerId = request.OwnerId;
             entity.Tags = tagsRepository.GetAll().Where(t => request.Tags.Contains(t.Id)).ToList();
-            entity.Groups = groupsRepository.GetAll().Where(g => request.Groups.Contains(g.Id)).ToList();
 
             return entity;
         }

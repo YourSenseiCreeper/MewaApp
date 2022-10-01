@@ -39,12 +39,12 @@ namespace MewaAppBackend.Services.User
                 var claims = GenerateClaims(user);
 
                 var token = new JwtSecurityToken(
-                    _configuration["Jwt:Issuer"],
-                    _configuration["Jwt:Audience"],
-                    claims,
-                    notBefore: DateTime.Now,
-                    expires: DateTime.Now.AddDays(2),
-                    GenerateSigningCredential()
+                        _configuration["Jwt:Issuer"],
+                        _configuration["Jwt:Audience"],
+                        claims,
+                        notBefore: DateTime.Now,
+                        expires: DateTime.Now.AddDays(2),
+                        GenerateSigningCredential()
                     );
                 return new JwtSecurityTokenHandler().WriteToken(token);
             }

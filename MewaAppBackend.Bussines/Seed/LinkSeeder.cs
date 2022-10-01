@@ -88,7 +88,7 @@ namespace MewaAppBackend.Business.Seed
             var user = _context.Users.First(u => u.UserName == userName);
             var tags = _context.Tag.Where(t => tagName.Contains(t.Name)).ToList();
             var groups = _context.Group.Where(z => groupFolder.Contains(z.Name)).ToList();
-            var link = new Link { Name = name, Url = url, Tags = tags, Owner = user, Groups = groups};
+            var link = new Link { Name = name, Url = url, Tags = tags, Owner = user };
             return link;
         }
     }

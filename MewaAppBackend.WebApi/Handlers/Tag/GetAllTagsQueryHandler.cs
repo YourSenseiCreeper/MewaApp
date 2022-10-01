@@ -25,8 +25,7 @@ namespace MewaAppBackend.WebApi.Handlers.Tag
                 .Where(t => t.Name.ToLower().Contains(request.TagQuery))
                 .Take(request.Amount)
                 .AsNoTracking().ToList();
-            var dto = _mapper.Map<IEnumerable<TagDto>>(data);
-            return dto;
+            return _mapper.Map<IEnumerable<TagDto>>(data);
         }
     }
 }

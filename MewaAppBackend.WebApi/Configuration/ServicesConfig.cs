@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using MewaAppBackend.Business.Business;
 using MewaAppBackend.Model.Interfaces;
 using MewaAppBackend.Services.Thumbnail;
 using MewaAppBackend.Services.User;
@@ -15,6 +16,7 @@ namespace MewaAppBackend.WebApi.Configuration
             builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 
             builder.Services.AddTransient<IUnitOfWork, GenericUnitOfWork>();
+            builder.Services.AddTransient<IBusinessFactory, BusinessFactory>();
             builder.Services.AddScoped<IUserCreationService, UserCreationService>();
             builder.Services.AddScoped<IPageThumbnailService, PageThumbnailService>();
 

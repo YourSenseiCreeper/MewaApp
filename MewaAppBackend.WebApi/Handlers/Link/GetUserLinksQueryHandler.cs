@@ -27,7 +27,6 @@ namespace MewaAppBackend.WebApi.Handlers.Link
                 .Where(l => l.OwnerId == request.UserId)
                 .Include(l => l.Thumbnail)
                 .Include(l => l.Tags)
-                .Include(l => l.Groups)
                 .AsNoTracking()
                 .ToList();
             } else
@@ -38,14 +37,13 @@ namespace MewaAppBackend.WebApi.Handlers.Link
                 .Where(l => l.Owner.UserName == request.UserName)
                 .Include(l => l.Thumbnail)
                 .Include(l => l.Tags)
-                .Include(l => l.Groups)
                 .AsNoTracking()
                 .ToList();
 
             }
 
             if (string.IsNullOrEmpty(request.UserId))
-                results = results.Where(l => l.IsPublic).ToList();
+                results = results.ToList();
 
             var dto = _mapper.Map<IEnumerable<LinkDto>>(results);
 

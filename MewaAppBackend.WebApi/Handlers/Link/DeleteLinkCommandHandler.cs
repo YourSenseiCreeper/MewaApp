@@ -1,10 +1,11 @@
 ﻿using MediatR;
 using MewaAppBackend.Model.Interfaces;
 using MewaAppBackend.WebApi.Commands.Link;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MewaAppBackend.WebApi.Handlers.Link
 {
-    public class DeleteLinkCommandHandler : IRequestHandler<DeleteLinkCommand, DeleteLinkCommandResult>
+    public class DeleteLinkCommandHandler : IRequestHandler<DeleteLinkCommand, IActionResult>
     {
         private readonly IUnitOfWork unitOfWork;
         public DeleteLinkCommandHandler(IUnitOfWork unitOfWork)
@@ -12,20 +13,18 @@ namespace MewaAppBackend.WebApi.Handlers.Link
             this.unitOfWork = unitOfWork;
         }
 
-        public async Task<DeleteLinkCommandResult> Handle(DeleteLinkCommand request, CancellationToken cancellationToken)
+        public async Task<IActionResult> Handle(DeleteLinkCommand request, CancellationToken cancellationToken)
         {
             var repository = unitOfWork.Repository<Model.Model.Link>();
-            var entity = repository.GetAllIncluding(l => l.Tags, l => l.Groups).FirstOrDefault(l => l.Id == request.Id);
+            var entity = repository.GetAllIncluding(l => l.Tags).FirstOrDefault(l => l.Id == request.Id);
 
             if (entity == null)
-                return new DeleteLinkCommandResult { Message = $"Link o id: {request.Id} nie istnieje", Success = false };
+                return new BadRequestObjectResult($"Link with id {request.Id} dose not exist");
 
-            entity.Groups.Clear();
-            entity.Tags.Clear();
             repository.Delete(entity);
             unitOfWork.SaveChanges();
 
-            return new DeleteLinkCommandResult { Success = true };
+            return new OkResult();
         }
     }
 }

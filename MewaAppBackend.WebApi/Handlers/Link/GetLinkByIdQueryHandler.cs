@@ -22,10 +22,9 @@ namespace MewaAppBackend.WebApi.Handlers.Link
         {
             var result = _unitOfWork.Repository<Model.Model.Link>()
                 .GetAll()
-                .Where(l => l.Id == request.Id)
                 .Include(l => l.Thumbnail)
                 .Include(l => l.Tags)
-                .Include(l => l.Groups)
+                .Where(l => l.Id == request.Id)
                 .SingleOrDefault();
 
             var dto = _mapper.Map<LinkDto>(result);

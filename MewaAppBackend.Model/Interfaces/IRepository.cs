@@ -1,9 +1,11 @@
-﻿using System.Linq.Expressions;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace MewaAppBackend.Model.Interfaces
 {
     public interface IRepository<T> where T : class
     {
+        public DbSet<T> ObjectSet { get; }
         IQueryable<T> GetAllIncluding(params Expression<Func<T, object>>[] includes);
         IQueryable<T> GetAll();
         T GetDetail(Func<T, bool> predicate);

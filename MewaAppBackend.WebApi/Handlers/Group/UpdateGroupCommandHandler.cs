@@ -31,7 +31,6 @@ namespace MewaAppBackend.WebApi.Handlers.Group
 
             group.Id = request.Id;
             group.Name = request.Name;
-            group.RedirectURL = request.RedirectURL;
             group.IsFolder = request.IsFolder;
             group.Links = CompareAndProduceResults(group.Links, request.Links);
             group.Tags = CompareAndProduceResults(group.Tags, request.Tags);
@@ -59,7 +58,7 @@ namespace MewaAppBackend.WebApi.Handlers.Group
             // czy użytkownik ma uprawnienia do modyfikowania uprawnień innych?
 
             var newUsers = targetUsers.Where(u => differenceUsersIds.Any(d => u.UserId == d))
-                .Select(u => new GroupUser { GroupId = u.GroupId, UserId = u.UserId, Privilage = u.Privilage}).ToList();
+                .Select(u => new GroupUser { GroupId = u.GroupId, UserId = u.UserId, Privilage = Model.Enum.Privilage.User }).ToList();
             // we remove things by not picking to the savelist
             existingUsers.AddRange(newUsers);
 

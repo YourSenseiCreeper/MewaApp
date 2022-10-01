@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using MewaAppBackend.WebApi.Handlers.Tag;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MewaAppBackend.WebApi.Commands.Tag
 {
-    public class DeleteTagCommand : IRequest<DeleteTagCommandResult>
+    public class DeleteTagCommand : IRequest<IActionResult>
     {
         public int Id { get; set; }
     }

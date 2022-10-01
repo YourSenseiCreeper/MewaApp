@@ -6,10 +6,13 @@ using MewaAppBackend.WebApi.Extentions;
 using MewaAppBackend.WebApi.Handlers.Link;
 using MewaAppBackend.WebApi.Queries;
 using MewaAppBackend.WebApi.Queries.Link;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MewaAppBackend.WebApi.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
     public class LinkController : ControllerBase
@@ -38,9 +41,7 @@ namespace MewaAppBackend.WebApi.Controllers
         public async Task<ActionResult<IEnumerable<Link>>> GetUserLinks(string? userName = null)
         {
             var userId = this.GetUserGuidFromRequest();
-            var result = await _mediator.Send(new GetUserLinksQuery { UserId = userId, UserName = userName });
-
-            return Ok(result);
+            return new OkObjectResult(await _mediator.Send(new GetUserLinksQuery { UserId = userId, UserName = userName }));
         }
 
         [HttpGet("GetLinkById")]
@@ -51,20 +52,13 @@ namespace MewaAppBackend.WebApi.Controllers
 
 
         [HttpPost("Add")]
-        public async Task<AddLinkCommandResult> AddLink([FromBody] AddLinkDto dto)
+        public async Task<IActionResult> AddLink([FromBody] AddLinkDto dto)
         {
-            var userId = this.GetUserGuidFromRequest();
-            if (userId == null)
-            {
-                return new AddLinkCommandResult { Message = "You are not logged in", Success = false };
-            }
-
             var command = new AddLinkCommand
             {
                 Url = dto.Url,
                 Name = dto.Name,
                 Description = dto.Description,
-                OwnerId = userId,
                 Tags = dto.Tags,
                 Groups = dto.Groups
             };
@@ -72,30 +66,14 @@ namespace MewaAppBackend.WebApi.Controllers
         }
 
         [HttpDelete]
-        public async Task<DeleteLinkCommandResult> Delete([FromBody] DeleteLinkCommand command)
+        public async Task<IActionResult> Delete([FromBody] DeleteLinkCommand command)
         {
             return await _mediator.Send(command);
         }
 
         [HttpPut]
-        public async Task<EditLinkCommandResult> Edit([FromBody] EditLinkCommand dto)
+        public async Task<IActionResult> Edit([FromBody] EditLinkCommand dto)
         {
-            var userId = this.GetUserGuidFromRequest();
-            if (userId == null)
-            {
-                return new EditLinkCommandResult { Message = "You are not logged in", Success = false };
-            }
-
-            //var command = new EditLinkCommand
-            //{
-            //    Id = dto.Id,
-            //    Url = dto.Url,
-            //    Name = dto.Name,
-            //    Description = dto.Description,
-            //    OwnerId = userId,
-            //    Tags = dto.Tags,
-            //    Groups = dto.Groups
-            //};
             return await _mediator.Send(dto);
         }
     }

@@ -31,19 +31,19 @@ namespace MewaAppBackend.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<AddTagCommandResult> Add([FromBody] AddTagCommand command)
+        public async Task<IActionResult> Add([FromBody] AddTagCommand command)
         {
             return await _mediator.Send(command);
         }
 
         [HttpDelete("{id}")]
-        public async Task<DeleteTagCommandResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             return await _mediator.Send(new DeleteTagCommand { Id = id });
         }
 
         [HttpPut]
-        public async Task<EditTagCommandResult> Edit([FromBody] EditTagCommand command)
+        public async Task<IActionResult> Edit([FromBody] EditTagCommand command)
         {
             return await _mediator.Send(command);
         }

@@ -1,10 +1,11 @@
 ﻿using MediatR;
 using MewaAppBackend.Model.Interfaces;
 using MewaAppBackend.WebApi.Commands.Tag;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MewaAppBackend.WebApi.Handlers.Tag
 {
-    public class AddTagCommandHandler : IRequestHandler<AddTagCommand, AddTagCommandResult>
+    public class AddTagCommandHandler : IRequestHandler<AddTagCommand, IActionResult>
     {
         private readonly IUnitOfWork _unitOfWork;
         public AddTagCommandHandler(IUnitOfWork unitOfWork)
@@ -12,7 +13,7 @@ namespace MewaAppBackend.WebApi.Handlers.Tag
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<AddTagCommandResult> Handle(AddTagCommand request, CancellationToken cancellationToken)
+        public async Task<IActionResult> Handle(AddTagCommand request, CancellationToken cancellationToken)
         {
             var repository = _unitOfWork.Repository<Model.Model.Tag>();
 
@@ -20,13 +21,13 @@ namespace MewaAppBackend.WebApi.Handlers.Tag
 
             if (userTagCollection.Any(t => t.Name == request.Name))
             {
-                return new AddTagCommandResult { Message = "Tag musi być unikalny", Success = false };
+                return new BadRequestObjectResult("Taq must be uniqe");
             }
 
             repository.Add(new Model.Model.Tag { UserId = request.UserId, Name = request.Name });
             _unitOfWork.SaveChanges();
 
-            return new AddTagCommandResult { Success = true };
+            return new OkResult();
         }
     }
 }

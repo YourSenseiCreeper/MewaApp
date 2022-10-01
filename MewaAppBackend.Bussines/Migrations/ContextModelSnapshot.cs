@@ -22,21 +22,6 @@ namespace MewaAppBackend.Business.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("GroupLink", b =>
-                {
-                    b.Property<int>("GroupsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LinksId")
-                        .HasColumnType("int");
-
-                    b.HasKey("GroupsId", "LinksId");
-
-                    b.HasIndex("LinksId");
-
-                    b.ToTable("GroupLink");
-                });
-
             modelBuilder.Entity("MewaAppBackend.Model.Model.DbImage", b =>
                 {
                     b.Property<int>("Id")
@@ -108,21 +93,22 @@ namespace MewaAppBackend.Business.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int?>("GroupId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsFolder")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsPublic")
+                    b.Property<bool>("IsPersonal")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RedirectURL")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("GroupId");
 
                     b.ToTable("Group");
                 });
@@ -135,8 +121,8 @@ namespace MewaAppBackend.Business.Migrations
                     b.Property<int>("GroupId")
                         .HasColumnType("int");
 
-                    b.Property<short>("Privilage")
-                        .HasColumnType("smallint");
+                    b.Property<int>("Privilage")
+                        .HasColumnType("int");
 
                     b.HasKey("UserId", "GroupId");
 
@@ -164,8 +150,8 @@ namespace MewaAppBackend.Business.Migrations
                     b.Property<DateTime>("ExpiryDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsPublic")
-                        .HasColumnType("bit");
+                    b.Property<int>("GroupId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -183,6 +169,8 @@ namespace MewaAppBackend.Business.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GroupId");
 
                     b.HasIndex("OwnerId");
 
@@ -423,21 +411,6 @@ namespace MewaAppBackend.Business.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("GroupLink", b =>
-                {
-                    b.HasOne("MewaAppBackend.Model.Model.Group", null)
-                        .WithMany()
-                        .HasForeignKey("GroupsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MewaAppBackend.Model.Model.Link", null)
-                        .WithMany()
-                        .HasForeignKey("LinksId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("MewaAppBackend.Model.Model.DbImage", b =>
                 {
                     b.HasOne("MewaAppBackend.Model.Model.Link", "Link")
@@ -466,6 +439,13 @@ namespace MewaAppBackend.Business.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("MewaAppBackend.Model.Model.Group", b =>
+                {
+                    b.HasOne("MewaAppBackend.Model.Model.Group", null)
+                        .WithMany("Groups")
+                        .HasForeignKey("GroupId");
+                });
+
             modelBuilder.Entity("MewaAppBackend.Model.Model.GroupUser", b =>
                 {
                     b.HasOne("MewaAppBackend.Model.Model.Group", "Group")
@@ -487,11 +467,19 @@ namespace MewaAppBackend.Business.Migrations
 
             modelBuilder.Entity("MewaAppBackend.Model.Model.Link", b =>
                 {
+                    b.HasOne("MewaAppBackend.Model.Model.Group", "Group")
+                        .WithMany("Links")
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("MewaAppBackend.Model.Model.User", "Owner")
                         .WithMany("Links")
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Group");
 
                     b.Navigation("Owner");
                 });
@@ -568,6 +556,10 @@ namespace MewaAppBackend.Business.Migrations
 
             modelBuilder.Entity("MewaAppBackend.Model.Model.Group", b =>
                 {
+                    b.Navigation("Groups");
+
+                    b.Navigation("Links");
+
                     b.Navigation("Tags");
 
                     b.Navigation("Users");

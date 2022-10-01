@@ -1,10 +1,10 @@
 ﻿using MediatR;
 using MewaAppBackend.Model.Dtos.User;
-using MewaAppBackend.WebApi.Handlers.Group;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MewaAppBackend.WebApi.Commands.Group
 {
-    public class CreateGroupCommand : IRequest<CreateGroupCommandResult>
+    public class CreateGroupCommand : IRequest<IActionResult>
     {
         public string RedirectURL { get; set; }
         public string Name { get; set; }

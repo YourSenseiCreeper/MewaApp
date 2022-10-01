@@ -3,10 +3,11 @@ using MediatR;
 using MewaAppBackend.Model.Interfaces;
 using MewaAppBackend.Model.Model;
 using MewaAppBackend.WebApi.Commands.Group;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MewaAppBackend.WebApi.Handlers.Group
 {
-    public class CreateGroupCommandHandler : IRequestHandler<CreateGroupCommand, CreateGroupCommandResult>
+    public class CreateGroupCommandHandler : IRequestHandler<CreateGroupCommand, IActionResult>
     {
         private readonly IRepository<Model.Model.Link> linkRepository;
         private readonly IRepository<Model.Model.User> userRepository;
@@ -22,7 +23,7 @@ namespace MewaAppBackend.WebApi.Handlers.Group
             _mapper = mapper;
         }
 
-        public async Task<CreateGroupCommandResult> Handle(CreateGroupCommand request, CancellationToken cancellationToken)
+        public async Task<IActionResult> Handle(CreateGroupCommand request, CancellationToken cancellationToken)
         {
             var links = linkRepository.GetAll().Where(l => request.Links.Contains(l.Id)).ToList();
             var tags = tagRepository.GetAll().Where(t => request.Tags.Contains(t.Id)).ToList();
@@ -39,7 +40,6 @@ namespace MewaAppBackend.WebApi.Handlers.Group
             var group = new Model.Model.Group
             {
                 Name = request.Name,
-                RedirectURL = request.RedirectURL,
                 IsFolder = request.IsFolder,
                 Links = links,
                 Tags = tags,
@@ -49,13 +49,13 @@ namespace MewaAppBackend.WebApi.Handlers.Group
             var resultUsers = new List<GroupUser>();
             foreach(var user in request.Users)
             {
-                resultUsers.Add(new GroupUser { UserId = user.UserId, GroupId = newGroup.Id, Privilage = user.Privilage });
+                resultUsers.Add(new GroupUser { UserId = user.UserId, GroupId = newGroup.Id });
             }
             newGroup.Users = resultUsers;
 
             _context.SaveChanges();
 
-            return new CreateGroupCommandResult { Success = true };
+            return new OkResult();
         }
     }
 }

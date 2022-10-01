@@ -1,7 +1,6 @@
 ﻿using MewaAppBackend.Model.Interfaces;
 using MewaAppBackend.WebApi.Extensions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Linq.Expressions;
 
 namespace MewaAppBackend.WebApi.Repository
@@ -14,6 +13,11 @@ namespace MewaAppBackend.WebApi.Repository
         {
             db = _db;
             _objectSet = db.Set<T>();
+        }
+
+        public DbSet<T> ObjectSet
+        {
+            get { return _objectSet; }
         }
 
         public T Add(T entity)

@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using MewaAppBackend.WebApi.Handlers.Link;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MewaAppBackend.WebApi.Commands.Link
 {
-    public class EditLinkCommand : IRequest<EditLinkCommandResult>
+    public class EditLinkCommand : IRequest<IActionResult>
     {
         public int Id { get; set; }
         public string Url { get; set; }

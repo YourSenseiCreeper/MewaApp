@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MewaAppBackend.Business.Migrations
 {
-    public partial class pocDatabase : Migration
+    public partial class BaseDBModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -54,13 +54,19 @@ namespace MewaAppBackend.Business.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RedirectURL = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsFolder = table.Column<bool>(type: "bit", nullable: false)
+                    IsFolder = table.Column<bool>(type: "bit", nullable: false),
+                    IsPersonal = table.Column<bool>(type: "bit", nullable: false),
+                    GroupId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Group", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Group_Group_GroupId",
+                        column: x => x.GroupId,
+                        principalTable: "Group",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -170,6 +176,63 @@ namespace MewaAppBackend.Business.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "GroupUser",
+                columns: table => new
+                {
+                    GroupId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Privilage = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GroupUser", x => new { x.UserId, x.GroupId });
+                    table.ForeignKey(
+                        name: "FK_GroupUser_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_GroupUser_Group_GroupId",
+                        column: x => x.GroupId,
+                        principalTable: "Group",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Link",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "SYSDATETIME()"),
+                    ExpiryDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    OwnerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ThumbnailId = table.Column<int>(type: "int", nullable: true),
+                    GroupId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Link", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Link_AspNetUsers_OwnerId",
+                        column: x => x.OwnerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Link_Group_GroupId",
+                        column: x => x.GroupId,
+                        principalTable: "Group",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "File",
                 columns: table => new
                 {
@@ -191,6 +254,31 @@ namespace MewaAppBackend.Business.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_File_Link_LinkId",
+                        column: x => x.LinkId,
+                        principalTable: "Link",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Images",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    LinkId = table.Column<int>(type: "int", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Images", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Images_Link_LinkId",
+                        column: x => x.LinkId,
+                        principalTable: "Link",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -201,7 +289,9 @@ namespace MewaAppBackend.Business.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    GroupId = table.Column<int>(type: "int", nullable: true),
+                    LinkId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -212,106 +302,16 @@ namespace MewaAppBackend.Business.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "GroupUser",
-                columns: table => new
-                {
-                    GroupsId = table.Column<int>(type: "int", nullable: false),
-                    UsersId = table.Column<string>(type: "nvarchar(450)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_GroupUser", x => new { x.GroupsId, x.UsersId });
                     table.ForeignKey(
-                        name: "FK_GroupUser_AspNetUsers_UsersId",
-                        column: x => x.UsersId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_GroupUser_Group_GroupsId",
-                        column: x => x.GroupsId,
+                        name: "FK_Tag_Group_GroupId",
+                        column: x => x.GroupId,
                         principalTable: "Group",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Link",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ExpiryDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    FileId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Link", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Link_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Link_File_FileId",
-                        column: x => x.FileId,
-                        principalTable: "File",
                         principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "GroupTag",
-                columns: table => new
-                {
-                    GroupsId = table.Column<int>(type: "int", nullable: false),
-                    TagsId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_GroupTag", x => new { x.GroupsId, x.TagsId });
                     table.ForeignKey(
-                        name: "FK_GroupTag_Group_GroupsId",
-                        column: x => x.GroupsId,
-                        principalTable: "Group",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_GroupTag_Tag_TagsId",
-                        column: x => x.TagsId,
-                        principalTable: "Tag",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "GroupLink",
-                columns: table => new
-                {
-                    GroupsId = table.Column<int>(type: "int", nullable: false),
-                    LinksId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_GroupLink", x => new { x.GroupsId, x.LinksId });
-                    table.ForeignKey(
-                        name: "FK_GroupLink_Group_GroupsId",
-                        column: x => x.GroupsId,
-                        principalTable: "Group",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_GroupLink_Link_LinksId",
-                        column: x => x.LinksId,
+                        name: "FK_Tag_Link_LinkId",
+                        column: x => x.LinkId,
                         principalTable: "Link",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -354,37 +354,51 @@ namespace MewaAppBackend.Business.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_File_LinkId",
+                table: "File",
+                column: "LinkId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_File_UserId",
                 table: "File",
                 column: "UserId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_GroupLink_LinksId",
-                table: "GroupLink",
-                column: "LinksId");
+                name: "IX_Group_GroupId",
+                table: "Group",
+                column: "GroupId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GroupTag_TagsId",
-                table: "GroupTag",
-                column: "TagsId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_GroupUser_UsersId",
+                name: "IX_GroupUser_GroupId",
                 table: "GroupUser",
-                column: "UsersId");
+                column: "GroupId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Link_FileId",
-                table: "Link",
-                column: "FileId",
-                unique: true,
-                filter: "[FileId] IS NOT NULL");
+                name: "IX_Images_LinkId",
+                table: "Images",
+                column: "LinkId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Link_UserId",
+                name: "IX_Link_GroupId",
                 table: "Link",
-                column: "UserId");
+                column: "GroupId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Link_OwnerId",
+                table: "Link",
+                column: "OwnerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tag_GroupId",
+                table: "Tag",
+                column: "GroupId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tag_LinkId",
+                table: "Tag",
+                column: "LinkId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tag_UserId",
@@ -410,13 +424,16 @@ namespace MewaAppBackend.Business.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "GroupLink");
-
-            migrationBuilder.DropTable(
-                name: "GroupTag");
+                name: "File");
 
             migrationBuilder.DropTable(
                 name: "GroupUser");
+
+            migrationBuilder.DropTable(
+                name: "Images");
+
+            migrationBuilder.DropTable(
+                name: "Tag");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -425,16 +442,10 @@ namespace MewaAppBackend.Business.Migrations
                 name: "Link");
 
             migrationBuilder.DropTable(
-                name: "Tag");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Group");
-
-            migrationBuilder.DropTable(
-                name: "File");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers");
         }
     }
 }
