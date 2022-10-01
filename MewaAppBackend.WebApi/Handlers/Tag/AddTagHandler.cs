@@ -1,14 +1,14 @@
 ﻿using MediatR;
-using MewaAppBackend.Model.Interfaces;
+using MewaAppBackend.Business.UnitOfWork;
 using MewaAppBackend.WebApi.Commands.Tag;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MewaAppBackend.WebApi.Handlers.Tag
 {
-    public class AddTagCommandHandler : IRequestHandler<AddTagCommand, IActionResult>
+    public class AddTagHandler : IRequestHandler<AddTagCommand, IActionResult>
     {
         private readonly IUnitOfWork _unitOfWork;
-        public AddTagCommandHandler(IUnitOfWork unitOfWork)
+        public AddTagHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

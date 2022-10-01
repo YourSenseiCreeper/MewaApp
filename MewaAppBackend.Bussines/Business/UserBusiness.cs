@@ -1,4 +1,5 @@
-﻿using MewaAppBackend.Model.Interfaces;
+﻿using MewaAppBackend.Business.Repository;
+using MewaAppBackend.Business.UnitOfWork;
 using MewaAppBackend.Model.Model;
 
 namespace MewaAppBackend.Business.Business

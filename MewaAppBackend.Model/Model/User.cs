@@ -11,6 +11,5 @@ namespace MewaAppBackend.Model.Model
         public File Avatar { get; set; }
         public IEnumerable<GroupUser> Groups { get; set; }
         public IEnumerable<Tag> Tags { get; set; }
-        public IEnumerable<Link> Links { get; set; }
     }
 }

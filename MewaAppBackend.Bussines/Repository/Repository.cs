@@ -1,9 +1,9 @@
-﻿using MewaAppBackend.Model.Interfaces;
+﻿using MewaAppBackend.Business.EntityFramework;
 using MewaAppBackend.WebApi.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace MewaAppBackend.WebApi.Repository
+namespace MewaAppBackend.Business.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {

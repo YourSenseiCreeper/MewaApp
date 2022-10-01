@@ -2,7 +2,9 @@
 {
     public interface IBusinessFactory
     {
-        GroupBusiness GroupBusiness { get; }
+        IGroupBusiness GroupBusiness { get; }
+        ILinkBusiness LinkBusiness { get; }
+        IUserBusiness UserBusiness { get; }
 
         void SaveChanges();
     }

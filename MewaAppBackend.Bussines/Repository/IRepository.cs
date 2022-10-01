@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace MewaAppBackend.Model.Interfaces
+namespace MewaAppBackend.Business.Repository
 {
     public interface IRepository<T> where T : class
     {

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace MewaAppBackend.WebApi
+namespace MewaAppBackend.Business.EntityFramework
 {
     public class Context : IdentityDbContext<User>
     {

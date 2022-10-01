@@ -1,17 +1,17 @@
 ﻿using AutoMapper;
 using MediatR;
+using MewaAppBackend.Business.UnitOfWork;
 using MewaAppBackend.Model.Dtos.Tag;
-using MewaAppBackend.Model.Interfaces;
 using MewaAppBackend.WebApi.Queries.Tag;
 
 namespace MewaAppBackend.WebApi.Handlers.Tag
 {
-    public class GetTagByIdQueryHandler : IRequestHandler<GetTagByIdQuery, TagDto>
+    public class GetTagByIdHandler : IRequestHandler<GetTagByIdQuery, TagDto>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public GetTagByIdQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public GetTagByIdHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;

@@ -1,17 +1,16 @@
 ﻿using AutoMapper;
 using MediatR;
 using MewaAppBackend.Business.Business;
-using MewaAppBackend.Model.Interfaces;
+using MewaAppBackend.Business.UnitOfWork;
 using MewaAppBackend.Services.Thumbnail;
 using MewaAppBackend.Services.User;
-using MewaAppBackend.WebApi.UnitOfWork;
 using System.Reflection;
 
 namespace MewaAppBackend.WebApi.Configuration
 {
     public static class ServicesConfig
     {
-        public static void Handle(WebApplicationBuilder builder) 
+        public static void Handle(WebApplicationBuilder builder)
         {
             builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 

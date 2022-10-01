@@ -1,4 +1,4 @@
-﻿using MewaAppBackend.Model.Interfaces;
+﻿using MewaAppBackend.Business.UnitOfWork;
 
 namespace MewaAppBackend.Business.Business
 {
@@ -11,7 +11,7 @@ namespace MewaAppBackend.Business.Business
             this._unitOfWork = unitOfWork;
         }
 
-        public GroupBusiness GroupBusiness
+        public IGroupBusiness GroupBusiness
         {
             get
             {
@@ -19,7 +19,7 @@ namespace MewaAppBackend.Business.Business
             }
         }
 
-        public UserBusiness UserBusiness
+        public IUserBusiness UserBusiness
         {
             get
             {
@@ -27,7 +27,15 @@ namespace MewaAppBackend.Business.Business
             }
         }
 
-        public void SaveChanges() 
+        public ILinkBusiness LinkBusiness
+        {
+            get
+            {
+                return new LinkBusiness(_unitOfWork);
+            }
+        }
+
+        public void SaveChanges()
         {
             _unitOfWork.SaveChanges();
         }

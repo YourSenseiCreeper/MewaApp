@@ -1,14 +1,14 @@
 ﻿using MediatR;
-using MewaAppBackend.Model.Interfaces;
+using MewaAppBackend.Business.UnitOfWork;
 using MewaAppBackend.WebApi.Commands.Link;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MewaAppBackend.WebApi.Handlers.Link
 {
-    public class DeleteLinkCommandHandler : IRequestHandler<DeleteLinkCommand, IActionResult>
+    public class DeleteLinkHandler : IRequestHandler<DeleteLinkCommand, IActionResult>
     {
         private readonly IUnitOfWork unitOfWork;
-        public DeleteLinkCommandHandler(IUnitOfWork unitOfWork)
+        public DeleteLinkHandler(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
         }

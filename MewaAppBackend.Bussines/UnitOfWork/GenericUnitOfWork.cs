@@ -1,7 +1,7 @@
-﻿using MewaAppBackend.Model.Interfaces;
-using MewaAppBackend.WebApi.Repository;
+﻿using MewaAppBackend.Business.EntityFramework;
+using MewaAppBackend.Business.Repository;
 
-namespace MewaAppBackend.WebApi.UnitOfWork
+namespace MewaAppBackend.Business.UnitOfWork
 {
     public class GenericUnitOfWork : IUnitOfWork
     {

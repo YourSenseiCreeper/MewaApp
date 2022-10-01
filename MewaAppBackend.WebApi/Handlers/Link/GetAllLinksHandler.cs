@@ -1,17 +1,17 @@
 ﻿using AutoMapper;
 using MediatR;
+using MewaAppBackend.Business.UnitOfWork;
 using MewaAppBackend.Model.Dtos.Link;
-using MewaAppBackend.Model.Interfaces;
 using MewaAppBackend.WebApi.Queries;
 using Microsoft.EntityFrameworkCore;
 
 namespace MewaAppBackend.WebApi.Handlers.Link
 {
-    public class GetAllLinksQueryHandler : IRequestHandler<GetAllLinksQuery, IEnumerable<LinkDto>>
+    public class GetAllLinksHandler : IRequestHandler<GetAllLinksQuery, IEnumerable<LinkDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public GetAllLinksQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public GetAllLinksHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;

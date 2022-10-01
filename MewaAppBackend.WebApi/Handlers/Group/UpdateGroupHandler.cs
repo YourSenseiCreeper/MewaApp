@@ -1,19 +1,21 @@
 ﻿using AutoMapper;
 using MediatR;
+using MewaAppBackend.Business.EntityFramework;
+using MewaAppBackend.Business.Repository;
+using MewaAppBackend.Business.UnitOfWork;
 using MewaAppBackend.Model.Dtos.User;
-using MewaAppBackend.Model.Interfaces;
 using MewaAppBackend.Model.Model;
 using MewaAppBackend.WebApi.Commands.Group;
 
 namespace MewaAppBackend.WebApi.Handlers.Group
 {
-    public class UpdateGroupCommandHandler : IRequestHandler<UpdateGroupCommand, Unit>
+    public class UpdateGroupHandler : IRequestHandler<UpdateGroupCommand, Unit>
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IRepository<Model.Model.Group> groupRepository;
         protected readonly IMapper _mapper;
         private readonly Context _context;
-        public UpdateGroupCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, Context context)
+        public UpdateGroupHandler(IUnitOfWork unitOfWork, IMapper mapper, Context context)
         {
             this.unitOfWork = unitOfWork;
             groupRepository = unitOfWork.Repository<Model.Model.Group>();
@@ -50,7 +52,7 @@ namespace MewaAppBackend.WebApi.Handlers.Group
 
             var existingUsersIds = sourceLinksIds.Intersect(targetUsersIds);
             var existingUsers = source.Where(l => existingUsersIds.Contains(l.UserId)).ToList();
-            foreach(var existingUser in existingUsers)
+            foreach (var existingUser in existingUsers)
             {
                 existingUser.Privilage = targetUsers.First(u => u.UserId == existingUser.UserId).Privilage;
             }

@@ -1,20 +1,22 @@
 ﻿using AutoMapper;
 using MediatR;
-using MewaAppBackend.Model.Interfaces;
+using MewaAppBackend.Business.EntityFramework;
+using MewaAppBackend.Business.Repository;
+using MewaAppBackend.Business.UnitOfWork;
 using MewaAppBackend.Model.Model;
 using MewaAppBackend.WebApi.Commands.Group;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MewaAppBackend.WebApi.Handlers.Group
 {
-    public class CreateGroupCommandHandler : IRequestHandler<CreateGroupCommand, IActionResult>
+    public class CreateGroupHandler : IRequestHandler<CreateGroupCommand, IActionResult>
     {
         private readonly IRepository<Model.Model.Link> linkRepository;
         private readonly IRepository<Model.Model.User> userRepository;
         private readonly IRepository<Model.Model.Tag> tagRepository;
         protected readonly IMapper _mapper;
         private readonly Context _context;
-        public CreateGroupCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, Context context)
+        public CreateGroupHandler(IUnitOfWork unitOfWork, IMapper mapper, Context context)
         {
             linkRepository = unitOfWork.Repository<Model.Model.Link>();
             userRepository = unitOfWork.Repository<Model.Model.User>();
@@ -25,17 +27,8 @@ namespace MewaAppBackend.WebApi.Handlers.Group
 
         public async Task<IActionResult> Handle(CreateGroupCommand request, CancellationToken cancellationToken)
         {
-            var links = linkRepository.GetAll().Where(l => request.Links.Contains(l.Id)).ToList();
-            var tags = tagRepository.GetAll().Where(t => request.Tags.Contains(t.Id)).ToList();
-            //var users = userRepository.GetAll().Where(u => request.Users.Contains(u.Id))
-            //    .Select(u => new GroupUser { UserId = u.Id, GroupId = group.Id }).ToList();
-
-            // sender is admin
-            //var selectedUsers = new List<GroupUser>
-            //{
-            //    new GroupUser { User = null, Privilage = GroupPrivilage.Admin } // todo: attach current user
-            //};
-            //selectedUsers.AddRange(users.Select(u => new GroupUser { User = u, Privilage = GroupPrivilage.Reader }));
+            var links = linkRepository.ObjectSet.Where(l => request.Links.Contains(l.Id)).ToList();
+            var tags = tagRepository.ObjectSet.Where(t => request.Tags.Contains(t.Id)).ToList();
 
             var group = new Model.Model.Group
             {
@@ -47,7 +40,7 @@ namespace MewaAppBackend.WebApi.Handlers.Group
 
             var newGroup = _context.Group.Add(group).Entity;
             var resultUsers = new List<GroupUser>();
-            foreach(var user in request.Users)
+            foreach (var user in request.Users)
             {
                 resultUsers.Add(new GroupUser { UserId = user.UserId, GroupId = newGroup.Id });
             }

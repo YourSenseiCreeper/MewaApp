@@ -1,5 +1,6 @@
-﻿using MewaAppBackend.Model.Enum;
-using MewaAppBackend.Model.Interfaces;
+﻿using MewaAppBackend.Business.Repository;
+using MewaAppBackend.Business.UnitOfWork;
+using MewaAppBackend.Model.Enum;
 using MewaAppBackend.Model.Model;
 
 namespace MewaAppBackend.Business.Business
@@ -46,6 +47,22 @@ namespace MewaAppBackend.Business.Business
 
             group.Users = new List<GroupUser>() { newGroupUser };
             return group;
+        }
+
+        public void AddLinkToGroup(Group group, Link link)
+        {
+            var links = new List<Link>(group.Links);
+            links.Add(link);
+
+            link.Group = group;
+            group.Links = links;
+
+            _groupRepository.Edit(group);
+        }
+
+        public Group GetById(int id) 
+        {
+            return _groupRepository.GetDetail(x => x.Id == id);
         }
     }
 }

@@ -1,14 +1,14 @@
 ﻿using MediatR;
-using MewaAppBackend.Model.Interfaces;
+using MewaAppBackend.Business.UnitOfWork;
 using MewaAppBackend.WebApi.Commands.Link;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MewaAppBackend.WebApi.Handlers.Link
 {
-    public class EditLinkCommandHandler : IRequestHandler<EditLinkCommand, IActionResult>
+    public class EditLinkHandler : IRequestHandler<EditLinkCommand, IActionResult>
     {
         private readonly IUnitOfWork unitOfWork;
-        public EditLinkCommandHandler(IUnitOfWork unitOfWork)
+        public EditLinkHandler(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
         }
@@ -36,7 +36,6 @@ namespace MewaAppBackend.WebApi.Handlers.Link
             entity.Name = request.Name;
             entity.Description = request.Description;
             entity.ExpiryDate = request.ExpiryDate;
-            entity.OwnerId = request.OwnerId;
             entity.Tags = tagsRepository.GetAll().Where(t => request.Tags.Contains(t.Id)).ToList();
 
             return entity;

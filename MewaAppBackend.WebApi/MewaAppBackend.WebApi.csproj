@@ -40,7 +40,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\Link\" />
     <Folder Include="MewaAppFront\" />
     <None Include="..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>

@@ -9,10 +9,11 @@ using MewaAppBackend.WebApi.Queries.Link;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace MewaAppBackend.WebApi.Controllers
 {
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
     public class LinkController : ControllerBase
@@ -62,6 +63,18 @@ namespace MewaAppBackend.WebApi.Controllers
                 Tags = dto.Tags,
                 Groups = dto.Groups
             };
+            return await _mediator.Send(command);
+        }
+
+        [HttpPost("AddLinkToGroup")]
+        public async Task<IActionResult> AddLinkToGroup([FromBody] AddLinkToGroupCommand command)
+        {
+            var userId = this.GetUserGuidFromRequest();
+            if (userId == null)
+                return new BadRequestObjectResult("User dose not exist");
+
+            command.UserId = userId;
+
             return await _mediator.Send(command);
         }
 

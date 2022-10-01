@@ -1,14 +1,14 @@
 ﻿using MediatR;
-using MewaAppBackend.Model.Interfaces;
+using MewaAppBackend.Business.UnitOfWork;
 using MewaAppBackend.WebApi.Commands.Tag;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MewaAppBackend.WebApi.Handlers.Tag
 {
-    public class DeleteTagCommandHandler : IRequestHandler<DeleteTagCommand, IActionResult>
+    public class DeleteTagHandler : IRequestHandler<DeleteTagCommand, IActionResult>
     {
         private readonly IUnitOfWork _unitOfWork;
-        public DeleteTagCommandHandler(IUnitOfWork unitOfWork)
+        public DeleteTagHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -20,7 +20,7 @@ namespace MewaAppBackend.WebApi.Handlers.Tag
 
             if (tag == null)
                 return new BadRequestObjectResult($"Tag with id {request.Id} dose not exist!");
-            
+
             repository.Delete(tag);
             _unitOfWork.SaveChanges();
 

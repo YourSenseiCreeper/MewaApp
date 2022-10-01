@@ -1,19 +1,17 @@
-﻿using AutoMapper;
-using MediatR;
-using MewaAppBackend.Model.Interfaces;
-using MewaAppBackend.Model.Model;
+﻿using MediatR;
+using MewaAppBackend.Business.UnitOfWork;
 using MewaAppBackend.Services.Thumbnail;
 using MewaAppBackend.WebApi.Queries.Link;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MewaAppBackend.WebApi.Handlers.Link
 {
-    public class AddLinkQueryHandler : IRequestHandler<AddLinkCommand, IActionResult>
+    public class AddLinkHandler : IRequestHandler<AddLinkCommand, IActionResult>
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IPageThumbnailService _pageThumbnailService;
 
-        public AddLinkQueryHandler(IUnitOfWork unitOfWork, IPageThumbnailService pageThumbnailService)
+        public AddLinkHandler(IUnitOfWork unitOfWork, IPageThumbnailService pageThumbnailService)
         {
             this.unitOfWork = unitOfWork;
             _pageThumbnailService = pageThumbnailService;
@@ -27,7 +25,6 @@ namespace MewaAppBackend.WebApi.Handlers.Link
                 Name = request.Name,
                 Description = request.Description,
                 ExpiryDate = request.ExpiryDate,
-                OwnerId = request.OwnerId,
                 Tags = unitOfWork.Repository<Model.Model.Tag>().GetAll().Where(t => request.Tags.Contains(t.Id)).ToList(),
             };
             var newLinkFromDb = repository.Add(link);

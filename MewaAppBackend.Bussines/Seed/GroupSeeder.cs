@@ -2,6 +2,7 @@ using MewaAppBackend.Model.Model;
 using Microsoft.AspNetCore.Identity;
 using MewaAppBackend.WebApi;
 using Microsoft.EntityFrameworkCore;
+using MewaAppBackend.Business.EntityFramework;
 
 namespace MewaAppBackend.Business.Seed
 {

@@ -1,14 +1,12 @@
 ﻿using MediatR;
-using MewaAppBackend.Model.Dtos.User;
 using MewaAppBackend.WebApi.Commands.User;
-using MewaAppBackend.WebApi.Handlers.User;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MewaAppBackend.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController: ControllerBase
+    public class UserController : ControllerBase
     {
         private readonly IMediator _mediator;
 
@@ -24,7 +22,7 @@ namespace MewaAppBackend.WebApi.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<ActionResult<LoginCommandResult>> Login([FromBody] LoginCommand command)
+        public async Task<ActionResult<string>> Login([FromBody] LoginCommand command)
         {
             return await _mediator.Send(command, CancellationToken.None);
         }

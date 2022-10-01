@@ -1,11 +1,8 @@
 ﻿using MediatR;
+using MewaAppBackend.Business.UnitOfWork;
 using MewaAppBackend.Model.Dtos.Group;
-using MewaAppBackend.Model.Interfaces;
 using MewaAppBackend.Model.Model;
 using MewaAppBackend.WebApi.Commands.Group;
-using MewaAppBackend.WebApi.Extentions;
-using MewaAppBackend.WebApi.Handlers;
-using MewaAppBackend.WebApi.Handlers.Group;
 using MewaAppBackend.WebApi.Queries.Group;
 using Microsoft.AspNetCore.Mvc;
 
@@ -58,7 +55,6 @@ namespace MewaAppBackend.WebApi.Controllers
             unitOfWork.Repository<Link>().Add(new Link
             {
                 Name = "Name",
-                OwnerId = "28ad5b21-258b-4b21-b44a-78fac15a9c37",
                 Url = "asd"
             });
 

@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
+using MewaAppBackend.Business.UnitOfWork;
 using MewaAppBackend.Model.Dtos.Dashboard;
 using MewaAppBackend.Model.Dtos.Group;
 using MewaAppBackend.Model.Dtos.Link;
-using MewaAppBackend.Model.Interfaces;
 using MewaAppBackend.WebApi.Queries.Dashboard;
 using Microsoft.EntityFrameworkCore;
 
@@ -44,10 +44,11 @@ namespace MewaAppBackend.WebApi.Handlers.Dashboard
 
             if (isCurrentUser)
             {
-                resultGroups = groups.Select(g => new MicroGroupDto { Id = g.Id, Name = g.Name, IsShared = false}).ToList();
+                resultGroups = groups.Select(g => new MicroGroupDto { Id = g.Id, Name = g.Name, IsShared = false }).ToList();
                 resultGroups.AddRange(groupsSharedWithUser.Select(g => new MicroGroupDto { Id = g.Id, Name = g.Name, IsShared = true }).ToList());
                 resultLinks = linksWithoutGroup;
-            } else
+            }
+            else
             {
                 resultGroups = groups.Select(g => new MicroGroupDto { Id = g.Id, Name = g.Name, IsShared = false }).ToList();
                 resultLinks = linksWithoutGroup.ToList();

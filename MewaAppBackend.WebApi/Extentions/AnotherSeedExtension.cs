@@ -1,4 +1,5 @@
-﻿using MewaAppBackend.Business.Seed;
+﻿using MewaAppBackend.Business.EntityFramework;
+using MewaAppBackend.Business.Seed;
 
 namespace MewaAppBackend.WebApi.Extentions
 {

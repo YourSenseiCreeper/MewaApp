@@ -1,18 +1,18 @@
 ﻿using AutoMapper;
 using MediatR;
+using MewaAppBackend.Business.UnitOfWork;
 using MewaAppBackend.Model.Dtos.Link;
-using MewaAppBackend.Model.Interfaces;
 using MewaAppBackend.WebApi.Queries;
 using Microsoft.EntityFrameworkCore;
 
 namespace MewaAppBackend.WebApi.Handlers.Link
 {
-    public class GetLinkByIdQueryHandler : IRequestHandler<GetLinkByIdQuery, LinkDto>
+    public class GetLinkByIdHandler : IRequestHandler<GetLinkByIdQuery, LinkDto>
     {
         private IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public GetLinkByIdQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public GetLinkByIdHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
@@ -20,8 +20,7 @@ namespace MewaAppBackend.WebApi.Handlers.Link
 
         public Task<LinkDto> Handle(GetLinkByIdQuery request, CancellationToken cancellationToken)
         {
-            var result = _unitOfWork.Repository<Model.Model.Link>()
-                .GetAll()
+            var result = _unitOfWork.Repository<Model.Model.Link>().ObjectSet
                 .Include(l => l.Thumbnail)
                 .Include(l => l.Tags)
                 .Where(l => l.Id == request.Id)

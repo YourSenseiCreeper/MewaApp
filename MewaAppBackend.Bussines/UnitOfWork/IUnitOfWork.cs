@@ -1,6 +1,6 @@
-﻿using MewaAppBackend.Model.Model;
+﻿using MewaAppBackend.Business.Repository;
 
-namespace MewaAppBackend.Model.Interfaces
+namespace MewaAppBackend.Business.UnitOfWork
 {
     public interface IUnitOfWork
     {

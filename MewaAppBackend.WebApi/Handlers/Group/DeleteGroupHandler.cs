@@ -1,15 +1,16 @@
 ﻿using MediatR;
-using MewaAppBackend.Model.Interfaces;
+using MewaAppBackend.Business.Repository;
+using MewaAppBackend.Business.UnitOfWork;
 using MewaAppBackend.WebApi.Commands.Group;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MewaAppBackend.WebApi.Handlers.Group
 {
-    public class DeleteGroupCommandHandler : IRequestHandler<DeleteGroupCommand, IActionResult>
+    public class DeleteGroupHandler : IRequestHandler<DeleteGroupCommand, IActionResult>
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IRepository<Model.Model.Group> groupRepository;
-        public DeleteGroupCommandHandler(IUnitOfWork unitOfWork)
+        public DeleteGroupHandler(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
             groupRepository = unitOfWork.Repository<Model.Model.Group>();
