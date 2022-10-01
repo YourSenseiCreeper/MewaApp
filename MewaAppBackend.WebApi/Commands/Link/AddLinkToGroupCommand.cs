@@ -2,6 +2,7 @@
 using MediatR;
 using MewaAppBackend.Model.Dtos.Tag;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json.Serialization;
 
 namespace MewaAppBackend.WebApi.Commands.Link
 {
@@ -12,8 +13,5 @@ namespace MewaAppBackend.WebApi.Commands.Link
         public string? Description { get; set; }
         public DateTime ExpiryDate { get; set; }
         public int GroupId { get; set; }
-
-        [Ignore]
-        public string UserId { get; set; }
     }
 }
