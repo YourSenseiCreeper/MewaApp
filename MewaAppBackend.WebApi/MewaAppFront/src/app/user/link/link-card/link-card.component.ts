@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { Link } from 'src/app/shared/models';
+import { MicroLink } from 'src/app/shared/models';
 import { LinkService } from 'src/app/shared/services/link.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { AddEditLinkDialogComponent } from '../../dialog/add-edit-link-dialog/add-edit-link-dialog.component';
@@ -13,19 +13,7 @@ import { ConfirmationDialogComponent } from '../../dialog/confirmation/confirmat
   styleUrls: [ './link-card.component.scss' ]
 })
 export class LinkCardComponent implements OnInit {
-  @Input() link: Link = {
-    id: 1,
-    name: 'Link',
-    description: "Opis",
-    url: "https://google.com",
-    expiryDate: null,
-    isPublic: true,
-    thumbnailId: null,
-    ownerId: null,
-    thumbnailContent: null,
-    tags: [],
-    groups: []
-  };
+  @Input() link: MicroLink | null = null;
 
   imageUrl = "/assets/images/asp-net-core-identity-with-patterns-1.png";
 
@@ -36,7 +24,7 @@ export class LinkCardComponent implements OnInit {
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.convertThumbnailBase64ToImage(this.link.thumbnailContent);
+
   }
 
   convertThumbnailBase64ToImage(base64: string | null): string {
@@ -75,7 +63,7 @@ export class LinkCardComponent implements OnInit {
 
   onCopy(): void {
     try {
-      navigator.clipboard.writeText(this.link.url);
+      navigator.clipboard.writeText(this.link!.url);
       this.snackBar.open("Link was copied", 'Ok', {
         duration: 2000
       });
@@ -110,9 +98,10 @@ export class LinkCardComponent implements OnInit {
       width: '50%',
       data: {title: 'Usuwanie linku', text: "Czy na pewno chcesz usunąć ten link?"},
     });
+
     dialogRef.componentInstance.onDecide.subscribe(result => {
       if (result) {
-        this.service.deleteLink(this.link.id).subscribe(response => {
+        this.service.deleteLink(this.link!.id).subscribe(response => {
           console.log('Link został usunięty');
         });
       }
@@ -124,7 +113,6 @@ export class LinkCardComponent implements OnInit {
   }
 
   redirect(): void {
-    window.open(this.link.url, '_blank')?.focus();
+    // window.open(this.link.url, '_blank')?.focus();
   }
-
 }

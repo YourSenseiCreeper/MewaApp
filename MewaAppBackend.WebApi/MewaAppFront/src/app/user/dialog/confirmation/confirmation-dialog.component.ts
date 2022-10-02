@@ -14,7 +14,6 @@ export interface DialogData {
   styleUrls: ['./confirmation-dialog.component.scss']
 })
 export class ConfirmationDialogComponent {
-
     text = 'Tekst';
     title = 'Tytuł';
     isCancelVisible = true;
@@ -37,6 +36,7 @@ export class ConfirmationDialogComponent {
     }
 
     closeDialogAndComplete() {
+        // Here we can just put value -> this.dialogRef.close(false); and recive it on dialogRef.afterClosed().supscribe()
         this.dialogRef.close();
         this.onDecide.complete();
     }

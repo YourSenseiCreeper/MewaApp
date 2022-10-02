@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using MewaAppBackend.Model.Dtos.Group;
 using MewaAppBackend.WebApi.Commands.Group;
+using MewaAppBackend.WebApi.Extentions;
 using MewaAppBackend.WebApi.Queries.Group;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -21,7 +22,7 @@ namespace MewaAppBackend.WebApi.Controllers
         }
 
         [HttpPost("AddGroupToGroup")]
-        public async Task<IActionResult> AddGroupToGroup(AddGroupToGroupCommand comand)
+        public async Task<ActionResult<MicroGroupDto>> AddGroupToGroup(AddGroupToGroupCommand comand)
         {
             return Ok(await _mediator.Send(comand));
         }
@@ -42,11 +43,21 @@ namespace MewaAppBackend.WebApi.Controllers
         {
             return await _mediator.Send(command);
         }
-        
-        [HttpGet("GetGroupContent")]
+
+        [HttpGet("GetGroup")]
         public async Task<ActionResult<GroupDto>> Get([FromQuery] GetDetailGroupQuery query)
         {
             return await _mediator.Send(query);
+        }
+
+        [HttpGet("GetUserGroup")]
+        public async Task<ActionResult<GroupDto>> GetUserGroup()
+        {
+            var userId = this.GetUserGuidFromRequest();
+            if (userId == null)
+                return new BadRequestObjectResult("User dose not exist");
+
+            return await _mediator.Send(new GetDashboardByUserQuery { UserId = userId });
         }
     }
 }

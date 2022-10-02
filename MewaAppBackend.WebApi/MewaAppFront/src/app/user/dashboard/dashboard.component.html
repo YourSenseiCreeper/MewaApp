@@ -21,7 +21,7 @@
 <div class="link-card-container">
 	<div *ngIf="simpleLinks === true">
 		<app-inline-link-card
-			*ngFor="let link of links"
+			*ngFor="let link of data?.links"
 			[link]="link"
 			class="link-card">
 		</app-inline-link-card>
@@ -29,7 +29,7 @@
 	<div *ngIf="simpleLinks === false">
     <div class="link-card-grid">
       <app-link-card
-        *ngFor="let link of links"
+        *ngFor="let link of data?.links"
         [link]="link"
         class="single-link-card">
       </app-link-card>

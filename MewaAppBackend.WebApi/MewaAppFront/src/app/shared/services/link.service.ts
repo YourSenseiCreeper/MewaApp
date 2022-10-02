@@ -1,7 +1,6 @@
 import { Inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs/internal/Observable";
-import { map } from "rxjs/internal/operators/map";
-import { AddLink, Link, SuccessResult } from "../models";
+import { AddLinkToGroup, Link, MicroLink, SuccessResult } from "../models";
 import { MewaHttpService } from "./mewa-http.service";
 
 @Injectable({ providedIn: 'any' })
@@ -11,16 +10,8 @@ export class LinkService {
         this.service = service;
      }
 
-    getAllLinks(): Observable<Link[]> {
-        return this.service.get("/link").pipe(map(data => this.mapLinks(data)))
-    }
-
-    getUserLinks(userName: string): Observable<Link[]> {
-        return this.service.get('/link/GetByUser', { userName: userName }).pipe(map(data => this.mapLinks(data)))
-    }
-
-    addLink(newLink: AddLink): Observable<SuccessResult> {
-        return this.service.post("/link/add", newLink);
+    addLink(newLink: AddLinkToGroup): Observable<MicroLink> {
+        return this.service.post("/link/AddLinkToGroup", newLink);
     }
 
     editLink(existingLink: Link): Observable<SuccessResult> {

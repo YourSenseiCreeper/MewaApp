@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MewaAppBackend.WebApi.Handlers.Link
 {
-    public class AddLinkToGroupHandler : IRequestHandler<AddLinkToGroupCommand, IActionResult>
+    public class AddLinkToGroupHandler : IRequestHandler<AddLinkToGroupCommand, ActionResult<MicroLinkDto>>
     {
         private readonly IBusinessFactory _businessFactory;
         private readonly IMapper _mapper;
@@ -18,7 +18,7 @@ namespace MewaAppBackend.WebApi.Handlers.Link
             _mapper = mapper;
         }
 
-        public async Task<IActionResult> Handle(AddLinkToGroupCommand request, CancellationToken cancellationToken)
+        public async Task<ActionResult<MicroLinkDto>> Handle(AddLinkToGroupCommand request, CancellationToken cancellationToken)
         {
             // Later in this handler should be tag creation and assigment to link
             var newLink = _businessFactory.LinkBusiness.CreateLink(request.Name, request.Url, request.ExpiryDate, request.Description);

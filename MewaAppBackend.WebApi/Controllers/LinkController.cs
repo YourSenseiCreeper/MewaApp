@@ -20,7 +20,7 @@ namespace MewaAppBackend.WebApi.Controllers
         }
 
         [HttpPost("AddLinkToGroup")]
-        public async Task<IActionResult> AddLinkToGroup([FromBody] AddLinkToGroupCommand command)
+        public async Task<ActionResult<MicroLinkDto>> AddLinkToGroup([FromBody] AddLinkToGroupCommand command)
         {
             return await _mediator.Send(command);
         }

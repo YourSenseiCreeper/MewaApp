@@ -2,7 +2,7 @@
 using MewaAppBackend.Model.Dtos.Group;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MewaAppBackend.WebApi.Queries.Dashboard
+namespace MewaAppBackend.WebApi.Queries.Group
 {
     public class GetDashboardByUserQuery : IRequest<ActionResult<GroupDto>>
     {

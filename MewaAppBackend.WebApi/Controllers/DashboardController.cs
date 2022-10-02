@@ -1,8 +1,7 @@
 ﻿using MediatR;
-using MewaAppBackend.Model.Dtos.Dashboard;
 using MewaAppBackend.Model.Dtos.Group;
 using MewaAppBackend.WebApi.Extentions;
-using MewaAppBackend.WebApi.Queries.Dashboard;
+using MewaAppBackend.WebApi.Queries.Group;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

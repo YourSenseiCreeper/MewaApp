@@ -47,12 +47,12 @@
     <a [routerLink]="url">
       <div class="folder-content">
         <div class="folder-text">
-          {{ group.name }}
+          {{ group?.name }}
         </div>
       </div>
     </a>
   </div>
   <div class="folder-name">
-    {{ group.name }}
+    {{ group?.name ?? 'test' }}
   </div>
 </div>

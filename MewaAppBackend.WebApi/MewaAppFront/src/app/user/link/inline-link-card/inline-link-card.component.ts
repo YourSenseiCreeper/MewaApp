@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { Link } from 'src/app/shared/models';
+import { Link, MicroLink } from 'src/app/shared/models';
 import { LinkService } from 'src/app/shared/services/link.service';
 import { ConfirmationDialogComponent } from '../../dialog/confirmation/confirmation-dialog.component';
 
@@ -12,7 +12,7 @@ import { ConfirmationDialogComponent } from '../../dialog/confirmation/confirmat
 })
 export class InlineLinkCardComponent implements OnInit {
   @Input()
-  link!: Link;
+  link!: MicroLink;
 
   imageUrl = "/assets/images/asp-net-core-identity-with-patterns-1.png";
 

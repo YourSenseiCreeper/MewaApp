@@ -1,12 +1,11 @@
 ﻿using AutoMapper;
 using MediatR;
 using MewaAppBackend.Business.Business;
-using MewaAppBackend.Model.Dtos.Dashboard;
 using MewaAppBackend.Model.Dtos.Group;
-using MewaAppBackend.WebApi.Queries.Dashboard;
+using MewaAppBackend.WebApi.Queries.Group;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MewaAppBackend.WebApi.Handlers.Dashboard
+namespace MewaAppBackend.WebApi.Handlers.Group
 {
     public class GetDashboardByUserQueryHandler : IRequestHandler<GetDashboardByUserQuery, ActionResult<GroupDto>>
     {

@@ -9,7 +9,7 @@ import { GroupDto } from 'src/app/shared/models';
 export class FolderCardComponent {
   
   @Input() url: string = "";
-  @Input() group: GroupDto = { id: 0, name: 'Folder', description: '', isFolder: true };
+  @Input() group: GroupDto | null = null;
 
   constructor() { }
 

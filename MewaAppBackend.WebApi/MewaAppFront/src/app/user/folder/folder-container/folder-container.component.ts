@@ -20,7 +20,7 @@ export class FolderContainerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.service.getAllGroups().subscribe(r => this.groups = r);
+    // this.service.getAllGroups().subscribe(r => this.groups = r);
   }
 
   toggleChange(): void {
