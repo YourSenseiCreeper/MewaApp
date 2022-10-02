@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MewaAppBackend.Business.Migrations
 {
-    public partial class BaseDBModel : Migration
+    public partial class finalDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -55,16 +55,15 @@ namespace MewaAppBackend.Business.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsFolder = table.Column<bool>(type: "bit", nullable: false),
                     IsPersonal = table.Column<bool>(type: "bit", nullable: false),
-                    GroupId = table.Column<int>(type: "int", nullable: true)
+                    ParentGroupId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Group", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Group_Group_GroupId",
-                        column: x => x.GroupId,
+                        name: "FK_Group_Group_ParentGroupId",
+                        column: x => x.ParentGroupId,
                         principalTable: "Group",
                         principalColumn: "Id");
                 });
@@ -211,19 +210,12 @@ namespace MewaAppBackend.Business.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "SYSDATETIME()"),
                     ExpiryDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    OwnerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ThumbnailId = table.Column<int>(type: "int", nullable: true),
                     GroupId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Link", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Link_AspNetUsers_OwnerId",
-                        column: x => x.OwnerId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Link_Group_GroupId",
                         column: x => x.GroupId,
@@ -365,9 +357,9 @@ namespace MewaAppBackend.Business.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Group_GroupId",
+                name: "IX_Group_ParentGroupId",
                 table: "Group",
-                column: "GroupId");
+                column: "ParentGroupId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_GroupUser_GroupId",
@@ -384,11 +376,6 @@ namespace MewaAppBackend.Business.Migrations
                 name: "IX_Link_GroupId",
                 table: "Link",
                 column: "GroupId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Link_OwnerId",
-                table: "Link",
-                column: "OwnerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tag_GroupId",
@@ -439,10 +426,10 @@ namespace MewaAppBackend.Business.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Link");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Link");
 
             migrationBuilder.DropTable(
                 name: "Group");

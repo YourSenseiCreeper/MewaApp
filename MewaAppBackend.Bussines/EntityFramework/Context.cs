@@ -46,6 +46,12 @@ namespace MewaAppBackend.Business.EntityFramework
                 .WithOne(g => g.Group)
                 .HasForeignKey(g => g.GroupId);
 
+            modelBuilder.Entity<Group>()
+                .HasOne(s => s.ParentGroup)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction)
+                .IsRequired(false);
+
             // Group -> GroupUser <- User ok
             // Group -> <- User
             modelBuilder.Entity<GroupUser>()

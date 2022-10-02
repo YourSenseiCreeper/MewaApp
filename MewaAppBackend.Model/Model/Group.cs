@@ -10,11 +10,11 @@
         }
 
         public string Name { get; set; }
-        public bool IsFolder { get; set; }
         public bool IsPersonal { get; set; }
         public IEnumerable<Link> Links { get; set; }
         public IEnumerable<Tag> Tags { get; set; }
         public IEnumerable<GroupUser> Users { get; set; }
-        public IEnumerable<Group> Groups { get; set; }
+        public Group ParentGroup { get; set; }
+        public int? ParentGroupId { get; set; }
     }
 }

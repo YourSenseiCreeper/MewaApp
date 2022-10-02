@@ -33,7 +33,6 @@ namespace MewaAppBackend.WebApi.Handlers.Group
 
             group.Id = request.Id;
             group.Name = request.Name;
-            group.IsFolder = request.IsFolder;
             group.Links = CompareAndProduceResults(group.Links, request.Links);
             group.Tags = CompareAndProduceResults(group.Tags, request.Tags);
             group.Users = CompareAndProduceResultUsers(group.Users, request.Users);

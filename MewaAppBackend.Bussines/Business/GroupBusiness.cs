@@ -2,6 +2,7 @@
 using MewaAppBackend.Business.UnitOfWork;
 using MewaAppBackend.Model.Enum;
 using MewaAppBackend.Model.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace MewaAppBackend.Business.Business
 {
@@ -20,18 +21,24 @@ namespace MewaAppBackend.Business.Business
 
         public Group CreatePersonalGroup(User owner)
         {
-            var newGroup = GetPersonalGroupObject();
+            var newGroup = GetGroupObject("DASHBOARD", true);
             _groupRepository.Add(newGroup);
             return newGroup;
         }
 
-        private Group GetPersonalGroupObject()
+        public Group CreateGroup(string name)
+        {
+            var newGroup = GetGroupObject(name, false);
+            _groupRepository.Add(newGroup);
+            return newGroup;
+        }
+
+        private Group GetGroupObject(string name, bool isPersonal)
         {
             return new Group()
             {
-                Name = "DASHBOARD",
-                IsPersonal = true,
-                IsFolder = true,
+                Name = name,
+                IsPersonal = isPersonal,
             };
         }
 
@@ -60,9 +67,43 @@ namespace MewaAppBackend.Business.Business
             _groupRepository.Edit(group);
         }
 
+        public void AddGroupToGroup(Group parentGroup, Group group)
+        {
+            group.ParentGroupId = parentGroup.Id;
+            _groupRepository.Edit(group);
+        }
+
         public Group GetById(int id) 
         {
             return _groupRepository.GetDetail(x => x.Id == id);
+        }
+
+        public Group GetDashboardByUserId(string userId) 
+        {
+            return _groupRepository
+                .ObjectSet
+                .Where(x => x.Users.Any(q => q.UserId == userId) && x.IsPersonal)
+                .Include(x => x.ParentGroup)
+                .Include(x => x.Users)
+                .Include(x => x.Links)
+                .FirstOrDefault();
+        }
+
+        public Group GetGroupById(int id)
+        {
+            return _groupRepository
+                .ObjectSet
+                .Where(x => x.Id == id)
+                .Include(x => x.ParentGroup)
+                .Include(x => x.Users)
+                .Include(x => x.Links)
+                .FirstOrDefault();
+        }
+
+        public IEnumerable<Group> GetChildrenGroups(int groupId)
+        {
+            return _groupRepository
+                .ObjectSet.Where(x => x.ParentGroupId == groupId);
         }
     }
 }

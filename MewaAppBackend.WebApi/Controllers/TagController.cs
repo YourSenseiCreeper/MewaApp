@@ -1,12 +1,14 @@
 ﻿using MediatR;
 using MewaAppBackend.Model.Dtos.Tag;
 using MewaAppBackend.WebApi.Commands.Tag;
-using MewaAppBackend.WebApi.Handlers.Tag;
 using MewaAppBackend.WebApi.Queries.Tag;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MewaAppBackend.WebApi.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
     public class TagController : ControllerBase

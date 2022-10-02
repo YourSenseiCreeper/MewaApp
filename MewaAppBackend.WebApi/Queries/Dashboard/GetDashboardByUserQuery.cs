@@ -1,11 +1,11 @@
 ﻿using MediatR;
-using MewaAppBackend.Model.Dtos.Dashboard;
+using MewaAppBackend.Model.Dtos.Group;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MewaAppBackend.WebApi.Queries.Dashboard
 {
-    public class GetDashboardByUserQuery : IRequest<DashboardDto>
+    public class GetDashboardByUserQuery : IRequest<ActionResult<GroupDto>>
     {
-        public string Username { get; set; }
         public string UserId { get; set; }
     }
 }

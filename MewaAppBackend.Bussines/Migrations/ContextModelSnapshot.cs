@@ -93,12 +93,6 @@ namespace MewaAppBackend.Business.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("GroupId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsFolder")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("IsPersonal")
                         .HasColumnType("bit");
 
@@ -106,9 +100,12 @@ namespace MewaAppBackend.Business.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ParentGroupId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("GroupId");
+                    b.HasIndex("ParentGroupId");
 
                     b.ToTable("Group");
                 });
@@ -435,9 +432,12 @@ namespace MewaAppBackend.Business.Migrations
 
             modelBuilder.Entity("MewaAppBackend.Model.Model.Group", b =>
                 {
-                    b.HasOne("MewaAppBackend.Model.Model.Group", null)
-                        .WithMany("Groups")
-                        .HasForeignKey("GroupId");
+                    b.HasOne("MewaAppBackend.Model.Model.Group", "ParentGroup")
+                        .WithMany()
+                        .HasForeignKey("ParentGroupId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("ParentGroup");
                 });
 
             modelBuilder.Entity("MewaAppBackend.Model.Model.GroupUser", b =>
@@ -542,8 +542,6 @@ namespace MewaAppBackend.Business.Migrations
 
             modelBuilder.Entity("MewaAppBackend.Model.Model.Group", b =>
                 {
-                    b.Navigation("Groups");
-
                     b.Navigation("Links");
 
                     b.Navigation("Tags");
