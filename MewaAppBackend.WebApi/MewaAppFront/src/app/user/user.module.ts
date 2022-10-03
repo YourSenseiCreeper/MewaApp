@@ -20,7 +20,6 @@ import { PublicModule } from '../public/public.module';
 import { GroupService } from '../shared/services/group.service';
 import { LinkService } from '../shared/services/link.service';
 import { NotificationService } from '../shared/services/notification.service';
-import { TagService } from '../shared/services/tag.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AddEditFolderDialogComponent } from './dialog/add-edit-folder/add-edit-folder-dialog.component';
 import { AddEditLinkDialogComponent } from './dialog/add-edit-link-dialog/add-edit-link-dialog.component';
@@ -79,7 +78,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   providers: [
     LinkService,
     GroupService,
-    TagService,
     NotificationService,
   ]
 })

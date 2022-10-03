@@ -7,7 +7,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { debounceTime, distinctUntilChanged, map, Observable, of, startWith, Subject, switchMap } from 'rxjs';
 import { Link, TagDto } from 'src/app/shared/models';
 import { LinkService } from 'src/app/shared/services/link.service';
-import { TagService } from 'src/app/shared/services/tag.service';
 
 export interface AddEditLinkDialogData {
   link?: Link;
@@ -33,7 +32,6 @@ export class AddEditLinkDialogComponent implements OnInit {
   });
   onSave$ = new Subject();
   tags: TagDto[] = [];
-  filteredTags$: Observable<TagDto[]>;
   filteredTags: TagDto[] = [];
   autocomplete = false;
 
@@ -57,18 +55,10 @@ export class AddEditLinkDialogComponent implements OnInit {
   }
 
   constructor(
-    public tagService: TagService,
     public linkService: LinkService,
     public dialogRef: MatDialogRef<AddEditLinkDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: AddEditLinkDialogData) {
       this.onSave = this.onSave$.asObservable();
-      this.filteredTags$ = this.tagControl.valueChanges.pipe(
-        startWith(null),
-        debounceTime(300),
-        distinctUntilChanged(),
-        switchMap((tag: string | null) => this._filter(tag)),
-      );
-      this.filteredTags$.subscribe(v => this.filteredTags = v);
    }
 
   ngOnInit(): void {
@@ -181,11 +171,5 @@ export class AddEditLinkDialogComponent implements OnInit {
 
     this.tagInput!.nativeElement.value = '';
     this.tagControl.setValue(null);
-  }
-
-  private _filter(value: any): Observable<TagDto[]> {
-    return !value || !!value.name ? 
-      of([]) : 
-      this.tagService.getAllTags(value.toLowerCase(), 10);
   }
 } 

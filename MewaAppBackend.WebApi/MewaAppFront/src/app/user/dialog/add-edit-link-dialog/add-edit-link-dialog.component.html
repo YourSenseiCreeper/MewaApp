@@ -101,11 +101,11 @@
 			<mat-autocomplete 
 				#auto="matAutocomplete" 
 				(optionSelected)="selected($event)">
-				<mat-option 
+				<!-- <mat-option 
 					*ngFor="let tag of filteredTags$ | async" 
 					[value]="tag">
 					{{ tag.name }}
-				</mat-option>
+				</mat-option> -->
 			</mat-autocomplete>
 		</mat-form-field>
 	</div>

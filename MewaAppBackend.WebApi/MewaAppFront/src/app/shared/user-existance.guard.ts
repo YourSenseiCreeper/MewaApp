@@ -16,17 +16,7 @@ export class UserExistanceGuard implements CanActivate, CanActivateChild {
         private _router: Router) { }
 
     async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
-        let userName = route.params['userName'];
-        if (!!userName) {
-            let result = await this.userService.exists(userName).toPromise();
-            if (!result)
-                this._router.navigate(['/']);
-            return result ?? false;
-        }
-        else
-            this._router.navigate(['/']);
-
-        return false;
+        return true;
     }
 
     async canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
