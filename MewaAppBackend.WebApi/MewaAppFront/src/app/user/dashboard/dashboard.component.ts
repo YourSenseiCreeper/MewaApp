@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { catchError, EMPTY } from 'rxjs';
-import { GroupDto, Link } from 'src/app/shared/models';
+import { GroupDto } from 'src/app/shared/models';
 import { GroupService } from 'src/app/shared/services/group.service';
 import { LinkService } from 'src/app/shared/services/link.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
