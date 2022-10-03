@@ -102,13 +102,14 @@ export class LinkCardComponent implements OnInit {
       data: {title: 'Usuwanie linku', text: "Czy na pewno chcesz usunąć ten link?"},
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.service 
-          .deleteLink(this.link!.id)
-          .subscribe(response => console.log('Link został usunięty'));
-      }
-    });
+    dialogRef.afterClosed()
+      .subscribe(result => {
+        if (result) {
+          this.service 
+            .deleteLink(this.link!.id)
+            .subscribe(response => console.log('Link został usunięty'));
+        }
+      });
   }
 
 }

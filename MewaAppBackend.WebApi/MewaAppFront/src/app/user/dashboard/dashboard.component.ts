@@ -40,17 +40,17 @@ export class DashboardComponent implements OnInit {
         data: { title: 'Dodaj nowy link', icon: 'add' },
         width: '50%'
       });
-      
-      dialog.componentInstance.onSave.subscribe(v => {
-        this.service.addLink(v)
-          .pipe(catchError((err, caught) => {
-            this.notification.showError(err as string);
-            return EMPTY;
-          }))
-          .subscribe(r => {
-            this.notification.showSuccess("Link dodany");
-            dialog.componentInstance.close();
-          })
-      });
+
+    dialog.afterClosed().subscribe(v => {
+      this.service.addLink(v)
+        .pipe(catchError((err, caught) => {
+          this.notification.showError(err as string);
+          return EMPTY;
+        }))
+        .subscribe(r => {
+          this.notification.showSuccess("Link dodany");
+          dialog.componentInstance.close();
+        })
+    });
   }
 } 
