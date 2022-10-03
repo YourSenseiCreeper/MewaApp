@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { catchError, EMPTY } from 'rxjs';
 import { Link, MicroLink } from 'src/app/shared/models';
 import { LinkService } from 'src/app/shared/services/link.service';
 import { ConfirmationDialogComponent } from '../../dialog/confirmation/confirmation-dialog.component';
@@ -79,7 +80,10 @@ export class InlineLinkCardComponent implements OnInit {
       width: '50%',
       data: {title: 'Czy jesteś pewien?', text: "Czy rzeczywiście chcesz usunąć ten link?"},
     });
-    dialogRef.componentInstance.onDecide.subscribe(result => {
+
+    dialogRef.afterClosed()
+    .pipe(catchError((err, caught) => EMPTY))
+    .subscribe(result => {
       if (result) {
         this.service.deleteLink(this.link.id).subscribe(response => {
           console.log('Link został usunięty');

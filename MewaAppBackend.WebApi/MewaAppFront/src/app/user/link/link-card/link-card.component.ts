@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { catchError, EMPTY } from 'rxjs';
 import { MicroLink } from 'src/app/shared/models';
 import { LinkService } from 'src/app/shared/services/link.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -81,16 +82,18 @@ export class LinkCardComponent implements OnInit {
       },
       width: '75%'
     });
-    dialog.componentInstance.onSave.subscribe(v => {
-      this.service.editLink(v).subscribe(r => {
-        if (r.success) {
-         this.notification.showSuccess("Link zmieniony");
-         dialog.componentInstance.close();
-        } else {
-         this.notification.showError(r.message as string);
-        }
-      })
-    });
+
+    dialog.afterClosed()
+      .pipe(catchError((err, caught) => {
+        this.notification.showError(err as string);
+        return EMPTY;
+      }))
+      .subscribe(v => {
+        this.service.editLink(v).subscribe(r => {
+          this.notification.showSuccess("Link zmieniony");
+          dialog.componentInstance.close();
+        })
+      });
   }
 
   onDelete(): void {
@@ -99,20 +102,13 @@ export class LinkCardComponent implements OnInit {
       data: {title: 'Usuwanie linku', text: "Czy na pewno chcesz usunąć ten link?"},
     });
 
-    dialogRef.componentInstance.onDecide.subscribe(result => {
+    dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.service.deleteLink(this.link!.id).subscribe(response => {
-          console.log('Link został usunięty');
-        });
+        this.service 
+          .deleteLink(this.link!.id)
+          .subscribe(response => console.log('Link został usunięty'));
       }
     });
   }
 
-  onShare(): void {
-
-  }
-
-  redirect(): void {
-    // window.open(this.link.url, '_blank')?.focus();
-  }
 }

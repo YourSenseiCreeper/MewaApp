@@ -1,12 +1,5 @@
-import { Component, Inject, Input, Output } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Subject } from 'rxjs';
-
-export interface DialogData {
-    title: string,
-    text: string,
-    isCancelVisible: boolean
-}
 
 @Component({
   selector: 'app-confirmation-dialog',
@@ -18,26 +11,16 @@ export class ConfirmationDialogComponent {
     title = 'Tytuł';
     isCancelVisible = true;
 
-    @Output()
-    public onDecide = new Subject<boolean>();
-
     constructor(
         public dialogRef: MatDialogRef<ConfirmationDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any) { }
 
     closeOrCancel() {
-        this.onDecide.next(false);
-        this.closeDialogAndComplete();
+        this.dialogRef.close(false);
     }
 
     accept() {
-        this.onDecide.next(true);
-        this.closeDialogAndComplete();
+        this.dialogRef.close(true);
     }
 
-    closeDialogAndComplete() {
-        // Here we can just put value -> this.dialogRef.close(false); and recive it on dialogRef.afterClosed().supscribe()
-        this.dialogRef.close();
-        this.onDecide.complete();
-    }
 }
