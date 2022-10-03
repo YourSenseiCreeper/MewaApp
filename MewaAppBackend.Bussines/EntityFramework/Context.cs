@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace MewaAppBackend.WebApi
+namespace MewaAppBackend.Business.EntityFramework
 {
     public class Context : IdentityDbContext<User>
     {
@@ -45,6 +45,12 @@ namespace MewaAppBackend.WebApi
                 .HasMany(u => u.Users)
                 .WithOne(g => g.Group)
                 .HasForeignKey(g => g.GroupId);
+
+            modelBuilder.Entity<Group>()
+                .HasOne(s => s.ParentGroup)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction)
+                .IsRequired(false);
 
             // Group -> GroupUser <- User ok
             // Group -> <- User

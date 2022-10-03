@@ -23,6 +23,7 @@ export interface AddEditLinkDialogData {
 export class AddEditLinkDialogComponent implements OnInit {
   
   @Output() public onSave!: Observable<any>;
+  @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement> | undefined;
 
   addEditLink: FormGroup = new FormGroup({
     url: new FormControl('', [Validators.required, Validators.maxLength(300), Validators.minLength(6)]),
@@ -35,6 +36,9 @@ export class AddEditLinkDialogComponent implements OnInit {
   filteredTags$: Observable<TagDto[]>;
   filteredTags: TagDto[] = [];
   autocomplete = false;
+
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  tagControl = new FormControl();
 
   get urlForm() {
     return this.addEditLink.get('url');
@@ -71,13 +75,7 @@ export class AddEditLinkDialogComponent implements OnInit {
     if (this.data.link) {
       this.loadFormFromLink();
     }
-    // this.tagService.getAllTags().subscribe(d => { 
-    //   this.allTags = d;
-    //   if (this.data.link?.tags) {
-    //     let tagIds = this.data.link.tags.map(t => t.id);
-    //     this.tags = this.allTags.filter(t => tagIds.includes(t.id));
-    //   }
-    // });
+
     this.urlForm?.valueChanges.subscribe((v: string) => {
       if (this.autocomplete && !this.nameForm?.value) {
         let lastUrlSection = v.slice(v.lastIndexOf('/'), v.length);
@@ -118,14 +116,11 @@ export class AddEditLinkDialogComponent implements OnInit {
   }
 
   submit(): void {
-    if (this.data.link) {
-      this.submitModifiedLink();
-    } else {
-      this.submitNewLink();
-    }
+    this.data.link ? this.submitModifiedLink() : this.submitNewLink();
   }
 
   submitNewLink(): void {
+    // Const here
     let value = {
       url: this.urlForm?.value,
       name: this.nameForm?.value,
@@ -139,6 +134,7 @@ export class AddEditLinkDialogComponent implements OnInit {
   }
 
   submitModifiedLink(): void {
+    // Const here
     let value = {
       id: this.data.link?.id,
       url: this.urlForm?.value,
@@ -157,13 +153,9 @@ export class AddEditLinkDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  separatorKeysCodes: number[] = [ENTER, COMMA];
-  tagControl = new FormControl();
-
-  @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement> | undefined;
-
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
+    // Const here
     let tag = this.filteredTags.filter(t => t.name == value)[0];
     if (value && tag !== undefined) {
       this.tags.push(tag);
@@ -182,6 +174,7 @@ export class AddEditLinkDialogComponent implements OnInit {
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
+    // Const here
     let tag = this.filteredTags.filter(t => t.name == event.option.viewValue)[0];
     if (!this.tags.find(t => t.name == event.option.viewValue))
       this.tags.push(tag);
@@ -191,10 +184,8 @@ export class AddEditLinkDialogComponent implements OnInit {
   }
 
   private _filter(value: any): Observable<TagDto[]> {
-    if (!value || !!value.name) {
-      return of([]);
-    }
-    const filterValue = value.toLowerCase();
-    return this.tagService.getAllTags(value.toLowerCase(), 10);
+    return !value || !!value.name ? 
+      of([]) : 
+      this.tagService.getAllTags(value.toLowerCase(), 10);
   }
 } 

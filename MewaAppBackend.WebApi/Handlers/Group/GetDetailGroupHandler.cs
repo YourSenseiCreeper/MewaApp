@@ -1,0 +1,33 @@
+﻿using AutoMapper;
+using MediatR;
+using MewaAppBackend.Business.Business;
+using MewaAppBackend.Model.Dtos.Group;
+using MewaAppBackend.WebApi.Queries.Group;
+using Microsoft.AspNetCore.Mvc;
+
+namespace MewaAppBackend.WebApi.Handlers.Group
+{
+    public class GetDetailGroupHandler : IRequestHandler<GetDetailGroupQuery, ActionResult<GroupDto>>
+    {
+        private readonly IBusinessFactory _businessFactory;
+        private readonly IMapper _mapper;
+        public GetDetailGroupHandler(IBusinessFactory businessFactory, IMapper mapper)
+        {
+            _businessFactory = businessFactory;
+            _mapper = mapper;
+        }
+
+        public async Task<ActionResult<GroupDto>> Handle(GetDetailGroupQuery request, CancellationToken cancellationToken)
+        {
+            var group = _businessFactory.GroupBusiness.GetGroupById(request.Id);
+            if (group == null)
+                return new BadRequestObjectResult($"No group with id {request.Id} found");
+
+            var chlidrenGroups = _businessFactory.GroupBusiness.GetChildrenGroups(group.Id);
+
+            var mapedGroup = _mapper.Map<GroupDto>(group);
+            mapedGroup.Groups = _mapper.Map<IEnumerable<MicroGroupDto>>(chlidrenGroups);
+            return new OkObjectResult(mapedGroup);
+        }
+    }
+}

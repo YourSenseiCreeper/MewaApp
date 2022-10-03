@@ -1,75 +1,30 @@
 ﻿using MediatR;
 using MewaAppBackend.Model.Dtos.Group;
-using MewaAppBackend.Model.Interfaces;
-using MewaAppBackend.Model.Model;
 using MewaAppBackend.WebApi.Commands.Group;
 using MewaAppBackend.WebApi.Extentions;
-using MewaAppBackend.WebApi.Handlers.Group;
 using MewaAppBackend.WebApi.Queries.Group;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MewaAppBackend.WebApi.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
     public class GroupController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly IUnitOfWork unitOfWork;
 
-        public GroupController(IMediator mediator, IUnitOfWork unitOfWork)
+        public GroupController(IMediator mediator)
         {
             _mediator = mediator;
-            this.unitOfWork = unitOfWork;
         }
 
-        /// <summary>
-        /// Geting all groups
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet("GetAll")]
-        public async Task<IEnumerable<GroupDto>> GetAll()
+        [HttpPost("AddGroupToGroup")]
+        public async Task<ActionResult<MicroGroupDto>> AddGroupToGroup(AddGroupToGroupCommand comand)
         {
-            return await _mediator.Send(new GetAllGroupsQuery());
-        }
-        /// <summary>
-        /// Get one group
-        /// </summary>
-        /// <param name="id"> Id of group that we want go get </param>
-        /// <returns> HTTP Response only </returns>
-        [HttpGet("GetDetailGroup")]
-        public async Task<GroupDto> GetDetailGroup(int id)
-        {
-            return await _mediator.Send(new GetDetailGroupQuery { Id = id });
-        }
-
-        [HttpPost]
-        public async Task<ActionResult<CreateGroupCommandResult>> Create(CreateGroupCommand createGroupCommand)
-        {
-            //var currentUserId = this.GetUserGuidFromRequest();
-            //createGroupCommand.Users = new[] { currentUserId };
-            return Ok(await _mediator.Send(createGroupCommand));
-        }
-
-        [HttpPost("TestDataGroup")]
-        public async Task<ActionResult> TestData()
-        {
-            unitOfWork.Repository<Link>().Add(new Link
-            {
-                Name = "Name",
-                OwnerId = "28ad5b21-258b-4b21-b44a-78fac15a9c37",
-                Url = "asd"
-            });
-
-            unitOfWork.Repository<Tag>().Add(new Tag
-            {
-                Name = "Name",
-                UserId = "28ad5b21-258b-4b21-b44a-78fac15a9c37"
-            });
-
-            unitOfWork.SaveChanges();
-
-            return Ok();
+            return Ok(await _mediator.Send(comand));
         }
 
         [HttpPut]
@@ -84,9 +39,25 @@ namespace MewaAppBackend.WebApi.Controllers
         }
 
         [HttpDelete]
-        public async Task<DeleteGroupCommandResult> Delete([FromBody] DeleteGroupCommand command)
+        public async Task<IActionResult> Delete([FromBody] DeleteGroupCommand command)
         {
             return await _mediator.Send(command);
+        }
+
+        [HttpGet("GetGroup")]
+        public async Task<ActionResult<GroupDto>> Get([FromQuery] GetDetailGroupQuery query)
+        {
+            return await _mediator.Send(query);
+        }
+
+        [HttpGet("GetUserGroup")]
+        public async Task<ActionResult<GroupDto>> GetUserGroup()
+        {
+            var userId = this.GetUserGuidFromRequest();
+            if (userId == null)
+                return new BadRequestObjectResult("User dose not exist");
+
+            return await _mediator.Send(new GetDashboardByUserQuery { UserId = userId });
         }
     }
 }

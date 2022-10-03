@@ -12,6 +12,12 @@ export interface Link {
     groups: MicroGroup[];
 }
 
+export interface MicroLink {
+    id: number;
+    name: string;
+    url: string;
+}
+
 export interface MicroTag {
     id: number;
     name: string;
@@ -22,14 +28,12 @@ export interface MicroGroup {
     name: string;
 }
 
-export interface AddLink {
+export interface AddLinkToGroup {
     url: string;
     name: string;
     description: string | null;
     expiryDate: Date | null;
-    isPublic: boolean;
-    tags: number[];
-    groups: number[];
+    groupId: number;
 }
 
 export interface AddGroup {
@@ -45,8 +49,8 @@ export interface AddGroup {
 export interface GroupDto {
     id: number,
     name: string,
-    description: string,
-    isFolder: boolean
+    groups: MicroGroup[],
+    links: MicroLink[]
 }
 
 export interface RegisterCommand {

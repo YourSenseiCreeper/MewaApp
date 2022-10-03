@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute } from '@angular/router';
+import { catchError, EMPTY } from 'rxjs';
 import { Link } from 'src/app/shared/models';
 import { LinkService } from 'src/app/shared/services/link.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -102,14 +103,15 @@ export class FolderContentsComponent implements OnInit {
         width: '50%'
       });
       dialog.componentInstance.onSave.subscribe(v => {
-        this.service.addLink(v).subscribe(r => {
-          if (r.success) {
-           this.notification.showSuccess("Link dodany");
-           dialog.componentInstance.close();
-          } else {
-           this.notification.showError(r.message as string);
-          }
-        })
+        this.service.addLink(v)
+          .pipe(catchError((err, caught) => {
+            this.notification.showError(err as string);
+            return EMPTY;
+          }))
+          .subscribe(r => {
+            this.notification.showSuccess("Link dodany");
+            dialog.componentInstance.close();
+          })
       });
   }
 

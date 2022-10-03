@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips/chip-input';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { map, Observable, startWith } from 'rxjs';
+import { catchError, EMPTY, map, Observable, startWith } from 'rxjs';
 import { AddGroup, TagDto } from 'src/app/shared/models';
 import { GroupService } from 'src/app/shared/services/group.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -15,7 +15,9 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
   styleUrls: ['./add-edit-folder-dialog.component.scss']
 })
 export class AddEditFolderDialogComponent implements OnInit {
-  
+
+  @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement> | undefined;
+
   addEditFolder: FormGroup = new FormGroup({
     url: new FormControl('', [Validators.required, Validators.maxLength(300), Validators.minLength(6)]),
     name: new FormControl('', [Validators.maxLength(300)]),
@@ -24,6 +26,8 @@ export class AddEditFolderDialogComponent implements OnInit {
   tags: TagDto[] = [];
   allTags: TagDto[] = [];
   filteredTags: Observable<TagDto[]>;
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  tagControl = new FormControl();
 
   get urlForm() {
     return this.addEditFolder.get("url");
@@ -53,37 +57,26 @@ export class AddEditFolderDialogComponent implements OnInit {
   }
 
   submit() {
-    let values = {
-      redirectUrl: this.urlForm?.value,
-      name: this.nameForm?.value,
-      description: this.descriptionForm?.value,
-      isFolder: true,
-      links: [],
-      tags: [],
-      users: []
-    } as AddGroup;
-    this.service.addGroup(values).subscribe(r => {
-      if (r.success) {
+    // Insted of 1 here shoud be Group id
+    this.service.AddGroupToGroup(this.nameForm?.value, 1)
+    .pipe(catchError((err, caught) => {
+      this.notification.showError(err as string);
+      this.close();
+      return EMPTY;
+    }))
+    .subscribe(r => {
       this.notification.showSuccess("Folder dodany");
       this.close();
-      } else {
-      this.notification.showError(r.message as string);
-      }
     })
   }
 
-   close() {
-     this.dialogRef.close();
-   }
-
-   separatorKeysCodes: number[] = [ENTER, COMMA];
-  tagControl = new FormControl();
-
-  @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement> | undefined;
+  close() {
+    this.dialogRef.close();
+  }
 
   add(event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
-    let tag = this.allTags.filter(t => t.name == value)[0];
+    const value: string = (event.value?.trim() || '');
+    let tag: TagDto = this.allTags.filter(t => t.name == value)[0];
 
     if (value && tag !== undefined) {
       this.tags.push(tag);
@@ -111,6 +104,8 @@ export class AddEditFolderDialogComponent implements OnInit {
   private _filter(value: string): TagDto[] {
     const filterValue = value.toLowerCase();
 
-    return this.allTags.filter(t => t.name.toLowerCase().includes(filterValue));
+    return this.allTags
+      .filter(t => t.name.toLowerCase()
+      .includes(filterValue));
   }
 } 

@@ -1,8 +1,7 @@
-﻿using MewaAppBackend.Model.Interfaces;
-using MewaAppBackend.Model.Model;
-using MewaAppBackend.WebApi.Repository;
+﻿using MewaAppBackend.Business.EntityFramework;
+using MewaAppBackend.Business.Repository;
 
-namespace MewaAppBackend.WebApi.UnitOfWork
+namespace MewaAppBackend.Business.UnitOfWork
 {
     public class GenericUnitOfWork : IUnitOfWork
     {
@@ -17,7 +16,7 @@ namespace MewaAppBackend.WebApi.UnitOfWork
         public IRepository<T> Repository<T>() where T : class
         {
             if (repositories.TryGetValue(typeof(T), out var repository))
-                return (IRepository<T>) repository;
+                return (IRepository<T>)repository;
             IRepository<T> repo = new Repository<T>(db);
             repositories.Add(typeof(T), repo);
             return repo;

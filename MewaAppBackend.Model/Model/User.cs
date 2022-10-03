@@ -9,8 +9,7 @@ namespace MewaAppBackend.Model.Model
             this.Groups = new HashSet<GroupUser>();
         }
         public File Avatar { get; set; }
-        public virtual ICollection<GroupUser> Groups { get; set; }
-        public virtual ICollection<Tag> Tags { get; set; }
-        public virtual ICollection<Link> Links { get; set; }
+        public IEnumerable<GroupUser> Groups { get; set; }
+        public IEnumerable<Tag> Tags { get; set; }
     }
 }

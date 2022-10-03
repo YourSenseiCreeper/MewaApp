@@ -9,12 +9,12 @@
             this.Users = new HashSet<GroupUser>();
         }
 
-        public string RedirectURL { get; set; }
         public string Name { get; set; }
-        public bool IsFolder { get; set; }
-        public bool IsPublic { get; set; }
-        public virtual ICollection<Link> Links { get; set; }
-        public virtual ICollection<Tag> Tags { get; set; }
-        public virtual ICollection<GroupUser> Users { get; set; }
+        public bool IsPersonal { get; set; }
+        public IEnumerable<Link> Links { get; set; }
+        public IEnumerable<Tag> Tags { get; set; }
+        public IEnumerable<GroupUser> Users { get; set; }
+        public Group ParentGroup { get; set; }
+        public int? ParentGroupId { get; set; }
     }
 }

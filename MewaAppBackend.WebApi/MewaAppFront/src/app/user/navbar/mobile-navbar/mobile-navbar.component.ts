@@ -16,12 +16,7 @@ export class MobileNavbarComponent implements OnInit {
   }
 
   @HostListener('window:scroll') onScroll() {
-    if(window.scrollY > 0) {
-      this.navbarFixed = true;
-    }
-    else {
-      this.navbarFixed = false;
-    }
+    this.navbarFixed = window.scrollY > 0 ;
   }
 
   logout() {

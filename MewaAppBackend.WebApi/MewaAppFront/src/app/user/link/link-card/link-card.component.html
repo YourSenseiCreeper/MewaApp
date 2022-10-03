@@ -3,7 +3,7 @@
   <mat-card-header>
     <div class="card-header">
       <mat-card-title class="title">
-        {{ link.name }}
+        {{ link?.name }}
       </mat-card-title>
       <a
         class="more-icon"
@@ -53,13 +53,13 @@
       (click)="redirect()">
     <div class="separator"></div>
     <mat-card-subtitle class="card-description">
-      {{ link.description }}
+      Not implemented
     </mat-card-subtitle>
   </mat-card-content>
 
   <mat-card-footer>
     <mat-card-subtitle class="link">
-      {{ link.url }}
+      {{ link?.url }}
     </mat-card-subtitle>
     <a
       class="link-icon"
