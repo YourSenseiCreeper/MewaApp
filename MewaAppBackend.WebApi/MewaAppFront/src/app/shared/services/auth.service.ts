@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/internal/operators/map';
-import { LoginCommand, LoginCommandResult, RegisterCommand, RegisterCommandResult } from '../models';
+import { LoginCommand, RegisterCommand, RegisterCommandResult, TokenDTO } from '../models';
 import { CurrentUserService } from './current-user.service';
 import { MewaHttpService } from './mewa-http.service';
 
@@ -27,12 +27,8 @@ export class AuthService {
     return rawResult as RegisterCommandResult;
   }
 
-  login(command: LoginCommand): Observable<LoginCommandResult> {
-    return this.service.post("/User/Login", command).pipe(map(data => this.mapLoginResult(data)))
-  }
-
-  mapLoginResult(rawResult: any): LoginCommandResult {
-    return rawResult as LoginCommandResult;
+  login(command: LoginCommand): Observable<TokenDTO> {
+    return this.service.post("/User/Login", command);
   }
   
   getUserToken(): string | null {

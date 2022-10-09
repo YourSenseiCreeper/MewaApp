@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { catchError, EMPTY } from 'rxjs';
 import { LoginCommand } from 'src/app/shared/models';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -31,24 +32,26 @@ export class LoginComponent {
   }
 
   login(): void {
-    let rawForm = this.loginForm.getRawValue();
+    const rawForm = this.loginForm.getRawValue();
     this.submitDisabled = true;
-    let command = {
+    const command = {
       email: rawForm.login,
       password: rawForm.password
     } as LoginCommand;
-    this.service.login(command).subscribe(r => {
-      if (r.success) {
-        this.authService.setUserToken(r.token);
-        this.router.navigate(['/user/dashboard']);
-      } else {
-        this.notification.showError(r.message);
+
+    console.log("Test")
+
+    this.service.login(command)
+      .pipe(
+        catchError((err, caught) => {
         this.submitDisabled = false;
-      }
-    }, error => {
-      this.notification.showError("Problem z połączeniem: " + error.message);
-      this.submitDisabled = false;
-    });
+        return EMPTY;
+      }))
+      .subscribe(token => {
+        console.log(token.token)
+        this.authService.setUserToken(token.token);
+        this.router.navigate(['/user/dashboard']);
+      });
   }
 
   getErrorMessage(control: string): string {

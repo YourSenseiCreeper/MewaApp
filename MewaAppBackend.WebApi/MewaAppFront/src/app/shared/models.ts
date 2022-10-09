@@ -68,10 +68,8 @@ export interface LoginCommand {
     password: string;
 }
 
-export interface LoginCommandResult {
-    message: string;
-    success: boolean;
-    token: string;
+export interface TokenDTO {
+    token: string
 }
 
 export interface SuccessResult {
