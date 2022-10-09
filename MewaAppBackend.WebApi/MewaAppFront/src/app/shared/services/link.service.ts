@@ -21,25 +21,4 @@ export class LinkService {
     deleteLink(id: number): Observable<any> {
         return this.service.delete("/link", { id: id });
     }
-
-    mapLinks(links: any[]): Link[] {
-        return links.map(l => this.mapLink(l));
-    }
-
-    mapLink(rawLink: any) {
-    let link = {
-        id: rawLink.id,
-        url: rawLink.url,
-        name: rawLink.name,
-        description: rawLink.desciption ? rawLink.desciption : null,
-        expiryDate: rawLink.expiryDate ? rawLink.expiryDate : null,
-        ownerId: rawLink.ownerId,
-        thumbnailId: rawLink.thumbnailId ? rawLink.thumbnailId : null,
-        thumbnailContent: rawLink.thumbnailContent ? rawLink.thumbnailContent : null,
-        tags: rawLink.tags,
-        groups: rawLink.groups
-    } as Link;
-
-    return link;
-    }
 }

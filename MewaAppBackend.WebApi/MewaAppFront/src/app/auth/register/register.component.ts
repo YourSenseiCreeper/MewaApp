@@ -36,12 +36,6 @@ export class RegisterComponent {
   }
 
   ngOnInit(): void {
-    /* this.route.queryParamMap.subscribe(params => {
-      this.registerForm.controls['email'].setValue(params.get('email') ? params.get('email') as string : '');
-      if (params.get('email')) {
-        this.registerForm.controls['email'].markAsTouched();
-      }
-    }); */
     if (this.emailService.getMessage()) {
       this.registerForm.controls['email'].setValue(this.emailService.getMessage());
       this.registerForm.controls['email'].markAsTouched();

@@ -9,18 +9,12 @@ export class NotificationService {
 
   constructor(private _snackBar: MatSnackBar) { }
 
-  showTestMessage(): void {
-    this._snackBar.open("Testing", "Close", {
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    })
-  }
-
   showMessage(text: string, action: string, panelClass: string): void {
     this._snackBar.open(text, action, {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
-      panelClass: panelClass
+      panelClass: panelClass,
+      duration: 5000
     })
   }
 

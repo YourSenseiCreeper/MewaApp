@@ -6,13 +6,11 @@ import {
     RouterStateSnapshot,
     CanActivateChild
 } from '@angular/router';
-import { UserService } from './services/user.service';
 
 @Injectable({ providedIn: 'any' })
 export class UserExistanceGuard implements CanActivate, CanActivateChild {
 
     constructor(
-        private userService: UserService,
         private _router: Router) { }
 
     async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {

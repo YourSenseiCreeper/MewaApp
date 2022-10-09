@@ -8,15 +8,10 @@ import { MewaHttpService } from './mewa-http.service';
 @Injectable({ providedIn: 'any' })
 export class AuthService {
   private service: MewaHttpService;
-  private currentUserService: CurrentUserService;
   private UserTokenKeyName: string = "access_token";
-
-
   constructor(
-    @Inject(MewaHttpService) service: MewaHttpService,
-    @Inject(CurrentUserService) currentUserService: CurrentUserService) {
+    @Inject(MewaHttpService) service: MewaHttpService) {
       this.service = service;
-      this.currentUserService = currentUserService;
   }
 
   register(command: RegisterCommand): Observable<RegisterCommandResult> {
