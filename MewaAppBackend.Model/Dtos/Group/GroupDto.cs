@@ -6,8 +6,7 @@ namespace MewaAppBackend.Model.Dtos.Group
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public IEnumerable<MicroLinkDto> Links { get; set; }
-        public IEnumerable<MicroGroupDto> Groups { get; set; }
+        public IEnumerable<MewaElementDto> Elements { get; set; }
     }
 }
  

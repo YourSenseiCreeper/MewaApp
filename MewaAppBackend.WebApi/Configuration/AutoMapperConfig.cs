@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MewaAppBackend.Model.Dtos;
 using MewaAppBackend.Model.Dtos.Group;
 using MewaAppBackend.Model.Dtos.Link;
 using MewaAppBackend.Model.Dtos.Tag;
@@ -16,7 +17,8 @@ namespace MewaAppBackend.WebApi.Configuration
             CreateMap<Link, MicroLinkDto>();
             CreateMap<Tag, MicroTagDto>();
             CreateMap<Tag, TagDto>();
-            CreateMap<Group, GroupDto>();
+            CreateMap<Group, GroupDto>()
+                .ForMember(x => x.Elements, opt => opt.Ignore()); ;
             CreateMap<Group, MicroGroupDto>();
             CreateMap<Link, LinkDto>();
             CreateMap<User, UserDto>();
@@ -36,6 +38,11 @@ namespace MewaAppBackend.WebApi.Configuration
                 .ForMember(d => d.Id, options => options.MapFrom(t => t.Group.Id))
                 .ForMember(d => d.Name, options => options.MapFrom(t => t.Group.Name));
 
+            CreateMap<Group, MewaElementDto>()
+                .ForMember(x => x.IsFolder, opt => opt.MapFrom(o => true));
+
+            CreateMap<Link, MewaElementDto>()
+                .ForMember(x => x.IsFolder, opt => opt.MapFrom(o => false));
         }
     }
 }

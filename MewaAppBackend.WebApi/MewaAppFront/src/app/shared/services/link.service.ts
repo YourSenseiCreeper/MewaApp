@@ -1,6 +1,6 @@
 import { Inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs/internal/Observable";
-import { AddLinkToGroup, Link, MicroLink, SuccessResult } from "../models";
+import { AddLinkToGroup, Link, MewaElementDto, SuccessResult } from "../models";
 import { MewaHttpService } from "./mewa-http.service";
 
 @Injectable({ providedIn: 'any' })
@@ -10,7 +10,7 @@ export class LinkService {
         this.service = service;
      }
 
-    addLink(newLink: AddLinkToGroup): Observable<MicroLink> {
+    addLink(newLink: AddLinkToGroup): Observable<MewaElementDto> {
         return this.service.post("/link/AddLinkToGroup", newLink);
     }
 

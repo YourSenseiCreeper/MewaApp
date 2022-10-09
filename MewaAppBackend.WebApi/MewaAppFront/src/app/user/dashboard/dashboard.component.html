@@ -16,23 +16,34 @@
     </mat-icon>
     Dodaj link
   </button>
+  <button
+    class="button" 
+    mat-stroked-button 
+    color="primary"
+    (click)="addGroup()">
+    <mat-icon>create_new_folder</mat-icon>
+    Dodaj folder
+</button>
   </div>
 </header>
 <div class="link-card-container">
 	<div *ngIf="simpleLinks === true">
-		<app-inline-link-card
+		<!-- <app-inline-link-card
 			*ngFor="let link of data?.links"
 			[link]="link"
 			class="link-card">
-		</app-inline-link-card>
+		</app-inline-link-card> -->
 	</div>
 	<div *ngIf="simpleLinks === false">
     <div class="link-card-grid">
+      <!-- <app-folder-card 
+        *ngFor="let group of data?.groups" [group]="group">
+      </app-folder-card>
       <app-link-card
         *ngFor="let link of data?.links"
         [link]="link"
         class="single-link-card">
-      </app-link-card>
+      </app-link-card> -->
     </div>
 	</div>
 </div>

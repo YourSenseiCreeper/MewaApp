@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using MewaAppBackend.Model.Dtos;
 using MewaAppBackend.Model.Dtos.Link;
 using MewaAppBackend.WebApi.Commands.Link;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -20,7 +21,7 @@ namespace MewaAppBackend.WebApi.Controllers
         }
 
         [HttpPost("AddLinkToGroup")]
-        public async Task<ActionResult<MicroLinkDto>> AddLinkToGroup([FromBody] AddLinkToGroupCommand command)
+        public async Task<ActionResult<MewaElementDto>> AddLinkToGroup([FromBody] AddLinkToGroupCommand command)
         {
             return await _mediator.Send(command);
         }

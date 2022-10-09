@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { GroupDto } from 'src/app/shared/models';
+import { GroupDto, MicroGroup } from 'src/app/shared/models';
 
 @Component({
   selector: 'app-folder-card',
@@ -7,9 +7,7 @@ import { GroupDto } from 'src/app/shared/models';
   styleUrls: ['./folder-card.component.scss']
 })
 export class FolderCardComponent {
-  
-  @Input() url: string = "";
-  @Input() group: GroupDto | null = null;
+  @Input() group: MicroGroup | null = null;
 
   constructor() { }
 

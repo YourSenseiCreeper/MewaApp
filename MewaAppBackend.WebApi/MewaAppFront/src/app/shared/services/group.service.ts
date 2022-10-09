@@ -1,6 +1,6 @@
 import { Inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs/internal/Observable";
-import { GroupDto, MicroGroup } from "../models";
+import { GroupDto, MewaElementDto, MicroGroup } from "../models";
 import { MewaHttpService } from "./mewa-http.service";
 
 @Injectable({providedIn: 'any'})
@@ -11,7 +11,7 @@ export class GroupService {
         this.service = service;
     }
 
-    AddGroupToGroup(name: string, parentGroupId: number ): Observable<MicroGroup> {
+    AddGroupToGroup(name: string, parentGroupId: number ): Observable<MewaElementDto> {
         return this.service.post('/group/AddGroupToGroup', {
             name: name,
             parentGroupId: parentGroupId

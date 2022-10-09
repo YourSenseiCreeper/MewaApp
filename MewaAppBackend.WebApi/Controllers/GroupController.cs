@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using MewaAppBackend.Model.Dtos;
 using MewaAppBackend.Model.Dtos.Group;
 using MewaAppBackend.WebApi.Commands.Group;
 using MewaAppBackend.WebApi.Extentions;
@@ -22,7 +23,7 @@ namespace MewaAppBackend.WebApi.Controllers
         }
 
         [HttpPost("AddGroupToGroup")]
-        public async Task<ActionResult<MicroGroupDto>> AddGroupToGroup(AddGroupToGroupCommand comand)
+        public async Task<ActionResult<MewaElementDto>> AddGroupToGroup(AddGroupToGroupCommand comand)
         {
             return Ok(await _mediator.Send(comand));
         }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using MewaAppBackend.Business.Business;
+using MewaAppBackend.Model.Dtos;
 using MewaAppBackend.Model.Dtos.Group;
 using MewaAppBackend.WebApi.Queries.Group;
 using Microsoft.AspNetCore.Mvc;
@@ -25,8 +26,17 @@ namespace MewaAppBackend.WebApi.Handlers.Group
 
             var chlidrenGroups = _businessFactory.GroupBusiness.GetChildrenGroups(group.Id);
 
+            var allElements = new List<MewaElementDto>();
+
+            var linksElements = _mapper.Map<IEnumerable<MewaElementDto>>(group.Links);
+            allElements.AddRange(linksElements);
+
+            var groupElements = _mapper.Map<IEnumerable<MewaElementDto>>(chlidrenGroups);
+            allElements.AddRange(groupElements);
+
             var mapedGroup = _mapper.Map<GroupDto>(group);
-            mapedGroup.Groups = _mapper.Map<IEnumerable<MicroGroupDto>>(chlidrenGroups);
+            mapedGroup.Elements = allElements.OrderBy(x => !x.IsFolder);
+
             return new OkObjectResult(mapedGroup);
         }
     }

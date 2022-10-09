@@ -46,11 +46,18 @@ export interface AddGroup {
     users: string[]
 }
 
+
+export interface MewaElementDto {
+    id: number,
+    name: string,
+    isFolder: boolean,
+    url: string,
+}
+
 export interface GroupDto {
     id: number,
     name: string,
-    groups: MicroGroup[],
-    links: MicroLink[]
+    elements: MewaElementDto[]
 }
 
 export interface RegisterCommand {
