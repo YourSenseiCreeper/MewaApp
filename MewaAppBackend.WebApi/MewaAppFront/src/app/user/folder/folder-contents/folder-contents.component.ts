@@ -45,7 +45,6 @@ export class FolderContentsComponent implements OnInit {
         }))
         .subscribe(r => {
           this.notification.showSuccess("Link dodany");
-          dialog.componentInstance.close();
         })
     });
   }

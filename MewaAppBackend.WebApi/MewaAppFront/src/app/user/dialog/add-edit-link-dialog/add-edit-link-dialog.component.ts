@@ -4,15 +4,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips/chip-input';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { debounceTime, distinctUntilChanged, map, Observable, of, startWith, Subject, switchMap } from 'rxjs';
-import { Link, TagDto } from 'src/app/shared/models';
+import { Observable, Subject } from 'rxjs';
+import { AddLinkToGroup, Link, TagDto } from 'src/app/shared/models';
 import { LinkService } from 'src/app/shared/services/link.service';
 
-export interface AddEditLinkDialogData {
-  link?: Link;
-  title: string;
-  icon: string;
-}
 
 @Component({
   selector: 'app-add-edit-link-dialog',
@@ -28,12 +23,16 @@ export class AddEditLinkDialogComponent implements OnInit {
     url: new FormControl('', [Validators.required, Validators.maxLength(300), Validators.minLength(6)]),
     name: new FormControl('', [Validators.maxLength(300)]),
     description: new FormControl('', [Validators.maxLength(300)]),
-    isPublic: new FormControl(false, null)
   });
+
   onSave$ = new Subject();
   tags: TagDto[] = [];
   filteredTags: TagDto[] = [];
   autocomplete = false;
+  link?: Link;
+  title?: string;
+  icon?: string;
+  groupId?: number;
 
   separatorKeysCodes: number[] = [ENTER, COMMA];
   tagControl = new FormControl();
@@ -57,7 +56,7 @@ export class AddEditLinkDialogComponent implements OnInit {
   constructor(
     public linkService: LinkService,
     public dialogRef: MatDialogRef<AddEditLinkDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: AddEditLinkDialogData) {
+    @Inject(MAT_DIALOG_DATA) public data: AddEditLinkDialogComponent) {
       this.onSave = this.onSave$.asObservable();
    }
 
@@ -101,75 +100,30 @@ export class AddEditLinkDialogComponent implements OnInit {
     this.isPublicForm?.setValue(this.data.link?.isPublic);
   }
 
-  toggleAutocomplete() {
-    this.autocomplete = !this.autocomplete;
-  }
-
   submit(): void {
-    this.data.link ? this.submitModifiedLink() : this.submitNewLink();
+    this.submitNewLink();
+
+    this.dialogRef.close(this.submitNewLink());
   }
 
-  submitNewLink(): void {
-    // Const here
-    let value = {
+  submitNewLink(): AddLinkToGroup {
+    return {
       url: this.urlForm?.value,
       name: this.nameForm?.value,
       description: this.descriptionForm?.value,
       expiryDate: new Date(2023, 1, 1),
-      isPublic: this.isPublicForm?.value,
-      tags: this.tags.map(t => t.id),
-      groups: []
+      groupId: this.data.groupId!
     };
-    this.onSave$.next(value);
-  }
-
-  submitModifiedLink(): void {
-    // Const here
-    let value = {
-      id: this.data.link?.id,
-      url: this.urlForm?.value,
-      name: this.nameForm?.value,
-      description: this.descriptionForm?.value,
-      expiryDate: this.data.link?.expiryDate,
-      isPublic: this.isPublicForm?.value,
-      ownerId: this.data.link?.ownerId,
-      tags: this.tags.map(t => t.id),
-      groups: []
-    };
-    this.onSave$.next(value);
-  }
-
-  close(): void {
-    this.dialogRef.close();
   }
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
-    // Const here
     let tag = this.filteredTags.filter(t => t.name == value)[0];
     if (value && tag !== undefined) {
       this.tags.push(tag);
     }
 
     event.chipInput!.clear();
-    this.tagControl.setValue(null);
-  }
-
-  remove(tag: TagDto): void {
-    const index = this.tags.indexOf(tag);
-
-    if (index >= 0) {
-      this.tags.splice(index, 1);
-    }
-  }
-
-  selected(event: MatAutocompleteSelectedEvent): void {
-    // Const here
-    let tag = this.filteredTags.filter(t => t.name == event.option.viewValue)[0];
-    if (!this.tags.find(t => t.name == event.option.viewValue))
-      this.tags.push(tag);
-
-    this.tagInput!.nativeElement.value = '';
     this.tagControl.setValue(null);
   }
 } 

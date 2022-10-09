@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { catchError, EMPTY } from 'rxjs';
-import { GroupDto } from 'src/app/shared/models';
+import { AddLinkToGroup, GroupDto, MicroLink } from 'src/app/shared/models';
 import { GroupService } from 'src/app/shared/services/group.service';
 import { LinkService } from 'src/app/shared/services/link.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -24,8 +24,8 @@ export class DashboardComponent implements OnInit {
     private notification: NotificationService) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(paramMap => 
-      this.groupService.getUserDashboard().subscribe(data => this.data = data)
+    this.route.paramMap.subscribe((paramMap : ParamMap) => 
+      this.groupService.getUserDashboard().subscribe((data: GroupDto) => this.data = data)
     );
   }
 
@@ -34,23 +34,25 @@ export class DashboardComponent implements OnInit {
   }
 
   addLink(): void {
-    // Const here
-    let dialog = this.dialog.open(AddEditLinkDialogComponent,
+    const dialog = this.dialog.open(AddEditLinkDialogComponent,
       {
-        data: { title: 'Dodaj nowy link', icon: 'add' },
+        data: { title: 'Dodaj nowy link', icon: 'add', groupId: this.data?.id },
         width: '50%'
       });
 
-    dialog.afterClosed().subscribe(v => {
-      this.service.addLink(v)
-        .pipe(catchError((err, caught) => {
-          this.notification.showError(err as string);
-          return EMPTY;
-        }))
-        .subscribe(r => {
-          this.notification.showSuccess("Link dodany");
-          dialog.componentInstance.close();
-        })
-    });
+    dialog.afterClosed()
+      .subscribe((link: AddLinkToGroup | null) => {
+        if(!!link) {
+          this.service.addLink(link as AddLinkToGroup)
+          .pipe(catchError((err, caught) => {
+            this.notification.showError(err.message as string);
+            return EMPTY;
+          }))
+          .subscribe((newLink: MicroLink) => {
+            this.notification.showSuccess("Link dodany");
+            this.data?.links.push(newLink);
+          })
+        }
+      });
   }
 } 

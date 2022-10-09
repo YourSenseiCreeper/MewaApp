@@ -91,7 +91,6 @@ export class LinkCardComponent implements OnInit {
       .subscribe(v => {
         this.service.editLink(v).subscribe(r => {
           this.notification.showSuccess("Link zmieniony");
-          dialog.componentInstance.close();
         })
       });
   }

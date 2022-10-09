@@ -24,14 +24,6 @@
 				placeholder="https://example.com"
 				matInput 
 				formControlName="url">
-				<!-- <mat-error
-				*ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-				Please enter a valid email address
-				</mat-error>
-				<mat-error
-				*ngIf="emailFormControl.hasError('required')">
-				Email is <strong>required</strong>
-				</mat-error> -->
 		</mat-form-field>
 		<mat-form-field appearance="fill">
 			<mat-icon 
@@ -63,63 +55,13 @@
 				matInput 
 				formControlName="description">
 		</mat-form-field>
-		<mat-checkbox
-			formControlName="isPublic">
-			Link publiczny?
-		</mat-checkbox>
-		<mat-form-field appearance="fill">
-			<mat-icon 
-				class="icon" 
-				matPrefix>
-				label
-			</mat-icon>
-			<mat-label>
-				Tagi
-			</mat-label>
-			<mat-chip-list 
-				#chipList 
-				aria-label="Tag selection">
-				<mat-chip
-					*ngFor="let tag of tags"
-					(removed)="remove(tag)">
-					{{ tag.name }}
-					<button matChipRemove>
-						<mat-icon>
-							cancel
-						</mat-icon>
-					</button>
-				</mat-chip>
-				<input
-					placeholder="Nowy tag..."
-					#tagInput
-					[formControl]="tagControl"
-					[matAutocomplete]="auto"
-					[matChipInputFor]="chipList"
-					[matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-					(matChipInputTokenEnd)="add($event)">
-			</mat-chip-list>
-			<mat-autocomplete 
-				#auto="matAutocomplete" 
-				(optionSelected)="selected($event)">
-				<!-- <mat-option 
-					*ngFor="let tag of filteredTags$ | async" 
-					[value]="tag">
-					{{ tag.name }}
-				</mat-option> -->
-			</mat-autocomplete>
-		</mat-form-field>
 	</div>
 	<div mat-dialog-actions>
-		<mat-slide-toggle
-      		color="primary"
-      		(change)="toggleAutocomplete()">
-      		Autocomplete
-    	</mat-slide-toggle>
 		<button 
 			mat-button 
 			color="primary" 
 			type="button"
-			(click)="close()">
+			(click)="dialogRef.close();">
 			Anuluj
 		</button>
 		<button
