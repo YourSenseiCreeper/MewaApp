@@ -28,5 +28,16 @@ namespace MewaAppBackend.Business.Business
 
             return newLink;
         }
+
+        public void UpdateLink(Link link)
+        {
+            _linkRepository.Edit(link);
+        }
+
+        public Link GetLinkById(int linkId)
+        {
+            return _linkRepository.ObjectSet.Where(x => x.Id == linkId)
+                .FirstOrDefault();
+        }
     }
 }

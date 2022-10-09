@@ -33,7 +33,7 @@ namespace MewaAppBackend.WebApi.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Edit([FromBody] EditLinkCommand dto)
+        public async Task<ActionResult<MewaElementDto>> Edit([FromBody] EditLinkCommand dto)
         {
             return await _mediator.Send(dto);
         }

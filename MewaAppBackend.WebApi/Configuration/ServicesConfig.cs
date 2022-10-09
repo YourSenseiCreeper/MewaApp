@@ -2,6 +2,7 @@
 using MediatR;
 using MewaAppBackend.Business.Business;
 using MewaAppBackend.Business.UnitOfWork;
+using MewaAppBackend.Services.GroupsAndLinks;
 using MewaAppBackend.Services.Thumbnail;
 using MewaAppBackend.Services.User;
 using System.Reflection;
@@ -18,6 +19,7 @@ namespace MewaAppBackend.WebApi.Configuration
             builder.Services.AddTransient<IBusinessFactory, BusinessFactory>();
             builder.Services.AddScoped<IUserCreationService, UserCreationService>();
             builder.Services.AddScoped<IPageThumbnailService, PageThumbnailService>();
+            builder.Services.AddScoped<IGetGroupDtoService, GetGroupDtoService>();
 
             var mapperConfig = new MapperConfiguration(mc =>
             {
