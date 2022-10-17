@@ -16,6 +16,8 @@ import { AddEditLinkDialogComponent } from '../dialog/add-edit-link-dialog/add-e
 })
 export class DashboardComponent implements OnInit {
   data: GroupDto | null = null;
+  links: MewaElementDto[] | null = null;
+  folders: MewaElementDto[] | null = null;
   simpleLinks: boolean = false;
 
   constructor(private route: ActivatedRoute,
@@ -26,7 +28,12 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap : ParamMap) => 
-      this.groupService.getUserDashboard().subscribe((data: GroupDto) => this.data = data)
+      this.groupService.getUserDashboard().subscribe((data: GroupDto) => {
+          this.data = data,
+          this.folders = data.elements.filter(data => data.isFolder),
+          this.links = data.elements.filter(data => !data.isFolder)
+        }
+      ),
     );
   }
 

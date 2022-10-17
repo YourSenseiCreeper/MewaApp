@@ -24,10 +24,25 @@ header {
     }
 }
 
+.link-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
 h1{
     color: $my-primary;
     font-weight: bold;
     text-align: center;
     font-size: 40px;
     margin-top: 2rem;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    margin: 1em;
+    padding: 0;
+    border-top: 1px solid #999999;
 }
