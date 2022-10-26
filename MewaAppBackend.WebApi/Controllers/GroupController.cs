@@ -25,7 +25,7 @@ namespace MewaAppBackend.WebApi.Controllers
         [HttpPost("AddGroupToGroup")]
         public async Task<ActionResult<MewaElementDto>> AddGroupToGroup(AddGroupToGroupCommand comand)
         {
-            return Ok(await _mediator.Send(comand));
+            return await _mediator.Send(comand);
         }
 
         [HttpPut]

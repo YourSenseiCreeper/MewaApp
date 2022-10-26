@@ -21,9 +21,12 @@ namespace MewaAppBackend.WebApi.Handlers.Group
 
         public async Task<ActionResult<MewaElementDto>> Handle(AddGroupToGroupCommand request, CancellationToken cancellationToken)
         {
-            var parentGroup = _businessFactory.GroupBusiness.GetById(request.ParentGroupId);
+            var parentGroup = _businessFactory.GroupBusiness.GetFullGroupById(request.ParentGroupId);
             if (parentGroup == null)
                 return new BadRequestObjectResult($"Group with id {request.ParentGroupId} dose not exist");
+
+            if(parentGroup.GroupLvl > 2)
+                return new BadRequestObjectResult($"If you want to have more files pls buy premium");
 
             var newGroup = _businessFactory.GroupBusiness.CreateGroup(request.Name);
             _businessFactory.SaveChanges();

@@ -16,5 +16,6 @@
         public IEnumerable<GroupUser> Users { get; set; }
         public Group ParentGroup { get; set; }
         public int? ParentGroupId { get; set; }
+        public int GroupLvl { get; set; }
     }
 }

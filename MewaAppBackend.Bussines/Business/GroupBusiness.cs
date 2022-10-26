@@ -39,6 +39,7 @@ namespace MewaAppBackend.Business.Business
             {
                 Name = name,
                 IsPersonal = isPersonal,
+                GroupLvl = 1
             };
         }
 
@@ -69,13 +70,33 @@ namespace MewaAppBackend.Business.Business
 
         public void AddGroupToGroup(Group parentGroup, Group group)
         {
+            var newGroupUser = new GroupUser()
+            {
+                GroupId = group.Id,
+                UserId = parentGroup.Users.First(x => x.IsOwner).UserId,
+                Privilage = Privilage.Owner
+            };
+            _groupUserRepository.Add(newGroupUser);
+
             group.ParentGroupId = parentGroup.Id;
+            group.GroupLvl = parentGroup.GroupLvl + 1;
             _groupRepository.Edit(group);
         }
 
         public Group GetById(int id) 
         {
             return _groupRepository.GetDetail(x => x.Id == id);
+        }
+
+        public Group GetFullGroupById(int id)
+        {
+            return _groupRepository
+                .ObjectSet
+                .Where(x => x.Id == id)
+                .Include(x => x.ParentGroup)
+                .Include(x => x.Users)
+                .Include(x => x.Links)
+                .FirstOrDefault();
         }
 
         public Group GetDashboardByUserId(string userId) 
@@ -104,6 +125,30 @@ namespace MewaAppBackend.Business.Business
         {
             return _groupRepository
                 .ObjectSet.Where(x => x.ParentGroupId == groupId);
+        }
+
+        public async Task DeleteGroup(int groupId) 
+        {
+            var group = await _groupRepository
+                .ObjectSet
+                .Where(x => x.Id == groupId)
+                .FirstOrDefaultAsync();
+
+            RecursiveDelete(group);
+        }
+
+        private void RecursiveDelete(Group parent)
+        {
+            var childrens = GetChildrenGroups(parent.Id).ToList();
+            if (childrens.Count != 0)
+            {
+                foreach (var child in childrens)
+                {
+                    RecursiveDelete(child);
+                }
+            }
+
+            _groupRepository.Delete(parent);
         }
     }
 }

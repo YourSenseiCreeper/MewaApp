@@ -9,5 +9,7 @@ namespace MewaAppBackend.Business.Business
         void UpdateLink(Link link);
 
         Link GetLinkById(int linkId);
+
+        void DeleteLink(Link link);
     }
 }

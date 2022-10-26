@@ -34,6 +34,11 @@ namespace MewaAppBackend.Business.Business
             _linkRepository.Edit(link);
         }
 
+        public void DeleteLink(Link link)
+        {
+            _linkRepository.Delete(link);
+        }
+
         public Link GetLinkById(int linkId)
         {
             return _linkRepository.ObjectSet.Where(x => x.Id == linkId)
